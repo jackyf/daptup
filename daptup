@@ -1,0 +1,64 @@
+#!/bin/bash
+
+# Copyright 2008 Eugene V. Lyubimkin aka JackYF
+# License: GPLv3
+
+DAPTUP_CONFFILE=/etc/daptup.conf
+if [ -f $DAPTUP_CONFFILE ]; then
+	. $DAPTUP_CONFFILE
+else
+	echo "Cannot read configuration from '$DAPTUP_CONFFILE'"
+	exit 1
+fi
+
+
+# $1 - output
+function get_new()
+{
+	aptitude search ?new --display-format "$DAPTUP_NEW_DISPLAY_FORMAT" --width $DAPTUP_NEW_DISPLAY_WIDTH > $1
+}
+
+# $1 - output
+function get_updates()
+{
+	apt-show-versions -u | sort > $1
+}
+
+# $1 - before
+# $2 - after
+function diff_cmd()
+{
+	diff --minimal $1 $2 | grep -E "^[<>]" | sort
+}
+
+echo -n "Getting pre-new... "
+get_new $DAPTUP_NEW_BEFORE
+echo "[done]"
+
+echo -n "Getting pre-updates... "
+get_updates $DAPTUP_UPDATES_BEFORE
+echo "[done]"
+
+echo "Updating:"
+aptitude update
+echo "Update complete."
+
+echo -n "Getting post-new... "
+get_new $DAPTUP_NEW_AFTER
+echo "[done]"
+
+echo -n "Getting post-updates... "
+get_updates $DAPTUP_UPDATES_AFTER
+echo "[done]"
+
+echo "-------"
+echo "Updates"
+echo "-------"
+diff_cmd $DAPTUP_UPDATES_BEFORE $DAPTUP_UPDATES_AFTER | sed s/upgradeable\ from/-/g
+
+echo 
+echo "---"
+echo "New"
+echo "---"
+diff_cmd $DAPTUP_NEW_BEFORE $DAPTUP_NEW_AFTER
+ 

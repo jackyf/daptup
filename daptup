@@ -3,11 +3,18 @@
 # Copyright 2008 Eugene V. Lyubimkin aka JackYF
 # License: GPLv3
 
+# Checking for root priviledges
+MY_UID=`id -u`
+if [ "$MY_UID" != "0" ]; then
+	echo "You must run daptup with root priviledges."
+	exit 2
+fi
+
 DAPTUP_CONFFILE=/etc/daptup.conf
 if [ -f $DAPTUP_CONFFILE ]; then
 	. $DAPTUP_CONFFILE
 else
-	echo "Cannot read configuration from '$DAPTUP_CONFFILE'"
+	echo "Cannot read configuration from '$DAPTUP_CONFFILE'."
 	exit 1
 fi
 

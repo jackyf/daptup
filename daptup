@@ -18,6 +18,14 @@ else
 	exit 1
 fi
 
+PARAM=$1
+if [ "$PARAM" == "-h" ] || [ "$PARAM" == "--help" ]; then
+	echo "Usage: run '`basename ${0}`' with root priviledges."
+	exit 0
+elif [ "$PARAM" != "" ]; then
+	echo "Unknown param: $PARAM"
+	exit 4
+fi
 
 # $1 - output
 function get_new()

@@ -3,13 +3,6 @@
 # Copyright 2008 Eugene V. Lyubimkin aka JackYF
 # License: GPLv3
 
-# Checking for root priviledges
-MY_UID=`id -u`
-if [ "$MY_UID" != "0" ]; then
-	echo "You must run daptup with root priviledges."
-	exit 2
-fi
-
 DAPTUP_CONFFILE=/etc/daptup.conf
 if [ -f $DAPTUP_CONFFILE ]; then
 	. $DAPTUP_CONFFILE
@@ -18,19 +11,10 @@ else
 	exit 1
 fi
 
-PARAM=$1
-if [ "$PARAM" == "-h" ] || [ "$PARAM" == "--help" ]; then
-	echo "Usage: run '`basename ${0}`' with root priviledges."
-	exit 0
-elif [ "$PARAM" != "" ]; then
-	echo "Unknown param: $PARAM"
-	exit 4
-fi
-
 # $1 - output
 function get_new()
 {
-	aptitude search ?new --display-format "$DAPTUP_NEW_DISPLAY_FORMAT" --width $DAPTUP_NEW_DISPLAY_WIDTH > $1
+	aptitude search ~N --display-format "$DAPTUP_NEW_DISPLAY_FORMAT" --width $DAPTUP_NEW_DISPLAY_WIDTH > $1
 }
 
 # $1 - output
@@ -46,34 +30,53 @@ function diff_cmd()
 	diff --minimal $1 $2 | grep -E "^[<>]" | sort
 }
 
-echo -n "Getting pre-new... "
-get_new $DAPTUP_NEW_BEFORE
-echo "[done]"
+function do_pre
+{
+	echo -n "[daptup] getting list of pre-new packages..."
+	get_new $DAPTUP_NEW_BEFORE
+	echo "done"
 
-echo -n "Getting pre-updates... "
-get_updates $DAPTUP_UPDATES_BEFORE
-echo "[done]"
+	echo -n "[daptup] getting list of pre-upgradeable packages... "
+	get_updates $DAPTUP_UPDATES_BEFORE
+	echo "done"
+}
 
-echo "Updating:"
-aptitude update
-echo "Update complete."
+function do_post
+{
+	echo -n "[daptup] getting list of post-new packages... "
+	get_new $DAPTUP_NEW_AFTER
+	echo "done"
 
-echo -n "Getting post-new... "
-get_new $DAPTUP_NEW_AFTER
-echo "[done]"
+	echo -n "[daptup] getting list of post-upgradeable packages... "
+	get_updates $DAPTUP_UPDATES_AFTER
+	echo "done"
 
-echo -n "Getting post-updates... "
-get_updates $DAPTUP_UPDATES_AFTER
-echo "[done]"
+	echo "-------"
+	echo "Updates"
+	echo "-------"
+	diff_cmd $DAPTUP_UPDATES_BEFORE $DAPTUP_UPDATES_AFTER | sed s/upgradeable\ from/-/g
 
-echo "-------"
-echo "Updates"
-echo "-------"
-diff_cmd $DAPTUP_UPDATES_BEFORE $DAPTUP_UPDATES_AFTER | sed s/upgradeable\ from/-/g
+	echo 
+	echo "---"
+	echo "New"
+	echo "---"
+	diff_cmd $DAPTUP_NEW_BEFORE $DAPTUP_NEW_AFTER
+}
 
-echo 
-echo "---"
-echo "New"
-echo "---"
-diff_cmd $DAPTUP_NEW_BEFORE $DAPTUP_NEW_AFTER
- 
+# Start
+PARAM=$1
+case $PARAM in
+	pre)
+		do_pre
+		;;
+	post)
+		do_post
+		;;
+	-h|--help|*)
+		echo "Usage: run 'aptitude update' with root priviledges."
+		exit 0
+		;;
+esac
+		
+# End
+

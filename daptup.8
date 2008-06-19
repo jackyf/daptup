@@ -18,8 +18,20 @@
 .SH NAME
 daptup \- wrapper script on 'aptitude update'
 .SH SYNOPSIS
-.B daptup [-h | --help]
+.B daptup [-h | --help | --nocolor]
 .br
+.SH OPTIONS
+.br
+.B -h
+.br
+.B --help
+.br
+	prints the help
+.sp
+.B --nocolor
+.br
+	disables color output, useful for scripts or when output is not terminal
+.sp
 .PP
 \fBdaptup\fP is a script that run "aptitude update" command inside and outputs list of packages recently entered to repo and list of packages which got new updates.
 .SH SEE ALSO

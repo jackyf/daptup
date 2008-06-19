@@ -18,14 +18,24 @@ else
 	exit 1
 fi
 
+DAPTUP_USE_COLOR=y
+
 PARAM=$1
-if [ "$PARAM" == "-h" ] || [ "$PARAM" == "--help" ]; then
-	echo "Usage: run '`basename ${0}`' with root priviledges."
-	exit 0
-elif [ "$PARAM" != "" ]; then
-	echo "Unknown param: $PARAM"
-	exit 4
-fi
+case $PARAM in
+	--nocolor)
+		DAPTUP_USE_COLOR=n	
+		;;
+	-h|--help)
+		echo "Usage: run '`basename ${0}`' with root priviledges."
+		exit 0
+		;;
+	*)
+		if [ "$PARAM" != "" ]; then
+			echo "Unknown param: $PARAM"
+			exit 4
+		fi
+		;;
+esac
 
 DAPTUP_ERRORS_FILE=/tmp/daptup-errors-container
 
@@ -74,14 +84,32 @@ echo -n "Getting post-updates... "
 get_updates $DAPTUP_UPDATES_AFTER
 echo "[done]"
 
+tput init
+
+# by default daptup tries to use colors now, it can be disabled by specifying '--nocolor' option
+
 echo "-------"
 echo "Updates"
 echo "-------"
-diff_cmd $DAPTUP_UPDATES_BEFORE $DAPTUP_UPDATES_AFTER | sed s/upgradeable\ from/-/g
+diff_cmd $DAPTUP_UPDATES_BEFORE $DAPTUP_UPDATES_AFTER | sed s/upgradeable\ from/-/g | while read line; do
+	if [ "`expr "$line" : '<'`" == "0" ]; then
+		tput setf 2; # green
+	else
+		tput setf 4; # red
+	fi;
+	echo $line;
+	done
 
 echo 
 echo "---"
 echo "New"
 echo "---"
-diff_cmd $DAPTUP_NEW_BEFORE $DAPTUP_NEW_AFTER
- 
+diff_cmd $DAPTUP_NEW_BEFORE $DAPTUP_NEW_AFTER | while read line; do
+	if [ "`expr "$line" : '<'`" == "0" ]; then
+		tput setf 3; # blue
+	else
+		tput setf 4; # red
+	fi;
+	echo $line;
+	done
+

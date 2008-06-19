@@ -27,10 +27,13 @@ elif [ "$PARAM" != "" ]; then
 	exit 4
 fi
 
+DAPTUP_ERRORS_FILE=/tmp/daptup-errors-container
+
 # $1 - output
+# $2 - errors
 function get_new()
 {
-	aptitude search ~N --display-format "$DAPTUP_NEW_DISPLAY_FORMAT" --width $DAPTUP_NEW_DISPLAY_WIDTH > $1
+	aptitude search ~N --display-format "$DAPTUP_NEW_DISPLAY_FORMAT" --width $DAPTUP_NEW_DISPLAY_WIDTH > $1 2> $2
 }
 
 # $1 - output
@@ -47,7 +50,13 @@ function diff_cmd()
 }
 
 echo -n "Getting pre-new... "
-get_new $DAPTUP_NEW_BEFORE
+get_new $DAPTUP_NEW_BEFORE $DAPTUP_ERRORS_FILE
+
+APTITUDE_RESULT=`wc -l < $DAPTUP_ERRORS_FILE`
+if [ "$APTITUDE_RESULT" != "0" ]; then
+	echo "aptitude returned non-zero code, daptup stopped here."
+	exit $?
+fi
 echo "[done]"
 
 echo -n "Getting pre-updates... "
@@ -56,8 +65,9 @@ echo "[done]"
 
 aptitude update
 
+
 echo -n "Getting post-new... "
-get_new $DAPTUP_NEW_AFTER
+get_new $DAPTUP_NEW_AFTER /dev/null
 echo "[done]"
 
 echo -n "Getting post-updates... "

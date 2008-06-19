@@ -92,10 +92,12 @@ echo "-------"
 echo "Updates"
 echo "-------"
 diff_cmd $DAPTUP_UPDATES_BEFORE $DAPTUP_UPDATES_AFTER | sed s/upgradeable\ from/-/g | while read line; do
-	if [ "`expr "$line" : '<'`" == "0" ]; then
-		tput setf 2; # green
-	else
-		tput setf 4; # red
+	if [ "$DAPTUP_USE_COLOR" == "y" ]; then
+		if [ "`expr "$line" : '<'`" == "0" ]; then
+			tput setf 2; # green
+		else
+			tput setf 4; # red
+		fi;
 	fi;
 	echo $line;
 	done
@@ -105,10 +107,12 @@ echo "---"
 echo "New"
 echo "---"
 diff_cmd $DAPTUP_NEW_BEFORE $DAPTUP_NEW_AFTER | while read line; do
-	if [ "`expr "$line" : '<'`" == "0" ]; then
-		tput setf 3; # blue
-	else
-		tput setf 4; # red
+	if [ "$DAPTUP_USE_COLOR" == "y" ]; then
+		if [ "`expr "$line" : '<'`" == "0" ]; then
+			tput setf 3; # blue
+		else
+			tput setf 4; # red
+		fi;
 	fi;
 	echo $line;
 	done

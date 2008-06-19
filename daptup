@@ -54,9 +54,7 @@ echo -n "Getting pre-updates... "
 get_updates $DAPTUP_UPDATES_BEFORE
 echo "[done]"
 
-echo "Updating:"
 aptitude update
-echo "Update complete."
 
 echo -n "Getting post-new... "
 get_new $DAPTUP_NEW_AFTER

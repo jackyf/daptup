@@ -107,6 +107,11 @@ diff_cmd $DAPTUP_UPDATES_BEFORE $DAPTUP_UPDATES_AFTER | sed s/upgradeable\ from/
 	echo $line;
 	done
 
+# resetting to default color if needed...
+if [ "$DAPTUP_USE_COLOR" == "y" ]; then
+	tput sgr0
+fi
+
 echo 
 echo "---"
 echo "New"
@@ -122,3 +127,7 @@ diff_cmd $DAPTUP_NEW_BEFORE $DAPTUP_NEW_AFTER | while read line; do
 	echo $line;
 	done
 
+# resetting to default color if needed...
+if [ "$DAPTUP_USE_COLOR" == "y" ]; then
+	tput sgr0
+fi

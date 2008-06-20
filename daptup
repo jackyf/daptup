@@ -64,8 +64,8 @@ get_new $DAPTUP_NEW_BEFORE $DAPTUP_ERRORS_FILE
 
 APTITUDE_RESULT=`wc -l < $DAPTUP_ERRORS_FILE`
 if [ "$APTITUDE_RESULT" != "0" ]; then
-	echo "aptitude returned non-zero code, daptup stopped here."
-	exit $?
+	echo "errors present. Is apt/dpkg running?.."
+	exit 8
 fi
 echo "[done]"
 
@@ -74,6 +74,11 @@ get_updates $DAPTUP_UPDATES_BEFORE
 echo "[done]"
 
 aptitude update
+APTITUDE_RESULT=$?
+if [ "$APTITUDE_RESULT" != "0" ]; then
+	echo "aptitude returned non-zero code, daptup stopped here."
+	exit $?
+fi
 
 
 echo -n "Getting post-new... "

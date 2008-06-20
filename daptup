@@ -89,7 +89,9 @@ echo -n "Getting post-updates... "
 get_updates $DAPTUP_UPDATES_AFTER
 echo "[done]"
 
-tput init
+if [ "$DAPTUP_USE_COLOR" == "y" ]; then
+	tput init
+fi
 
 # by default daptup tries to use colors now, it can be disabled by specifying '--nocolor' option
 

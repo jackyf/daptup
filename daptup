@@ -95,6 +95,7 @@ fi
 
 # by default daptup tries to use colors now, it can be disabled by specifying '--nocolor' option
 
+echo
 echo "-------"
 echo "Updates"
 echo "-------"

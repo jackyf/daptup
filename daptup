@@ -38,6 +38,7 @@ case $PARAM in
 esac
 
 DAPTUP_ERRORS_FILE=/tmp/daptup-errors-container
+DAPTUP_TMP_FILE=/tmp/daptup-tmp
 
 # $1 - output
 # $2 - errors
@@ -54,9 +55,10 @@ function get_updates()
 
 # $1 - before
 # $2 - after
+# $3 - where result will be stored
 function diff_cmd()
 {
-	diff --minimal $1 $2 | grep -E "^[<>]" | sort
+	diff --minimal $1 $2 | grep -E "^[<>]" | sort > $3
 }
 
 echo -n "Getting pre-new... "
@@ -96,41 +98,50 @@ fi
 # by default daptup tries to use colors now, it can be disabled by specifying '--nocolor' option
 
 echo
-echo "-------"
-echo "Updates"
-echo "-------"
-diff_cmd $DAPTUP_UPDATES_BEFORE $DAPTUP_UPDATES_AFTER | sed s/upgradeable\ from/-/g | while read line; do
-	if [ "$DAPTUP_USE_COLOR" == "y" ]; then
-		if [ "`expr "$line" : '<'`" == "0" ]; then
-			tput setf 2; # green
-		else
-			tput setf 4; # red
+
+diff_cmd $DAPTUP_UPDATES_BEFORE $DAPTUP_UPDATES_AFTER $DAPTUP_TMP_FILE
+if [ "`wc -l < $DAPTUP_TMP_FILE`" == "0" ]; then # no updates
+	echo "No updates."
+else
+	echo "Updates:"
+	cat $DAPTUP_TMP_FILE | sed s/upgradeable\ from/-/g | while read line; do
+		if [ "$DAPTUP_USE_COLOR" == "y" ]; then
+			if [ "`expr "$line" : '<'`" == "0" ]; then
+				tput setf 2; # green
+			else
+				tput setf 4; # red
+			fi;
 		fi;
-	fi;
-	echo $line;
-	done
+		echo $line;
+		done
+fi
 
 # resetting to default color if needed...
 if [ "$DAPTUP_USE_COLOR" == "y" ]; then
 	tput sgr0
 fi
 
-echo 
-echo "---"
-echo "New"
-echo "---"
-diff_cmd $DAPTUP_NEW_BEFORE $DAPTUP_NEW_AFTER | while read line; do
-	if [ "$DAPTUP_USE_COLOR" == "y" ]; then
-		if [ "`expr "$line" : '<'`" == "0" ]; then
-			tput setf 3; # blue
-		else
-			tput setf 4; # red
+diff_cmd $DAPTUP_NEW_BEFORE $DAPTUP_NEW_AFTER $DAPTUP_TMP_FILE
+if [ "`wc -l < $DAPTUP_TMP_FILE`" == "0" ]; then # no new
+	echo "No new packages."
+else
+	echo "New packages:"
+	cat $DAPTUP_TMP_FILE | while read line; do
+		if [ "$DAPTUP_USE_COLOR" == "y" ]; then
+			if [ "`expr "$line" : '<'`" == "0" ]; then
+				tput setf 3; # blue
+			else
+				tput setf 4; # red
+			fi;
 		fi;
-	fi;
-	echo $line;
-	done
+		echo $line;
+		done
+fi
 
 # resetting to default color if needed...
 if [ "$DAPTUP_USE_COLOR" == "y" ]; then
 	tput sgr0
 fi
+
+rm $DAPTUP_TMP_FILE 2>/dev/null
+rm $DAPTUP_ERRORS_FILE 2>/dev/null

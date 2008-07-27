@@ -2,6 +2,7 @@
 
 # Copyright 2008 Eugene V. Lyubimkin aka JackYF
 # License: GPLv3
+# Devoted to Evgenija V. Katyuk.
 
 # Checking for root priviledges
 MY_UID=`id -u`

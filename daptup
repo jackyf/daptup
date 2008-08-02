@@ -61,12 +61,40 @@ function get_updates()
 	apt-show-versions -u | sort > $1
 }
 
+# $1 - output
+function get_watched()
+{
+	local GREP_EXPRESSION
+	for package in $DAPTUP_PACKAGES_WATCH_FOR; do
+		if [ -n "$GREP_EXPRESSION" ]; then
+			GREP_EXPRESSION="${GREP_EXPRESSION}|"
+		fi
+		GREP_EXPRESSION="${GREP_EXPRESSION}^${package}$"
+	done
+	if [ -z "$GREP_EXPRESSION" ]; then # no packages to watch
+		touch $1
+	else
+		aptitude search "~n($GREP_EXPRESSION)" \
+			--display-format "$DAPTUP_WATCH_DISPLAY_FORMAT" \
+			--width $DAPTUP_WATCH_DISPLAY_WIDTH \
+			$DAPTUP_EXTRA_APTITUDE_ARGUMENTS > $1
+	fi
+}
+
 # $1 - before
 # $2 - after
 # $3 - where result will be stored
 function diff_cmd()
 {
 	diff --minimal $1 $2 | grep -E "^[<>]" | sort > $3
+}
+
+function reset_color()
+{
+	# resetting to default color if needed...
+	if [ "$DAPTUP_USE_COLOR" == "y" ]; then
+		tput sgr0
+	fi
 }
 
 echo -n "Getting pre-new... "
@@ -81,6 +109,10 @@ echo "[done]"
 
 echo -n "Getting pre-updates... "
 get_updates $DAPTUP_UPDATES_BEFORE
+echo "[done]"
+
+echo -n "Getting pre-watched... "
+get_watched $DAPTUP_WATCH_BEFORE
 echo "[done]"
 
 aptitude update
@@ -99,10 +131,13 @@ echo -n "Getting post-updates... "
 get_updates $DAPTUP_UPDATES_AFTER
 echo "[done]"
 
+echo -n "Getting post-watched... "
+get_watched $DAPTUP_WATCH_AFTER
+echo "[done]"
+
 if [ "$DAPTUP_USE_COLOR" == "y" ]; then
 	tput init
 fi
-
 # by default daptup tries to use colors now, it can be disabled by specifying '--nocolor' option
 
 echo
@@ -124,10 +159,7 @@ else
 		done
 fi
 
-# resetting to default color if needed...
-if [ "$DAPTUP_USE_COLOR" == "y" ]; then
-	tput sgr0
-fi
+reset_color
 
 diff_cmd $DAPTUP_NEW_BEFORE $DAPTUP_NEW_AFTER $DAPTUP_TMP_FILE
 if [ "`wc -l < $DAPTUP_TMP_FILE`" == "0" ]; then # no new
@@ -146,10 +178,26 @@ else
 		done
 fi
 
-# resetting to default color if needed...
-if [ "$DAPTUP_USE_COLOR" == "y" ]; then
-	tput sgr0
+reset_color
+
+diff_cmd $DAPTUP_WATCH_BEFORE $DAPTUP_WATCH_AFTER $DAPTUP_TMP_FILE
+if [ "`wc -l < $DAPTUP_TMP_FILE`" == "0" ]; then # no changes in watched
+	echo "No news in watched packages."
+else
+	echo "Watched packages:"
+	cat $DAPTUP_TMP_FILE | while read line; do
+		if [ "$DAPTUP_USE_COLOR" == "y" ]; then
+			if [ "`expr "$line" : '<'`" == "0" ]; then
+				tput setf 2; # green
+			else
+				tput setf 4; # red
+			fi;
+		fi;
+		echo $line;
+		done
 fi
+
+reset_color
 
 rm $DAPTUP_TMP_FILE 2>/dev/null
 rm $DAPTUP_ERRORS_FILE 2>/dev/null

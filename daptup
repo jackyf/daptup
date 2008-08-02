@@ -38,6 +38,10 @@ case $PARAM in
 		;;
 esac
 
+if [ "$DAPTUP_DISABLE_COLUMNS" == "y" ]; then
+	DAPTUP_EXTRA_APTITUDE_ARGUMENTS="$DAPTUP_EXTRA_APTITUDE_ARGUMENTS --disable-columns"
+fi
+
 DAPTUP_ERRORS_FILE=/tmp/daptup-errors-container
 DAPTUP_TMP_FILE=/tmp/daptup-tmp
 
@@ -45,7 +49,10 @@ DAPTUP_TMP_FILE=/tmp/daptup-tmp
 # $2 - errors
 function get_new()
 {
-	aptitude search ~N --display-format "$DAPTUP_NEW_DISPLAY_FORMAT" --width $DAPTUP_NEW_DISPLAY_WIDTH > $1 2> $2
+	aptitude search ~N \
+		--display-format "$DAPTUP_NEW_DISPLAY_FORMAT" \
+		--width $DAPTUP_NEW_DISPLAY_WIDTH \
+		$DAPTUP_EXTRA_APTITUDE_ARGUMENTS > $1 2> $2
 }
 
 # $1 - output

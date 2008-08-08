@@ -2,7 +2,7 @@
 .\" First parameter, NAME, should be all caps
 .\" Second parameter, SECTION, should be 1-8, maybe w/ subsection
 .\" other parameters are allowed: see man(7), man(1)
-.TH DAPTUP 8 "May 13, 2008"
+.TH DAPTUP 8 "Aug 8, 2008"
 .\" Please adjust this date whenever revising the manpage.
 .\"
 .\" Some roff macros, for reference:
@@ -22,16 +22,12 @@ daptup \- wrapper script on 'aptitude update'
 .br
 .SH OPTIONS
 .br
-.B -h
-.br
-.B --help
-.br
-	prints the help
-.sp
+.TP
+.B -h --help
+prints the help
+.TP
 .B --nocolor
-.br
-	disables color output, useful for scripts or when output is not terminal
-.sp
+disables color output, useful for scripts or when output is not terminal
 .PP
 \fBdaptup\fP is a script that run "aptitude update" command inside and outputs list of packages recently entered to repo and list of packages which got new updates.
 .SH SEE ALSO

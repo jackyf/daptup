@@ -19,6 +19,16 @@ else
 	exit 1
 fi
 
+# Creating safe temporary files
+DAPTUP_UPDATES_BEFORE=$(tempfile)
+DAPTUP_UPDATES_AFTER=$(tempfile)
+DAPTUP_NEW_BEFORE=$(tempfile)
+DAPTUP_NEW_AFTER=$(tempfile)
+DAPTUP_WATCH_BEFORE=$(tempfile)
+DAPTUP_WATCH_AFTER=$(tempfile)
+DAPTUP_ERRORS_FILE=$(tempfile)
+DAPTUP_TMP_FILE=$(tempfile)
+
 DAPTUP_USE_COLOR=y
 
 PARAM=$1
@@ -42,8 +52,6 @@ if [ "$DAPTUP_DISABLE_COLUMNS" == "y" ]; then
 	DAPTUP_EXTRA_APTITUDE_ARGUMENTS="$DAPTUP_EXTRA_APTITUDE_ARGUMENTS --disable-columns"
 fi
 
-DAPTUP_ERRORS_FILE=/tmp/daptup-errors-container
-DAPTUP_TMP_FILE=/tmp/daptup-tmp
 
 # $1 - output
 # $2 - errors

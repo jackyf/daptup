@@ -10,7 +10,7 @@ SPOOL_DIR=/var/spool/daptup
 DAPTUP_UPDATES_BEFORE=$SPOOL_DIR/updates-before
 DAPTUP_UPDATES_AFTER=$SPOOL_DIR/updates-after
 DAPTUP_NEW_BEFORE=$SPOOL_DIR/new-before
-DAPTUP_NEW_AFTER=$SPOOL_DIR/updates-after
+DAPTUP_NEW_AFTER=$SPOOL_DIR/new-after
 DAPTUP_WATCH_BEFORE=$SPOOL_DIR/watch-before
 DAPTUP_WATCH_AFTER=$SPOOL_DIR/watch-after
 # safe temporary files

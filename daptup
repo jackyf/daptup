@@ -56,7 +56,16 @@ case $PARAM in
 		DAPTUP_USE_COLOR=n	
 		;;
 	-h|--help)
-		echo "Usage: run '`basename ${0}`' with root priviledges."
+		echo "Usage: `basename ${0}` [ -h | --help | --nocolor ]."
+		echo
+		echo "daptup runs 'aptitude update' command inside and outputs:"
+		echo " - list of packages recently entered to repo"
+		echo " - list of packages which got new updates"
+		echo " - list of changes in 'watched' packages."
+		echo
+		echo "Options:"
+		echo " -h, --help: output this help and exit"
+		echo " --nocolor: do not use colored output"
 		do_exit 0
 		;;
 	*)

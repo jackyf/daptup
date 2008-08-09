@@ -4,11 +4,36 @@
 # License: GPLv3
 # Devoted to Evgenija V. Katyuk.
 
+SPOOL_DIR=/var/spool/daptup
+
+# spool/cache files
+DAPTUP_UPDATES_BEFORE=$SPOOLDIR/updates-before
+DAPTUP_UPDATES_AFTER=$SPOOL_DIR/updates-after
+DAPTUP_NEW_BEFORE=$SPOOL_DIR/new-before
+DAPTUP_NEW_AFTER=$SPOOL_DIR/updates-after
+DAPTUP_WATCH_BEFORE=$SPOOL_DIR/watch-before
+DAPTUP_WATCH_AFTER=$SPOOL_DIR/watch-after
+# safe temporary files
+DAPTUP_ERRORS_FILE=$(tempfile)
+DAPTUP_TMP_FILE=$(tempfile)
+
+function delete_temp_files
+{
+	rm $DAPTUP_TMP_FILE $DAPTUP_ERRORS_FILE
+}
+
+# $1 - exit code
+function do_exit
+{
+	delete_temp_files
+	exit $1
+}
+
 # Checking for root priviledges
 MY_UID=`id -u`
 if [ "$MY_UID" != "0" ]; then
 	echo "You must run daptup with root priviledges."
-	exit 2
+	do_exit 2
 fi
 
 DAPTUP_CONFFILE=/etc/daptup.conf
@@ -16,18 +41,9 @@ if [ -f $DAPTUP_CONFFILE ]; then
 	. $DAPTUP_CONFFILE
 else
 	echo "Cannot read configuration from '$DAPTUP_CONFFILE'."
-	exit 1
+	do_exit 1
 fi
 
-# Creating safe temporary files
-DAPTUP_UPDATES_BEFORE=$(tempfile)
-DAPTUP_UPDATES_AFTER=$(tempfile)
-DAPTUP_NEW_BEFORE=$(tempfile)
-DAPTUP_NEW_AFTER=$(tempfile)
-DAPTUP_WATCH_BEFORE=$(tempfile)
-DAPTUP_WATCH_AFTER=$(tempfile)
-DAPTUP_ERRORS_FILE=$(tempfile)
-DAPTUP_TMP_FILE=$(tempfile)
 
 DAPTUP_USE_COLOR=y
 
@@ -43,7 +59,7 @@ case $PARAM in
 	*)
 		if [ "$PARAM" != "" ]; then
 			echo "Unknown param: $PARAM"
-			exit 4
+			do_exit 4
 		fi
 		;;
 esac
@@ -111,7 +127,7 @@ get_new $DAPTUP_NEW_BEFORE $DAPTUP_ERRORS_FILE
 APTITUDE_RESULT=`wc -l < $DAPTUP_ERRORS_FILE`
 if [ "$APTITUDE_RESULT" != "0" ]; then
 	echo "errors present. Is apt/dpkg running?.."
-	exit 8
+	do_exit 8
 fi
 echo "[done]"
 
@@ -127,7 +143,7 @@ aptitude update
 APTITUDE_RESULT=$?
 if [ "$APTITUDE_RESULT" != "0" ]; then
 	echo "aptitude returned non-zero code, daptup stopped here."
-	exit $?
+	do_exit $?
 fi
 
 
@@ -207,8 +223,7 @@ fi
 
 reset_color
 
-rm $DAPTUP_TMP_FILE $DAPTUP_ERRORS_FILE 2>/dev/null
-rm $DAPTUP_UPDATES_BEFORE $DAPTUP_UPDATES_AFTER 2>/dev/null
-rm $DAPTUP_NEW_BEFORE $DAPTUP_NEW_AFTER 2>/dev/null
-rm $DAPTUP_WATCH_BEFORE $DAPTUP_WATCH_AFTER 2>/dev/null
+delete_temp_files
+
+do_exit 0
 

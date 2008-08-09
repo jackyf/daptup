@@ -7,7 +7,7 @@
 SPOOL_DIR=/var/spool/daptup
 
 # spool/cache files
-DAPTUP_UPDATES_BEFORE=$SPOOLDIR/updates-before
+DAPTUP_UPDATES_BEFORE=$SPOOL_DIR/updates-before
 DAPTUP_UPDATES_AFTER=$SPOOL_DIR/updates-after
 DAPTUP_NEW_BEFORE=$SPOOL_DIR/new-before
 DAPTUP_NEW_AFTER=$SPOOL_DIR/updates-after
@@ -21,6 +21,9 @@ function delete_temp_files
 {
 	rm $DAPTUP_TMP_FILE $DAPTUP_ERRORS_FILE
 }
+
+trap "echo SIGTERM received && do_exit 1024" SIGTERM
+trap "echo SIGINT received && do_exit 2048" SIGINT
 
 # $1 - exit code
 function do_exit

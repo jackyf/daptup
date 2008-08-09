@@ -19,7 +19,7 @@ DAPTUP_TMP_FILE=$(tempfile)
 
 function delete_temp_files
 {
-	rm $DAPTUP_TMP_FILE $DAPTUP_ERRORS_FILE
+	rm -f $DAPTUP_TMP_FILE $DAPTUP_ERRORS_FILE
 }
 
 trap "echo SIGTERM received && do_exit 1024" SIGTERM

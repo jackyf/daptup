@@ -33,13 +33,6 @@ function do_exit
 	exit $1
 }
 
-# Checking for root priviledges
-MY_UID=`id -u`
-if [ "$MY_UID" != "0" ]; then
-	echo "You must run daptup with root priviledges."
-	do_exit 2
-fi
-
 DAPTUP_CONFFILE=/etc/daptup.conf
 if [ -f $DAPTUP_CONFFILE ]; then
 	. $DAPTUP_CONFFILE
@@ -76,6 +69,13 @@ case $PARAM in
 		fi
 		;;
 esac
+
+# Checking for root priviledges
+MY_UID=`id -u`
+if [ "$MY_UID" != "0" ]; then
+	echo "You must run daptup with root priviledges."
+	do_exit 2
+fi
 
 if [ "$DAPTUP_DISABLE_COLUMNS" == "y" ]; then
 	DAPTUP_EXTRA_APTITUDE_ARGUMENTS="$DAPTUP_EXTRA_APTITUDE_ARGUMENTS --disable-columns"

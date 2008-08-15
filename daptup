@@ -117,10 +117,14 @@ function get_watched()
 	fi
 }
 
+# $1 - result file
 function find_old_packages
 {
 	local DOC_DIR=/usr/share/doc
 	local SECONDS_IN_DAY=`expr 60 \* 60 \* 24`
+
+	rm -f $1
+	touch $1
 	
 	cat $DAPTUP_UPDATES_AFTER | while read line; do
 		package=`echo $line | grep -Eo "^.*/" | sed 's|/||'`
@@ -147,8 +151,8 @@ function find_old_packages
 					PACKAGE_TIMESTAMP=`date -d "$DATE" +%s`
 					DAYS=`expr \( $CURRENT_TIMESTAMP - $PACKAGE_TIMESTAMP \) / $SECONDS_IN_DAY`
 					if [ $DAYS -gt $DAPTUP_MINIMAL_DAY_COUNT_TREATING_OUTDATED ]; then # package is old
-						echo -n $line
-						echo ", $DAYS days old"
+						echo -n $line >> $1
+						echo ", $DAYS days old" >> $1
 					fi
 				else # date is extracted badly
 					echo "error: cannot extrace last date for package $package"
@@ -283,7 +287,15 @@ if [ "$DAPTUP_CHECK_FOR_OUTDATED_PACKAGES" == "y" ]; then
 	# data, print an error and don't try to check for outdated packages
 	expr "$DAPTUP_MINIMAL_DAY_COUNT_TREATING_OUTDATED" + 0 >/dev/null 2>/dev/null
 	if [ "$?" == "0" ]; then
-		find_old_packages
+		echo -n "Getting age info... "
+		find_old_packages $DAPTUP_TMP_FILE
+		echo "[done]"
+		if [ "`wc -l < $DAPTUP_TMP_FILE`" == "0" ]; then # no data in outdated
+			echo "No outdated packages."
+		else
+			echo "Outdated packages:"
+		fi
+		cat $DAPTUP_TMP_FILE
 	else
 		echo "error: DAPTUP_MINIMAL_DAY_COUNT_TREATING_OUTDATED contains non-numeric data"
 	fi

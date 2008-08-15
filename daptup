@@ -117,6 +117,50 @@ function get_watched()
 	fi
 }
 
+function find_old_packages
+{
+	DAYS_GONE_COUNT=256
+	local DOC_DIR=/usr/share/doc
+	local SECONDS_IN_DAY=`expr 60 \* 60 \* 24`
+	
+	cat $DAPTUP_UPDATES_AFTER | while read line; do
+		package=`echo $line | grep -Eo "^.*/" | sed 's|/||'`
+		local CHANGELOG_FILE
+		if [ -f $DOC_DIR/$package/changelog.Debian.gz ]; then
+			CHANGELOG_FILE=$DOC_DIR/$package/changelog.Debian.gz
+		elif [ -f $DOC_DIR/$package/changelog.gz ]; then
+			CHANGELOG_FILE=$DOC_DIR/$package/changelog.gz
+		else
+			echo "warning: cannot find any changelog for package '$package'"
+		fi
+
+		if [ -n "$CHANGELOG_FILE" ]; then # if we've found a changelog
+			local LAST_MODIFIED_LINE
+			LAST_MODIFIED_LINE=`zgrep -E "^ -- " $CHANGELOG_FILE | head -1`;
+			if [ -n "$LAST_MODIFIED_LINE" ]; then # changelog is correct
+
+				# extracting date
+				# example: " -- James Troup <james@nocrew.org>  Mon, 24 Apr 2006 04:24:07 +0100"
+
+				DATE=`echo $LAST_MODIFIED_LINE | grep -Eo "[0-9 ][0-9] [A-Z][a-z][a-z] [0-9]{4,4}"`
+				if [ -n "$DATE" ]; then # date is extracted correctly
+					CURRENT_TIMESTAMP=`date +%s`
+					PACKAGE_TIMESTAMP=`date -d "$DATE" +%s`
+					DAYS=`expr \( $CURRENT_TIMESTAMP - $PACKAGE_TIMESTAMP \) / $SECONDS_IN_DAY`
+					if [ $DAYS -gt $DAYS_GONE_COUNT ]; then # package is old
+						echo -n $line
+						echo ", $DAYS days old"
+					fi
+				else # date is extracted badly
+					echo "error: cannot extrace last date for package $package"
+				fi
+			else # changelog is not correct
+				echo "error: cannot fetch last entry from changelog for package $package"
+			fi
+		fi
+	done
+}
+
 # $1 - before
 # $2 - after
 # $3 - where result will be stored
@@ -234,6 +278,8 @@ else
 fi
 
 reset_color
+
+find_old_packages
 
 delete_temp_files
 

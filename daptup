@@ -13,6 +13,7 @@ DAPTUP_NEW_BEFORE=$SPOOL_DIR/new-before
 DAPTUP_NEW_AFTER=$SPOOL_DIR/new-after
 DAPTUP_WATCH_BEFORE=$SPOOL_DIR/watch-before
 DAPTUP_WATCH_AFTER=$SPOOL_DIR/watch-after
+DAPTUP_OUTDATED=$SPOOL_DIR/outdated
 # safe temporary files
 DAPTUP_ERRORS_FILE=$(tempfile)
 DAPTUP_TMP_FILE=$(tempfile)
@@ -218,6 +219,23 @@ echo -n "Getting post-watched... "
 get_watched $DAPTUP_WATCH_AFTER
 echo "[done]"
 
+OUTPUT_OUTDATED=n
+if [ "$DAPTUP_CHECK_FOR_OUTDATED_PACKAGES" == "y" ]; then
+	# if DAPTUP_MINIMAL_DAY_COUNT_TREATING_OUTDATED variable contains non-numeric
+	# data, print an error and don't try to check for outdated packages
+	expr "$DAPTUP_MINIMAL_DAY_COUNT_TREATING_OUTDATED" + 0 >/dev/null 2>/dev/null
+	if [ "$?" == "0" ]; then
+		echo -n "Getting package age info... "
+		find_old_packages $DAPTUP_OUTDATED
+		OUTPUT_OUTDATED=y
+		echo "[done]"
+	else
+		echo "error: DAPTUP_MINIMAL_DAY_COUNT_TREATING_OUTDATED contains non-numeric data"
+	fi
+else
+	echo "Skipping check for package ages."
+fi
+	
 if [ "$DAPTUP_USE_COLOR" == "y" ]; then
 	tput init
 fi
@@ -282,23 +300,13 @@ fi
 
 reset_color
 
-if [ "$DAPTUP_CHECK_FOR_OUTDATED_PACKAGES" == "y" ]; then
-	# if DAPTUP_MINIMAL_DAY_COUNT_TREATING_OUTDATED variable contains non-numeric
-	# data, print an error and don't try to check for outdated packages
-	expr "$DAPTUP_MINIMAL_DAY_COUNT_TREATING_OUTDATED" + 0 >/dev/null 2>/dev/null
-	if [ "$?" == "0" ]; then
-		echo -n "Getting age info... "
-		find_old_packages $DAPTUP_TMP_FILE
-		echo "[done]"
-		if [ "`wc -l < $DAPTUP_TMP_FILE`" == "0" ]; then # no data in outdated
-			echo "No outdated packages."
-		else
-			echo "Outdated packages:"
-		fi
-		cat $DAPTUP_TMP_FILE
+if [ "$OUTPUT_OUTDATED" == "y" ]; then
+	if [ "`wc -l < $DAPTUP_OUTDATED`" == "0" ]; then # no data in outdated
+		echo "No outdated packages."
 	else
-		echo "error: DAPTUP_MINIMAL_DAY_COUNT_TREATING_OUTDATED contains non-numeric data"
+		echo "Outdated packages:"
 	fi
+	cat $DAPTUP_OUTDATED
 fi
 
 delete_temp_files

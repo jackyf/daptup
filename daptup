@@ -307,7 +307,7 @@ if [ "$OUTPUT_OUTDATED" == "y" ]; then
 	else
 		echo "Outdated packages:"
 		if [ "$DAPTUP_USE_COLOR" == "y" ]; then
-			tput setf 5
+			tput setf 5 # magenta
 		fi
 		cat $DAPTUP_OUTDATED
 	fi

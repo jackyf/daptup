@@ -53,9 +53,10 @@ case $PARAM in
 		echo "Usage: `basename ${0}` [ -h | --help | --nocolor ]."
 		echo
 		echo "daptup runs 'aptitude update' command inside and outputs:"
-		echo " - list of packages recently entered to repo"
-		echo " - list of packages which got new updates"
-		echo " - list of changes in 'watched' packages."
+		echo " - list of packages recently entered to repo;"
+		echo " - list of packages which got new updates;"
+		echo " - list of changes in 'watched' packages;"
+		echo " - list of outdated packages (optionally)."
 		echo
 		echo "Options:"
 		echo " -h, --help: output this help and exit"

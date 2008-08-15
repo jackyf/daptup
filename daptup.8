@@ -30,6 +30,13 @@ prints the help
 disables color output, useful for scripts or when output is not terminal
 .PP
 \fBdaptup\fP is a script that run "aptitude update" command inside and outputs list of packages recently entered to repo, list of packages which got new updates, list of changes in 'watched' packages and, optionally, list of outdated packages.
+.SH FILES
+.TP
+.B /etc/daptup.conf
+self-documented configuration file
+.TP
+.B /var/spool/daptup/outdated
+cached file with info about outdated packages
 .SH SEE ALSO
 .BR aptitude (8),
 .br

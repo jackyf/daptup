@@ -305,9 +305,14 @@ if [ "$OUTPUT_OUTDATED" == "y" ]; then
 		echo "No outdated packages."
 	else
 		echo "Outdated packages:"
+		if [ "$DAPTUP_USE_COLOR" == "y" ]; then
+			tput setf 5
+		fi
+		cat $DAPTUP_OUTDATED
 	fi
-	cat $DAPTUP_OUTDATED
 fi
+
+reset_color
 
 delete_temp_files
 

@@ -279,7 +279,14 @@ fi
 reset_color
 
 if [ "$DAPTUP_CHECK_FOR_OUTDATED_PACKAGES" == "y" ]; then
-	find_old_packages
+	# if DAPTUP_MINIMAL_DAY_COUNT_TREATING_OUTDATED variable contains non-numeric
+	# data, print an error and don't try to check for outdated packages
+	expr "$DAPTUP_MINIMAL_DAY_COUNT_TREATING_OUTDATED" + 0 >/dev/null 2>/dev/null
+	if [ "$?" == "0" ]; then
+		find_old_packages
+	else
+		echo "error: DAPTUP_MINIMAL_DAY_COUNT_TREATING_OUTDATED contains non-numeric data"
+	fi
 fi
 
 delete_temp_files

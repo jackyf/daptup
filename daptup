@@ -119,7 +119,6 @@ function get_watched()
 
 function find_old_packages
 {
-	DAYS_GONE_COUNT=256
 	local DOC_DIR=/usr/share/doc
 	local SECONDS_IN_DAY=`expr 60 \* 60 \* 24`
 	
@@ -147,7 +146,7 @@ function find_old_packages
 					CURRENT_TIMESTAMP=`date +%s`
 					PACKAGE_TIMESTAMP=`date -d "$DATE" +%s`
 					DAYS=`expr \( $CURRENT_TIMESTAMP - $PACKAGE_TIMESTAMP \) / $SECONDS_IN_DAY`
-					if [ $DAYS -gt $DAYS_GONE_COUNT ]; then # package is old
+					if [ $DAYS -gt $DAPTUP_MINIMAL_DAY_COUNT_TREATING_OUTDATED ]; then # package is old
 						echo -n $line
 						echo ", $DAYS days old"
 					fi
@@ -279,7 +278,9 @@ fi
 
 reset_color
 
-find_old_packages
+if [ "$DAPTUP_CHECK_FOR_OUTDATED_PACKAGES" == "y" ]; then
+	find_old_packages
+fi
 
 delete_temp_files
 

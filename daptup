@@ -71,10 +71,10 @@ case $PARAM in
 		;;
 esac
 
-# Checking for root priviledges
+# Checking for root privileges
 MY_UID=`id -u`
 if [ "$MY_UID" != "0" ]; then
-	echo "You must run daptup with root priviledges."
+	echo "You must run daptup with root privileges."
 	do_exit 2
 fi
 

@@ -4,6 +4,9 @@
 # License: GPLv3
 # Devoted to Evgeniya V. Katyuk.
 
+# exit if any command returned non-zero status
+set -e
+
 SPOOL_DIR=/var/spool/daptup
 
 # spool/cache files
@@ -200,13 +203,7 @@ echo -n "Getting pre-watched... "
 get_watched $DAPTUP_WATCH_BEFORE
 echo "[done]"
 
-aptitude update
-APTITUDE_RESULT=$?
-if [ "$APTITUDE_RESULT" != "0" ]; then
-	echo "aptitude returned non-zero code, daptup stopped here."
-	do_exit $?
-fi
-
+aptitude update || (echo "aptitude returned non-zero code, daptup stopped here."; do_exit 8)
 
 echo -n "Getting post-new... "
 get_new $DAPTUP_NEW_AFTER /dev/null
@@ -224,8 +221,11 @@ OUTPUT_OUTDATED=n
 if [ "$DAPTUP_CHECK_FOR_OUTDATED_PACKAGES" == "y" ]; then
 	# if DAPTUP_MINIMAL_DAY_COUNT_TREATING_OUTDATED variable contains non-numeric
 	# data, print an error and don't try to check for outdated packages
+	set +e
 	expr "$DAPTUP_MINIMAL_DAY_COUNT_TREATING_OUTDATED" + 0 >/dev/null 2>/dev/null
-	if [ "$?" == "0" ]; then
+	exit_code=$?
+	set -e
+	if [ "$exit_code" == "0" ]; then
 		echo -n "Getting package age info... "
 		find_old_packages $DAPTUP_OUTDATED
 		OUTPUT_OUTDATED=y

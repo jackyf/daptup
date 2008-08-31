@@ -259,7 +259,7 @@ if [ "`wc -l < $DAPTUP_TMP_FILE`" == "0" ]; then # no updates
 	gettext "No new updates."; echo
 else
 	gettext "New updates:"; echo
-	cat $DAPTUP_TMP_FILE | while read line; do
+	cat $DAPTUP_TMP_FILE | sed s/upgradeable\ from/-/g | while read line; do
 		if [ "$DAPTUP_USE_COLOR" == "y" ]; then
 			if [ "`expr "$line" : '<'`" == "0" ]; then
 				tput setf 2; # green

@@ -264,7 +264,7 @@ if [ "`wc -l < $DAPTUP_TMP_FILE`" == "0" ]; then # no updates
 	gettext "No new updates."; echo
 else
 	gettext "New updates:"; echo
-	cat $DAPTUP_TMP_FILE | sed s/upgradeable\ from/-/g | while read line; do
+	cat $DAPTUP_TMP_FILE | sed s/upgradeable\ from/-/g | sed 's/ to / -> /g' | while read line; do
 		if [ "$DAPTUP_USE_COLOR" == "y" ]; then
 			if [ "`expr "$line" : '<'`" == "0" ]; then
 				tput setf 2; # green
@@ -324,7 +324,7 @@ if [ "$OUTPUT_OUTDATED" == "y" ]; then
 		if [ "$DAPTUP_USE_COLOR" == "y" ]; then
 			tput setf 5 # magenta
 		fi
-		cat $DAPTUP_OUTDATED | sed s/upgradeable\ from/-/g | while read line; do
+		cat $DAPTUP_OUTDATED | sed 's/upgradeable from/-/g' | sed 's/ to / -> /g' | while read line; do
 			echo -n "  "
 			echo $line
 		done

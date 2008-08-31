@@ -256,9 +256,9 @@ echo
 
 diff_cmd $DAPTUP_UPDATES_BEFORE $DAPTUP_UPDATES_AFTER $DAPTUP_TMP_FILE
 if [ "`wc -l < $DAPTUP_TMP_FILE`" == "0" ]; then # no updates
-	echo "No new updates."
+	gettext "No new updates."; echo
 else
-	echo "New updates:"
+	gettext "New updates:"; echo
 	cat $DAPTUP_TMP_FILE | sed s/upgradeable\ from/-/g | while read line; do
 		if [ "$DAPTUP_USE_COLOR" == "y" ]; then
 			if [ "`expr "$line" : '<'`" == "0" ]; then
@@ -275,9 +275,9 @@ reset_color
 
 diff_cmd $DAPTUP_NEW_BEFORE $DAPTUP_NEW_AFTER $DAPTUP_TMP_FILE
 if [ "`wc -l < $DAPTUP_TMP_FILE`" == "0" ]; then # no new
-	echo "No new or removed packages."
+	gettext "No new or removed packages."; echo
 else
-	echo "New and removed packages:"
+	gettext "New and removed packages:"; echo
 	cat $DAPTUP_TMP_FILE | while read line; do
 		if [ "$DAPTUP_USE_COLOR" == "y" ]; then
 			if [ "`expr "$line" : '<'`" == "0" ]; then
@@ -294,9 +294,9 @@ reset_color
 
 diff_cmd $DAPTUP_WATCH_BEFORE $DAPTUP_WATCH_AFTER $DAPTUP_TMP_FILE
 if [ "`wc -l < $DAPTUP_TMP_FILE`" == "0" ]; then # no changes in watched
-	echo "No news in watched packages."
+	gettext "No news in watched packages."; echo
 else
-	echo "Changes in watched packages:"
+	gettext "Changes in watched packages:"; echo
 	cat $DAPTUP_TMP_FILE | while read line; do
 		if [ "$DAPTUP_USE_COLOR" == "y" ]; then
 			if [ "`expr "$line" : '<'`" == "0" ]; then
@@ -313,9 +313,9 @@ reset_color
 
 if [ "$OUTPUT_OUTDATED" == "y" ]; then
 	if [ "`wc -l < $DAPTUP_OUTDATED`" == "0" ]; then # no data in outdated
-		echo "No outdated packages."
+		gettext "No outdated packages."; echo
 	else
-		echo "Outdated packages:"
+		gettext "Outdated packages:"; echo
 		if [ "$DAPTUP_USE_COLOR" == "y" ]; then
 			tput setf 5 # magenta
 		fi

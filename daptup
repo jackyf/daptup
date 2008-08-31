@@ -170,7 +170,7 @@ function find_old_packages
 						echo >> $1
 					fi
 				else # date is extracted badly
-					eval_gettext "error: cannot extrace last date for package '\$package'"; echo
+					eval_gettext "error: cannot extract last modification date for package '\$package'"; echo
 				fi
 			else # changelog is not correct
 				eval_gettext "error: cannot fetch last entry from changelog for package '\$package'"; echo

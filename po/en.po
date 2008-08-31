@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: daptup\n"
 "Report-Msgid-Bugs-To: jackyf.devel@gmail.com\n"
-"POT-Creation-Date: 2008-08-31 17:31+0300\n"
+"POT-Creation-Date: 2008-08-31 17:48+0300\n"
 "PO-Revision-Date: 2008-08-31 17:33+0300\n"
 "Last-Translator: Eugene V. Lyubimkin <jackyf.devel@gmail.com>\n"
 "Language-Team: English\n"
@@ -81,10 +81,10 @@ msgid "warning: cannot find any changelog for package '$package'"
 msgstr "warning: cannot find any changelog for package '$package'"
 
 #: daptup:169
-msgid "day old"
-msgid_plural "days old"
-msgstr[0] "day old"
-msgstr[1] "days old"
+msgid "day"
+msgid_plural "days"
+msgstr[0] "day"
+msgstr[1] "days"
 
 #: daptup:173
 #, sh-format

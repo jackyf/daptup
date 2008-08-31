@@ -195,7 +195,7 @@ function reset_color()
 	fi
 }
 
-echo -n "Building old list of packages... "
+gettext "Building old list of packages... "
 get_new $DAPTUP_NEW_BEFORE $DAPTUP_ERRORS_FILE
 
 APTITUDE_RESULT=`wc -l < $DAPTUP_ERRORS_FILE`
@@ -203,29 +203,29 @@ if [ "$APTITUDE_RESULT" != "0" ]; then
 	echo "errors present. Is apt/dpkg running?.."
 	do_exit 8
 fi
-echo "[done]"
+gettext "[done]"; echo
 
-echo -n "Building old list of available updates... "
+gettext "Building old list of available updates... "
 get_updates $DAPTUP_UPDATES_BEFORE
-echo "[done]"
+gettext "[done]"; echo
 
-echo -n "Building old list of watched packages... "
+gettext "Building old list of watched packages... "
 get_watched $DAPTUP_WATCH_BEFORE
-echo "[done]"
+gettext "[done]"; echo
 
 aptitude update || (echo "aptitude returned non-zero code, daptup stopped here."; do_exit 8)
 
-echo -n "Building new list of packages... "
+gettext "Building new list of packages... "
 get_new $DAPTUP_NEW_AFTER /dev/null
-echo "[done]"
+gettext "[done]"; echo
 
-echo -n "Building new list of available updates... "
+gettext "Building new list of available updates... "
 get_updates $DAPTUP_UPDATES_AFTER
-echo "[done]"
+gettext "[done]"; echo
 
-echo -n "Building new list of watched packages... "
+gettext "Building new list of watched packages... "
 get_watched $DAPTUP_WATCH_AFTER
-echo "[done]"
+gettext "[done]"; echo
 
 OUTPUT_OUTDATED=n
 if [ "$DAPTUP_CHECK_FOR_OUTDATED_PACKAGES" == "y" ]; then
@@ -236,15 +236,15 @@ if [ "$DAPTUP_CHECK_FOR_OUTDATED_PACKAGES" == "y" ]; then
 	exit_code=$?
 	set -e
 	if [ "$exit_code" == "0" ]; then
-		echo -n "Building list of outdated packages... "
+		gettext "Building list of outdated packages... "
 		find_old_packages $DAPTUP_OUTDATED
 		OUTPUT_OUTDATED=y
-		echo "[done]"
+		gettext "[done]"; echo
 	else
-		echo "error: DAPTUP_MINIMAL_DAY_COUNT_TREATING_OUTDATED contains non-numeric data"
+		gettext "error: DAPTUP_MINIMAL_DAY_COUNT_TREATING_OUTDATED contains non-numeric data"; echo
 	fi
 else
-	echo "Skipping check for outdated packages."
+	gettext "Skipping check for outdated packages."; echo
 fi
 	
 if [ "$DAPTUP_USE_COLOR" == "y" ]; then

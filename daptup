@@ -4,6 +4,13 @@
 # License: GPLv3
 # Devoted to Evgeniya V. Katyuk.
 
+# translation support
+. gettext.sh
+TEXTDOMAIN=daptup
+export TEXTDOMAIN
+TEXTDOMAINDIR=/usr/share/locale
+export TEXTDOMAINDIR
+
 # exit if any command returned non-zero status
 set -e
 

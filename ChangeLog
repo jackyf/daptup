@@ -2,6 +2,11 @@
 Changelog of daptup utility
 ---------------------------
 
+0.7.0
+ * Implemented translation support (gettext).
+ * Some messages changed to more descriptive ones.
+ * Added Russian translation.
+
 0.6.1
  * Added 'set -e' to make script more robust.
  * Indented outdated packages info by two spaces.

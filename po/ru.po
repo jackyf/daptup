@@ -1,13 +1,13 @@
-# Russian translations for PACKAGE package.
+# Russian translations for daptup package.
 # Copyright (C) 2008 Eugene V. Lyubimkin
-# This file is distributed under the same license as the PACKAGE package.
+# This file is distributed under the same license as the daptup package.
 # Eugene V. Lyubimkin <jackyf.devel@gmail.com>, 2008.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: daptup\n"
 "Report-Msgid-Bugs-To: jackyf.devel@gmail.com\n"
-"POT-Creation-Date: 2008-08-31 16:42+0300\n"
+"POT-Creation-Date: 2008-08-31 17:48+0300\n"
 "PO-Revision-Date: 2008-08-31 16:51+0300\n"
 "Last-Translator: Eugene V. Lyubimkin <jackyf.devel@gmail.com>\n"
 "Language-Team: Russian\n"
@@ -82,21 +82,24 @@ msgid "warning: cannot find any changelog for package '$package'"
 msgstr "предупреждение: не могу найти список изменений для пакета '$package'"
 
 #: daptup:169
-msgid "day old"
-msgid_plural "days old"
-msgstr[0] "день прошёл"
-msgstr[1] "дня прошло"
-msgstr[2] "дней прошло"
+msgid "day"
+msgid_plural "days"
+msgstr[0] "день"
+msgstr[1] "дня"
+msgstr[2] "дней"
 
 #: daptup:173
 #, sh-format
 msgid "error: cannot extract last modification date for package '$package'"
-msgstr "ошибка: не могу извлечь последнюю дату модификации для пакета '$package'"
+msgstr ""
+"ошибка: не могу извлечь последнюю дату модификации для пакета '$package'"
 
 #: daptup:176
 #, sh-format
 msgid "error: cannot fetch last entry from changelog for package '$package'"
-msgstr "ошибка: не могу найти последнюю запись в списке изменений для пакета '$package'"
+msgstr ""
+"ошибка: не могу найти последнюю запись в списке изменений для пакета "
+"'$package'"
 
 #: daptup:184
 msgid "[done]"
@@ -133,7 +136,9 @@ msgstr "Построение списка давно не обновлявших
 #: daptup:249
 msgid ""
 "error: DAPTUP_MINIMAL_DAY_COUNT_TREATING_OUTDATED contains non-numeric data"
-msgstr "Переменная DAPTUP_MINIMAL_DAY_COUNT_TREATING_OUTDATED содержит нечисловые данные"
+msgstr ""
+"Переменная DAPTUP_MINIMAL_DAY_COUNT_TREATING_OUTDATED содержит нечисловые "
+"данные"
 
 #: daptup:252
 msgid "Skipping check for outdated packages."

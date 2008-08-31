@@ -3,7 +3,6 @@ Changelog of daptup utility
 ---------------------------
 
 0.6.1
-
  * Added 'set -e' to make script more robust.
  * Indented outdated packages info by two spaces.
  * Typo fix.

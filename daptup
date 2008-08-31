@@ -33,8 +33,8 @@ function delete_temp_files
 	rm -f $DAPTUP_TMP_FILE $DAPTUP_ERRORS_FILE
 }
 
-trap "echo SIGTERM received && do_exit 1024" SIGTERM
-trap "echo SIGINT received && do_exit 2048" SIGINT
+trap "echo `gettext \"SIGTERM received\"` && do_exit 1024" SIGTERM
+trap "echo `gettext \"SIGINT received\"` && do_exit 2048" SIGINT
 
 # $1 - exit code
 function do_exit
@@ -47,7 +47,7 @@ DAPTUP_CONFFILE=/etc/daptup.conf
 if [ -f $DAPTUP_CONFFILE ]; then
 	. $DAPTUP_CONFFILE
 else
-	echo "Cannot read configuration from '$DAPTUP_CONFFILE'."
+	eval_gettext "Cannot read configuration from '\$DAPTUP_CONFFILE'."; echo
 	do_exit 1
 fi
 
@@ -60,22 +60,23 @@ case $PARAM in
 		DAPTUP_USE_COLOR=n	
 		;;
 	-h|--help)
-		echo "Usage: `basename ${0}` [ -h | --help | --nocolor ]."
+		BASENAME=`basename ${0}`
+		eval_gettext "Usage: \$BASENAME [ -h | --help | --nocolor ]."; echo
 		echo
-		echo "daptup runs 'aptitude update' command inside and outputs:"
-		echo " - list of packages recently entered to repo;"
-		echo " - list of packages which got new updates;"
-		echo " - list of changes in 'watched' packages;"
-		echo " - list of outdated packages (optionally)."
+		gettext "daptup runs 'aptitude update' command inside and outputs:"; echo
+		gettext " - list of packages recently entered to repo;"; echo
+		gettext " - list of packages which got new updates;"; echo
+		gettext " - list of changes in 'watched' packages;"; echo
+		gettext " - list of outdated packages (optionally)."; echo
 		echo
-		echo "Options:"
-		echo " -h, --help: output this help and exit"
-		echo " --nocolor: do not use colored output"
+		gettext "Options:"; echo
+		gettext " -h, --help: output this help and exit"; echo
+		gettext " --nocolor: do not use colored output"; echo
 		do_exit 0
 		;;
 	*)
 		if [ "$PARAM" != "" ]; then
-			echo "Unknown param: $PARAM"
+			eval_gettext "Unknown param: \$PARAM"; echo
 			do_exit 4
 		fi
 		;;
@@ -84,7 +85,7 @@ esac
 # Checking for root privileges
 MY_UID=`id -u`
 if [ "$MY_UID" != "0" ]; then
-	echo "You must run daptup with root privileges."
+	gettext "You must run daptup with root privileges."; echo
 	do_exit 2
 fi
 
@@ -146,7 +147,7 @@ function find_old_packages
 		elif [ -f $DOC_DIR/$package/changelog.gz ]; then
 			CHANGELOG_FILE=$DOC_DIR/$package/changelog.gz
 		else
-			echo "warning: cannot find any changelog for package '$package'"
+			eval_gettext "warning: cannot find any changelog for package '\$package'"; echo
 		fi
 
 		if [ -n "$CHANGELOG_FILE" ]; then # if we've found a changelog
@@ -164,7 +165,8 @@ function find_old_packages
 					DAYS=`expr \( $CURRENT_TIMESTAMP - $PACKAGE_TIMESTAMP \) / $SECONDS_IN_DAY`
 					if [ $DAYS -gt $DAPTUP_MINIMAL_DAY_COUNT_TREATING_OUTDATED ]; then # package is old
 						echo -n $line >> $1
-						echo ", $DAYS days old" >> $1
+						echo ", $DAYS " >> $1
+						ngettext "day old" "days old" $DAYS >> $1
 					fi
 				else # date is extracted badly
 					echo "error: cannot extrace last date for package $package"

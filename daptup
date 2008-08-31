@@ -165,14 +165,15 @@ function find_old_packages
 					DAYS=`expr \( $CURRENT_TIMESTAMP - $PACKAGE_TIMESTAMP \) / $SECONDS_IN_DAY`
 					if [ $DAYS -gt $DAPTUP_MINIMAL_DAY_COUNT_TREATING_OUTDATED ]; then # package is old
 						echo -n $line >> $1
-						echo ", $DAYS " >> $1
+						echo -n ", $DAYS " >> $1
 						ngettext "day old" "days old" $DAYS >> $1
+						echo >> $1
 					fi
 				else # date is extracted badly
-					echo "error: cannot extrace last date for package '$package'"
+					eval_gettext "error: cannot extrace last date for package '\$package'"; echo
 				fi
 			else # changelog is not correct
-				echo "error: cannot fetch last entry from changelog for package '$package'"
+				eval_gettext "error: cannot fetch last entry from changelog for package '\$package'"; echo
 			fi
 		fi
 	done

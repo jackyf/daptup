@@ -7,3 +7,22 @@ Changelog of daptup utility
  * Added 'set -e' to make script more robust.
  * Indented outdated packages info by two spaces.
  * Typo fix.
+
+0.6.0
+ * Added the ability to check for installed outdated packages.
+ * Built-in help output now working without root privileges.
+
+0.5.0
+ * Moved spool files to /var/spool/daptup instead of /tmp.
+ * Added catching of SIGTERM and SIGINT signals.
+ * Rewrote help output.
+ * Updated man page.
+
+0.4.1
+ * Fixed possible security flaw when user can symlink temporary file in /tmp
+   used by daptup to any system file so daptup will waste it.
+
+0.4.0
+ * Added ability to watch specified non-installed packages.
+ * Added ability to disable column output.
+

@@ -179,6 +179,11 @@ function find_old_packages
 	done
 }
 
+function print_done
+{
+	gettext "[done]"; echo
+}
+
 # $1 - before
 # $2 - after
 # $3 - where result will be stored
@@ -203,29 +208,29 @@ if [ "$APTITUDE_RESULT" != "0" ]; then
 	echo "errors present. Is apt/dpkg running?.."
 	do_exit 8
 fi
-gettext "[done]"; echo
+print_done
 
 gettext "Building old list of available updates... "
 get_updates $DAPTUP_UPDATES_BEFORE
-gettext "[done]"; echo
+print_done
 
 gettext "Building old list of watched packages... "
 get_watched $DAPTUP_WATCH_BEFORE
-gettext "[done]"; echo
+print_done
 
 aptitude update || (echo "aptitude returned non-zero code, daptup stopped here."; do_exit 8)
 
 gettext "Building new list of packages... "
 get_new $DAPTUP_NEW_AFTER /dev/null
-gettext "[done]"; echo
+print_done
 
 gettext "Building new list of available updates... "
 get_updates $DAPTUP_UPDATES_AFTER
-gettext "[done]"; echo
+print_done
 
 gettext "Building new list of watched packages... "
 get_watched $DAPTUP_WATCH_AFTER
-gettext "[done]"; echo
+print_done
 
 OUTPUT_OUTDATED=n
 if [ "$DAPTUP_CHECK_FOR_OUTDATED_PACKAGES" == "y" ]; then
@@ -239,7 +244,7 @@ if [ "$DAPTUP_CHECK_FOR_OUTDATED_PACKAGES" == "y" ]; then
 		gettext "Building list of outdated packages... "
 		find_old_packages $DAPTUP_OUTDATED
 		OUTPUT_OUTDATED=y
-		gettext "[done]"; echo
+		print_done
 	else
 		gettext "error: DAPTUP_MINIMAL_DAY_COUNT_TREATING_OUTDATED contains non-numeric data"; echo
 	fi

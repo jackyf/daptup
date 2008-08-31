@@ -169,10 +169,10 @@ function find_old_packages
 						ngettext "day old" "days old" $DAYS >> $1
 					fi
 				else # date is extracted badly
-					echo "error: cannot extrace last date for package $package"
+					echo "error: cannot extrace last date for package '$package'"
 				fi
 			else # changelog is not correct
-				echo "error: cannot fetch last entry from changelog for package $package"
+				echo "error: cannot fetch last entry from changelog for package '$package'"
 			fi
 		fi
 	done

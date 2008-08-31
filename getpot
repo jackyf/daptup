@@ -1,0 +1,2 @@
+#!/bin/sh
+xgettext daptup --language=shell --copyright-holder="Eugene V. Lyubimkin" --package-name=daptup --msgid-bugs-address="jackyf.devel@gmail.com" --output messages.pot

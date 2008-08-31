@@ -166,7 +166,7 @@ function find_old_packages
 					if [ $DAYS -gt $DAPTUP_MINIMAL_DAY_COUNT_TREATING_OUTDATED ]; then # package is old
 						echo -n $line >> $1
 						echo -n ", $DAYS " >> $1
-						ngettext "day old" "days old" $DAYS >> $1
+						ngettext "day" "days" $DAYS >> $1
 						echo >> $1
 					fi
 				else # date is extracted badly

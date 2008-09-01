@@ -324,10 +324,7 @@ if [ "$OUTPUT_OUTDATED" == "y" ]; then
 		if [ "$DAPTUP_USE_COLOR" == "y" ]; then
 			tput setf 5 # magenta
 		fi
-		cat $DAPTUP_OUTDATED | sed 's/upgradeable from/-/g' | sed 's/ to / -> /g' | while read line; do
-			echo -n "  "
-			echo $line
-		done
+		cat $DAPTUP_OUTDATED | sed 's/upgradeable from/-/g' | sed 's/ to / -> /g' | sed 's/^/  /'
 	fi
 fi
 

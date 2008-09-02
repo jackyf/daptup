@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: daptup\n"
 "Report-Msgid-Bugs-To: jackyf.devel@gmail.com\n"
-"POT-Creation-Date: 2008-08-31 17:48+0300\n"
+"POT-Creation-Date: 2008-09-02 22:26+0300\n"
 "PO-Revision-Date: 2008-08-31 17:33+0300\n"
 "Last-Translator: Eugene V. Lyubimkin <jackyf.devel@gmail.com>\n"
 "Language-Team: English\n"
@@ -104,6 +104,10 @@ msgstr "[done]"
 msgid "Building old list of packages... "
 msgstr "Building old list of packages... "
 
+#: daptup:208
+msgid "errors present. Is apt/dpkg running?.."
+msgstr "errors present. Is apt/dpkg running?.."
+
 #: daptup:213
 msgid "Building old list of available updates... "
 msgstr "Building old list of available updates... "
@@ -111,6 +115,10 @@ msgstr "Building old list of available updates... "
 #: daptup:217
 msgid "Building old list of watched packages... "
 msgstr "Building old list of watched packages... "
+
+#: daptup:221
+msgid "aptitude returned non-zero code, daptup stopped here."
+msgstr "aptitude returned non-zero code, daptup stopped here."
 
 #: daptup:223
 msgid "Building new list of packages... "

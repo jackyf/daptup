@@ -1,0 +1,180 @@
+# Ukrainian translations for daptup package.
+# Copyright (C) 2008 Eugene V. Lyubimkin
+# This file is distributed under the same license as the daptup package.
+# Eugene V. Lyubimkin <jackyf.devel@gmail.com>, 2008.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: daptup\n"
+"Report-Msgid-Bugs-To: jackyf.devel@gmail.com\n"
+"POT-Creation-Date: 2008-09-07 22:06+0300\n"
+"PO-Revision-Date: 2008-09-20 17:14+0300\n"
+"Last-Translator: Eugene V. Lyubimkin <jackyf.devel@gmail.com>\n"
+"Language-Team: Ukrainian\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=ASCII\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%"
+"10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+#: daptup:36
+msgid "SIGTERM received"
+msgstr "Отримано SIGTERM"
+
+#: daptup:37
+msgid "SIGINT received"
+msgstr "Отримано SIGINT"
+
+#: daptup:50
+#, sh-format
+msgid "Cannot read configuration from '$DAPTUP_CONFFILE'."
+msgstr "Не можу прочитати конфігураційний файл '$DAPTUP_CONFFILE'."
+
+#: daptup:64
+#, sh-format
+msgid "Usage: $BASENAME [ -h | --help | --nocolor ]."
+msgstr "Користування: $BASENAME [ -h | --help | --nocolor ]."
+
+#: daptup:66
+msgid "daptup runs 'aptitude update' command inside and outputs:"
+msgstr "daptup запускає команду 'aptitude update' та виводить:"
+
+#: daptup:67
+msgid " - list of packages recently entered to repo;"
+msgstr " - список пакетів, що тільки що прийшли до репозиторію;"
+
+#: daptup:68
+msgid " - list of packages which got new updates;"
+msgstr " - список пакетів, що отримали нові обновлення;"
+
+#: daptup:69
+msgid " - list of changes in 'watched' packages;"
+msgstr " - список змін у 'спостерігаємих' пакетах;"
+
+#: daptup:70
+msgid " - list of outdated packages (optionally)."
+msgstr " - список застарілих пакетів (необов'язково)."
+
+#: daptup:72
+msgid "Options:"
+msgstr "Параметри:"
+
+#: daptup:73
+msgid " -h, --help: output this help and exit"
+msgstr " -h, --help: вивести цю довідку та вийти"
+
+#: daptup:74
+msgid " --nocolor: do not use colored output"
+msgstr " --nocolor: не використовувати кольоровий вивід"
+
+#: daptup:79
+#, sh-format
+msgid "Unknown param: $PARAM"
+msgstr "Незрозумілий параметр: $PARAM"
+
+#: daptup:88
+msgid "You must run daptup with root privileges."
+msgstr "Ви повинні запускати daptup з привілегіями суперкористувача."
+
+#: daptup:150
+#, sh-format
+msgid "warning: cannot find any changelog for package '$package'"
+msgstr "попередження: не можу знайти список змін для пакету '$package'"
+
+#: daptup:169
+msgid "day"
+msgid_plural "days"
+msgstr[0] "день"
+msgstr[1] "дня"
+msgstr[2] "днів"
+
+#: daptup:173
+#, sh-format
+msgid "error: cannot extract last modification date for package '$package'"
+msgstr "помилка: не можу знайти дату останньої модифікації для пакету '$package'"
+
+#: daptup:176
+#, sh-format
+msgid "error: cannot fetch last entry from changelog for package '$package'"
+msgstr "помилка: не можу знайти останній запис у списку змін для пакету '$package'"
+
+#: daptup:184
+msgid "[done]"
+msgstr "[виконано]"
+
+#: daptup:203
+msgid "Building old list of packages... "
+msgstr "Будування старого списку пакетів... "
+
+#: daptup:208
+msgid "errors present. Is apt/dpkg running?.."
+msgstr "знайдено помилки. Можливо, зараз працюють apt/dpkg?.."
+
+#: daptup:213
+msgid "Building old list of available updates... "
+msgstr "Будування старого списка доступних обновлень"
+
+#: daptup:217
+msgid "Building old list of watched packages... "
+msgstr "Будування старого списка спостерігаємих пакетів... "
+
+#: daptup:221
+msgid "aptitude returned non-zero code, daptup stopped here."
+msgstr "aptitude вернула ненульовий код завершення, daptup зупинено."
+
+#: daptup:223
+msgid "Building new list of packages... "
+msgstr "Будування нового списка пакетів... "
+
+#: daptup:227
+msgid "Building new list of available updates... "
+msgstr "Будування нового списка доступних обновлень... "
+
+#: daptup:231
+msgid "Building new list of watched packages... "
+msgstr "Будування нового списка спостерігаємих пакетів... "
+
+#: daptup:244
+msgid "Building list of outdated packages... "
+msgstr "Будування списка застарілих пакетів... "
+
+#: daptup:249
+msgid ""
+"error: DAPTUP_MINIMAL_DAY_COUNT_TREATING_OUTDATED contains non-numeric data"
+msgstr "помилка: DAPTUP_MINIMAL_DAY_COUNT_TREATING_OUTDATED містить нечислові дані"
+
+#: daptup:252
+msgid "Skipping check for outdated packages."
+msgstr "Пропущено сканування на застарілі пакети."
+
+#: daptup:264
+msgid "No new updates."
+msgstr "Немає нових обновлень."
+
+#: daptup:266
+msgid "New updates:"
+msgstr "Нові обновлення:"
+
+#: daptup:283
+msgid "No new or removed packages."
+msgstr "Немає нових чи видалених пакетів."
+
+#: daptup:285
+msgid "New and removed packages:"
+msgstr "Нові та видалені пакети:"
+
+#: daptup:302
+msgid "No news in watched packages."
+msgstr "Немає нових в спостерігаємих пакетах."
+
+#: daptup:304
+msgid "Changes in watched packages:"
+msgstr "Зміни в спостерігаємих пакетах:"
+
+#: daptup:321
+msgid "No outdated packages."
+msgstr "Немає застарілих пакетів."
+
+#: daptup:323
+msgid "Outdated packages:"
+msgstr "Застарілі пакети:"

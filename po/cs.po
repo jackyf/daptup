@@ -1,0 +1,181 @@
+# Czech translation of daptup.
+# Copyright (C) YEAR Eugene V. Lyubimkin
+# This file is distributed under the same license as the daptup package.
+# Miroslav Kure <kurem@debian.cz>, 2008.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: daptup\n"
+"Report-Msgid-Bugs-To: jackyf.devel@gmail.com\n"
+"POT-Creation-Date: 2008-09-07 22:06+0300\n"
+"PO-Revision-Date: 2008-09-20 12:07+0200\n"
+"Last-Translator: Miroslav Kure <kurem@debian.cz>\n"
+"Language-Team: Czech <debian-l10n-czech@lists.debian..org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%"
+"10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+
+#: daptup:36
+msgid "SIGTERM received"
+msgstr "Zachycen SIGTERM"
+
+#: daptup:37
+msgid "SIGINT received"
+msgstr "Zachycen SIGINT"
+
+#: daptup:50
+#, sh-format
+msgid "Cannot read configuration from '$DAPTUP_CONFFILE'."
+msgstr "Nelze přečíst konfigurace ze souboru „$DAPTUP_CONFFILE“."
+
+#: daptup:64
+#, sh-format
+msgid "Usage: $BASENAME [ -h | --help | --nocolor ]."
+msgstr "Použití: $BASENAME [ -h | --help | --nocolor ]."
+
+#: daptup:66
+msgid "daptup runs 'aptitude update' command inside and outputs:"
+msgstr "daptup interně spustí příkaz „aptitude update“ a vypíše:"
+
+#: daptup:67
+msgid " - list of packages recently entered to repo;"
+msgstr " - seznam balíků čerstvě přidaných do repositáře"
+
+#: daptup:68
+msgid " - list of packages which got new updates;"
+msgstr " - seznam balíků, pro které existuje aktualizace"
+
+#: daptup:69
+msgid " - list of changes in 'watched' packages;"
+msgstr " - seznam změn ve „sledovaných“ balících"
+
+#: daptup:70
+msgid " - list of outdated packages (optionally)."
+msgstr " - seznam zastaralých balíků (volitelně)."
+
+#: daptup:72
+msgid "Options:"
+msgstr "Volby:"
+
+#: daptup:73
+msgid " -h, --help: output this help and exit"
+msgstr " -h, --help: vypíše tuto nápovědu a skončí"
+
+#: daptup:74
+msgid " --nocolor: do not use colored output"
+msgstr " --nocolor: nepoužije obarvený výstup"
+
+#: daptup:79
+#, sh-format
+msgid "Unknown param: $PARAM"
+msgstr "Neznámý parametr: $PARAM"
+
+#: daptup:88
+msgid "You must run daptup with root privileges."
+msgstr "daptup musíte spustit s rootovskými oprávněními."
+
+#: daptup:150
+#, sh-format
+msgid "warning: cannot find any changelog for package '$package'"
+msgstr "varování: nelze najít seznam změn pro balík „$package“"
+
+#: daptup:169
+msgid "day"
+msgid_plural "days"
+msgstr[0] "den"
+msgstr[1] "dny"
+msgstr[2] "dnů"
+
+#: daptup:173
+#, sh-format
+msgid "error: cannot extract last modification date for package '$package'"
+msgstr "chyba: nelze zjistit datum poslední změny balíku „$package“"
+
+#: daptup:176
+#, sh-format
+msgid "error: cannot fetch last entry from changelog for package '$package'"
+msgstr "chyba: nelze stáhnout poslední změnu v balíku „$package“"
+
+#: daptup:184
+msgid "[done]"
+msgstr "[hotovo]"
+
+#: daptup:203
+msgid "Building old list of packages... "
+msgstr "Sestavuje se starý seznam balíků..."
+
+#: daptup:208
+msgid "errors present. Is apt/dpkg running?.."
+msgstr "vyskytly se chyby. Běží apt/dpkg?..."
+
+#: daptup:213
+msgid "Building old list of available updates... "
+msgstr "Sestavuje se starý seznam aktualizací..."
+
+#: daptup:217
+msgid "Building old list of watched packages... "
+msgstr "Sestavuje se starý seznam sledovaných balíků..."
+
+#: daptup:221
+msgid "aptitude returned non-zero code, daptup stopped here."
+msgstr "aptitude skončila s nenulovým návratovým kódem, daptup končí."
+
+#: daptup:223
+msgid "Building new list of packages... "
+msgstr "Sestavuje se nový seznam balíků..."
+
+#: daptup:227
+msgid "Building new list of available updates... "
+msgstr "Sestavuje se nový seznam aktualizací..."
+
+#: daptup:231
+msgid "Building new list of watched packages... "
+msgstr "Sestavuje se nový seznam sledovaných balíků..."
+
+#: daptup:244
+msgid "Building list of outdated packages... "
+msgstr "Sestavuje se seznam zastaralých balíků..."
+
+#: daptup:249
+msgid ""
+"error: DAPTUP_MINIMAL_DAY_COUNT_TREATING_OUTDATED contains non-numeric data"
+msgstr ""
+"chyba: DAPTUP_MINIMAL_DAY_COUNT_TREATING_OUTDATED obsahuje nenumerická data"
+
+#: daptup:252
+msgid "Skipping check for outdated packages."
+msgstr "Přeskakuje se kontrola zastaralých balíků."
+
+#: daptup:264
+msgid "No new updates."
+msgstr "Žádné nové aktualizace."
+
+#: daptup:266
+msgid "New updates:"
+msgstr "Nové aktualizace:"
+
+#: daptup:283
+msgid "No new or removed packages."
+msgstr "Žádné nové nebo odstraněné balíky."
+
+#: daptup:285
+msgid "New and removed packages:"
+msgstr "Nové a odstraněné balíky:"
+
+#: daptup:302
+msgid "No news in watched packages."
+msgstr "Žádné novinky u sledovaných balíků."
+
+#: daptup:304
+msgid "Changes in watched packages:"
+msgstr "Změny ve sledovaných balících:"
+
+#: daptup:321
+msgid "No outdated packages."
+msgstr "Žádné zastaralé balíky."
+
+#: daptup:323
+msgid "Outdated packages:"
+msgstr "Zastaralé balíky:"

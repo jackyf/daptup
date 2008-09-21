@@ -1,0 +1,181 @@
+# Translation of daptup templates to German
+# Copyright (C) Helge Kreutzmann <debian@helgefjell.de>, 2008.
+# This file is distributed under the same license as the daptup package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: daptup\n"
+"Report-Msgid-Bugs-To: jackyf.devel@gmail.com\n"
+"POT-Creation-Date: 2008-09-07 22:06+0300\n"
+"PO-Revision-Date: 2008-09-21 07:40+0200\n"
+"Last-Translator: Helge Kreutzmann <debian@helgefjell.de>\n"
+"Language-Team: de <debian-l10n-german@lists.debian.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: daptup:36
+msgid "SIGTERM received"
+msgstr "SIGTERM erhalten"
+
+#: daptup:37
+msgid "SIGINT received"
+msgstr "SIGINT erhalten"
+
+#: daptup:50
+#, sh-format
+msgid "Cannot read configuration from '$DAPTUP_CONFFILE'."
+msgstr "Kann Konfiguration nicht aus »$DAPTUP_CONFFILE« lesen."
+
+#: daptup:64
+#, sh-format
+msgid "Usage: $BASENAME [ -h | --help | --nocolor ]."
+msgstr "Verwendung: $BASENAME [ -h | --help | --nocolor ]."
+
+#: daptup:66
+msgid "daptup runs 'aptitude update' command inside and outputs:"
+msgstr "Daptup führt intern »aptitude update« aus und liefert:"
+
+#: daptup:67
+msgid " - list of packages recently entered to repo;"
+msgstr " - eine Liste von Paketen, die kürzlich zum Depot hinzu kamen"
+
+#: daptup:68
+msgid " - list of packages which got new updates;"
+msgstr " - eine Liste von Paketen, die neue Aktualisierungen erhielten"
+
+#: daptup:69
+msgid " - list of changes in 'watched' packages;"
+msgstr " - eine Liste von Änderungen in »beobachteten« Paketen"
+
+#: daptup:70
+msgid " - list of outdated packages (optionally)."
+msgstr " - eine Liste von veralteten Paketen (optional)"
+
+#: daptup:72
+msgid "Options:"
+msgstr "Optionen:"
+
+#: daptup:73
+msgid " -h, --help: output this help and exit"
+msgstr " -h, --help: gibt diese Hilfe aus und beendet sich"
+
+#: daptup:74
+msgid " --nocolor: do not use colored output"
+msgstr " --nocolor: es wird keine farbige Ausgabe verwandt"
+
+#: daptup:79
+#, sh-format
+msgid "Unknown param: $PARAM"
+msgstr "Unbekannter Parameter: $PARAM"
+
+#: daptup:88
+msgid "You must run daptup with root privileges."
+msgstr "Sie müssen Daptup mit Root-Privilegien ausführen."
+
+#: daptup:150
+#, sh-format
+msgid "warning: cannot find any changelog for package '$package'"
+msgstr "Warnung: Kann kein Changelog für Paket »$package« finden"
+
+#: daptup:169
+msgid "day"
+msgid_plural "days"
+msgstr[0] "Tag"
+msgstr[1] "Tage"
+
+#: daptup:173
+#, sh-format
+msgid "error: cannot extract last modification date for package '$package'"
+msgstr ""
+"Fehler: Kann das letzte Änderungsdatum für Paket »$package« nicht ermitteln"
+
+#: daptup:176
+#, sh-format
+msgid "error: cannot fetch last entry from changelog for package '$package'"
+msgstr ""
+"Fehler: Kann den letzten Eintrag des Changelogs für Paket »$package« nicht "
+"holen"
+
+#: daptup:184
+msgid "[done]"
+msgstr "[erledigt]"
+
+#: daptup:203
+msgid "Building old list of packages... "
+msgstr "Erstelle alte Liste von Paketen... "
+
+#: daptup:208
+msgid "errors present. Is apt/dpkg running?.."
+msgstr "Fehler vorhanden. Läuft Apt/Dpkg?"
+
+#: daptup:213
+msgid "Building old list of available updates... "
+msgstr "Erstelle alte Liste von verfügbaren Aktualisierungen... "
+
+#: daptup:217
+msgid "Building old list of watched packages... "
+msgstr "Erstelle alte Liste von beobachteten Paketen... "
+
+#: daptup:221
+msgid "aptitude returned non-zero code, daptup stopped here."
+msgstr "Aptitude lieferte einen nicht-leeren Wert, Daptup beendet sich hier."
+
+#: daptup:223
+msgid "Building new list of packages... "
+msgstr "Erstelle neue Liste von Paketen... "
+
+#: daptup:227
+msgid "Building new list of available updates... "
+msgstr "Erstelle neue Liste von verfügbaren Aktualisierungen... "
+
+#: daptup:231
+msgid "Building new list of watched packages... "
+msgstr "Erstelle neue Liste von beobachteten Paketen... "
+
+#: daptup:244
+msgid "Building list of outdated packages... "
+msgstr "Erstelle Liste von veralteten Paketen... "
+
+#: daptup:249
+msgid ""
+"error: DAPTUP_MINIMAL_DAY_COUNT_TREATING_OUTDATED contains non-numeric data"
+msgstr ""
+"Fehler: DAPTUP_MINIMAL_DAY_COUNT_TREATING_OUTDATED enthält nicht-numerische "
+"Daten."
+
+#: daptup:252
+msgid "Skipping check for outdated packages."
+msgstr "Überspringe Prüfung auf veraltete Pakete."
+
+#: daptup:264
+msgid "No new updates."
+msgstr "Keine neuen Aktualisierungen."
+
+#: daptup:266
+msgid "New updates:"
+msgstr "Neue Aktualisierungen:"
+
+#: daptup:283
+msgid "No new or removed packages."
+msgstr "Keine neuen oder entfernten Pakete."
+
+#: daptup:285
+msgid "New and removed packages:"
+msgstr "Neue und entfernte Pakete:"
+
+#: daptup:302
+msgid "No news in watched packages."
+msgstr "Keine Neuigkeiten in beobachteten Paketen."
+
+#: daptup:304
+msgid "Changes in watched packages:"
+msgstr "Änderungen in beobachteten Paketen:"
+
+#: daptup:321
+msgid "No outdated packages."
+msgstr "Keine veralteten Pakete."
+
+#: daptup:323
+msgid "Outdated packages:"
+msgstr "Veraltete Pakete:"

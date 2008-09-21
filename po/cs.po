@@ -107,8 +107,8 @@ msgid "Building old list of packages... "
 msgstr "Sestavuje se starý seznam balíků..."
 
 #: daptup:208
-msgid "errors present. Is apt/dpkg running?.."
-msgstr "vyskytly se chyby. Běží apt/dpkg?..."
+msgid "errors present. Is apt/dpkg running?"
+msgstr "vyskytly se chyby. Běží apt/dpkg?"
 
 #: daptup:213
 msgid "Building old list of available updates... "

@@ -107,8 +107,8 @@ msgid "Building old list of packages... "
 msgstr "Будування старого списку пакетів... "
 
 #: daptup:208
-msgid "errors present. Is apt/dpkg running?.."
-msgstr "знайдено помилки. Можливо, зараз працюють apt/dpkg?.."
+msgid "errors present. Is apt/dpkg running?"
+msgstr "знайдено помилки. Можливо, зараз працюють apt/dpkg?"
 
 #: daptup:213
 msgid "Building old list of available updates... "

@@ -2,6 +2,12 @@
 Changelog of daptup utility
 ---------------------------
 
+0.7.1
+ * Added Ukrainian translation.
+ * Added Arabic translation by Mohamed Magdy.
+ * Added Czech translation by Miroslav Kure.
+ * Added German translation by Helge Kreutzmann.
+
 0.7.0
  * Implemented translation support (gettext).
  * Some messages changed to more descriptive ones.

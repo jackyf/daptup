@@ -112,7 +112,7 @@ msgstr "знайдено помилки. Можливо, зараз працюю
 
 #: daptup:213
 msgid "Building old list of available updates... "
-msgstr "Будування старого списка доступних обновлень"
+msgstr "Будування старого списка доступних обновлень... "
 
 #: daptup:217
 msgid "Building old list of watched packages... "

@@ -1,0 +1,179 @@
+# translation of daptup_0.7.1_nl.po to Dutch
+# Copyright (C) 2008 Eugene V. Lyubimkin
+# This file is distributed under the same license as the daptup package.
+#
+# Paul Gevers <paul@climbing.nl>, 2008.
+msgid ""
+msgstr ""
+"Project-Id-Version: daptup_0.7.1_nl\n"
+"Report-Msgid-Bugs-To: jackyf.devel@gmail.com\n"
+"POT-Creation-Date: 2008-09-07 22:06+0300\n"
+"PO-Revision-Date: 2008-09-28 18:14-0500\n"
+"Last-Translator: Paul Gevers <paul@climbing.nl>\n"
+"Language-Team: Dutch <debian-l10n-dutch@lists.debian.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms:  nplurals=2; plural=(n != 1);\n"
+"X-Generator: KBabel 1.11.4\n"
+
+#: daptup:36
+msgid "SIGTERM received"
+msgstr "SIGTERM ontvangen"
+
+#: daptup:37
+msgid "SIGINT received"
+msgstr "SIGINT ontvangen"
+
+#: daptup:50
+#, sh-format
+msgid "Cannot read configuration from '$DAPTUP_CONFFILE'."
+msgstr "De instellingen in '$DAPTUP_CONFFILE' kunnen niet ingelezen worden."
+
+#: daptup:64
+#, sh-format
+msgid "Usage: $BASENAME [ -h | --help | --nocolor ]."
+msgstr "Gebruik: $BASENAME [ -h | --help | --nocolor ]."
+
+#: daptup:66
+msgid "daptup runs 'aptitude update' command inside and outputs:"
+msgstr "'daptup' gebruikt intern het commando 'aptitude update' en geeft de volgende lijsten weer:"
+
+#: daptup:67
+msgid " - list of packages recently entered to repo;"
+msgstr " - pakketten die recentelijk aan de pakketbron zijn toegevoegd"
+
+#: daptup:68
+msgid " - list of packages which got new updates;"
+msgstr "- pakketten die een nieuwe update hebben"
+
+#: daptup:69
+msgid " - list of changes in 'watched' packages;"
+msgstr " - veranderingen in 'geobserveerde' pakketten"
+
+#: daptup:70
+msgid " - list of outdated packages (optionally)."
+msgstr " - verouderde pakketten (optioneel)"
+
+#: daptup:72
+msgid "Options:"
+msgstr "Opties:"
+
+#: daptup:73
+msgid " -h, --help: output this help and exit"
+msgstr " -h, --help: geeft deze 'help' weer en sluit af"
+
+#: daptup:74
+msgid " --nocolor: do not use colored output"
+msgstr " --nocolor: gebruik geen kleurenweergave"
+
+#: daptup:79
+#, sh-format
+msgid "Unknown param: $PARAM"
+msgstr "Onbekende parameter: $PARAM"
+
+#: daptup:88
+msgid "You must run daptup with root privileges."
+msgstr "U dient 'daptup' te draaien met beheerdersrechten ('root')."
+
+#: daptup:150
+#, sh-format
+msgid "warning: cannot find any changelog for package '$package'"
+msgstr "waarschuwing: het bestand 'changelog' van het pakket '$package' kan niet gevonden worden."
+
+#: daptup:169
+msgid "day"
+msgid_plural "days"
+msgstr[0] "dag"
+msgstr[1] "dagen"
+
+#: daptup:173
+#, sh-format
+msgid "error: cannot extract last modification date for package '$package'"
+msgstr "fout: het is niet mogelijk om de laatste wijzigingsdatum voor het pakket '$package' uit te lezen."
+
+#: daptup:176
+#, sh-format
+msgid "error: cannot fetch last entry from changelog for package '$package'"
+msgstr "fout: het is niet mogelijk om de laatste toevoeging in 'changelog' van het pakket '$package' uit te lezen."
+
+#: daptup:184
+msgid "[done]"
+msgstr "[gedaan]"
+
+#: daptup:203
+msgid "Building old list of packages... "
+msgstr "Bezig om de oude lijst met pakketten samen te stellen... "
+
+#: daptup:208
+msgid "errors present. Is apt/dpkg running?"
+msgstr "er zijn fouten opgetreden. Draait 'apt/dpkg' wel?"
+
+#: daptup:213
+msgid "Building old list of available updates... "
+msgstr "Bezig om de oude lijst met beschikbare pakketten samen te stellen... "
+
+#: daptup:217
+msgid "Building old list of watched packages... "
+msgstr "Bezig om de oude lijst met geobserveerde pakketten samen te stellen... "
+
+#: daptup:221
+msgid "aptitude returned non-zero code, daptup stopped here."
+msgstr "'Aptitude' gaf een code ongelijk aan nul terug. 'Daptup' is daarom hier gestopt."
+
+#: daptup:223
+msgid "Building new list of packages... "
+msgstr "Bezig om de nieuwe lijst met pakketten samen te stellen... "
+
+#: daptup:227
+msgid "Building new list of available updates... "
+msgstr "Bezig om de nieuwe lijst met beschikbare updates samen te stellen... "
+
+#: daptup:231
+msgid "Building new list of watched packages... "
+msgstr "Bezig om de nieuwe lijst met geobserveerde pakketten samen te stellen... "
+
+#: daptup:244
+msgid "Building list of outdated packages... "
+msgstr "Bezig om de nieuwe lijst met verouderde pakketten samen te stellen... "
+
+#: daptup:249
+msgid "error: DAPTUP_MINIMAL_DAY_COUNT_TREATING_OUTDATED contains non-numeric data"
+msgstr "fout: DAPTUP_MINIMAL_DAY_COUNT_TREATING_OUTDATED bevat niet-numerieke informatie."
+
+#: daptup:252
+msgid "Skipping check for outdated packages."
+msgstr "De controle voor verouderde pakketen wordt overgeslagen."
+
+#: daptup:264
+msgid "No new updates."
+msgstr "Geen nieuwe updates."
+
+#: daptup:266
+msgid "New updates:"
+msgstr "Nieuwe updates:"
+
+#: daptup:283
+msgid "No new or removed packages."
+msgstr "Geen nieuwe of verwijderde pakketten."
+
+#: daptup:285
+msgid "New and removed packages:"
+msgstr "Nieuwe en verwijderde pakketten:"
+
+#: daptup:302
+msgid "No news in watched packages."
+msgstr "Geen veranderingen in geobserveerde pakketten."
+
+#: daptup:304
+msgid "Changes in watched packages:"
+msgstr "Veranderingen in geobserveerde pakketten:"
+
+#: daptup:321
+msgid "No outdated packages."
+msgstr "Geen verouderde pakketten."
+
+#: daptup:323
+msgid "Outdated packages:"
+msgstr "Verouderde pakketten:"
+

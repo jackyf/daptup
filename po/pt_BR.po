@@ -111,7 +111,7 @@ msgid "Building old list of packages... "
 msgstr "Construindo antiga lista de pacotes..."
 
 #: daptup:208
-msgid "errors present. Is apt/dpkg running?.."
+msgid "errors present. Is apt/dpkg running?"
 msgstr "erros encontrados. O apt/dpkg estÃ¡ sendo executado?"
 
 #: daptup:213

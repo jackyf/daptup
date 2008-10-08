@@ -1,0 +1,186 @@
+# daptup Brazilian Portuguese translation 
+# Copyright (C) 2008 Eugene V. Lyubimkin
+# This file is distributed under the same license as the daptup package.
+# Guilherme Rocha <guilherme@gf7.com.br>, 2008.
+# Felipe Augusto van de Wiel (faw) <faw@debian.org>, 2008.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: daptup\n"
+"Report-Msgid-Bugs-To: jackyf.devel@gmail.com\n"
+"POT-Creation-Date: 2008-09-07 22:06+0300\n"
+"PO-Revision-Date: 2008-10-06 02:50-0300\n"
+"Last-Translator: Felipe Augusto van de Wiel (faw) <faw@debian.org>\n"
+"Language-Team: Brazilian Portuguese <debian-l10n-portuguese@lists.debian.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: daptup:36
+msgid "SIGTERM received"
+msgstr "SIGTERM recebido"
+
+#: daptup:37
+msgid "SIGINT received"
+msgstr "SIGINT recebido"
+
+#: daptup:50
+#, sh-format
+msgid "Cannot read configuration from '$DAPTUP_CONFFILE'."
+msgstr "NÃ£o foi possÃ­vel ler as configuraÃ§Ãµes de '$DAPTUP_CONFFILE'."
+
+#: daptup:64
+#, sh-format
+msgid "Usage: $BASENAME [ -h | --help | --nocolor ]."
+msgstr "Use: $BASENAME [ -h | --help | --nocolor ]."
+
+#: daptup:66
+msgid "daptup runs 'aptitude update' command inside and outputs:"
+msgstr "daptup executa o comando 'aptitude update' internamente e a saÃ­da Ã©:"
+
+#: daptup:67
+msgid " - list of packages recently entered to repo;"
+msgstr " - lista de pacotes que recentemente entraram no repositÃ³rio;"
+
+#: daptup:68
+msgid " - list of packages which got new updates;"
+msgstr " - lista de pacotes que receberam novas atualizaÃ§Ãµes;"
+
+#: daptup:69
+msgid " - list of changes in 'watched' packages;"
+msgstr " - lista das modificaÃ§Ãµes nos pacotes 'em observaÃ§Ã£o';"
+
+#: daptup:70
+msgid " - list of outdated packages (optionally)."
+msgstr " - lista de pacotes desatualizados (opcionalmente)."
+
+#: daptup:72
+msgid "Options:"
+msgstr "OpÃ§Ãµes:"
+
+#: daptup:73
+msgid " -h, --help: output this help and exit"
+msgstr " -h, --help: mostra esta ajuda e sai"
+
+#: daptup:74
+msgid " --nocolor: do not use colored output"
+msgstr " --nocolor: nÃ£o usa saÃ­da colorida"
+
+#: daptup:79
+#, sh-format
+msgid "Unknown param: $PARAM"
+msgstr "ParÃ¢metro desconhecido: $PARAM"
+
+#: daptup:88
+msgid "You must run daptup with root privileges."
+msgstr "VocÃª precisa executar o daptup com privilÃ©gios de root."
+
+#: daptup:150
+#, sh-format
+msgid "warning: cannot find any changelog for package '$package'"
+msgstr ""
+"atenÃ§Ã£o: nÃ£o foi possÃ­vel localizar registro de mudanÃ§as do pacote '$package'"
+
+#: daptup:169
+msgid "day"
+msgid_plural "days"
+msgstr[0] "dia"
+msgstr[1] "dias"
+
+#: daptup:173
+#, sh-format
+msgid "error: cannot extract last modification date for package '$package'"
+msgstr ""
+"erro: nÃ£o foi possÃ­vel extrair a data da Ãºltima modificaÃ§Ã£o do pacote "
+"'$package'"
+
+#: daptup:176
+#, sh-format
+msgid "error: cannot fetch last entry from changelog for package '$package'"
+msgstr ""
+"erro: nÃ£o foi possÃ­vel obter o Ãºltimo registro de mudanÃ§as do pacote "
+"'$package'"
+
+#: daptup:184
+msgid "[done]"
+msgstr "[feito]"
+
+#: daptup:203
+msgid "Building old list of packages... "
+msgstr "Construindo antiga lista de pacotes..."
+
+#: daptup:208
+msgid "errors present. Is apt/dpkg running?.."
+msgstr "erros encontrados. O apt/dpkg estÃ¡ sendo executado?"
+
+#: daptup:213
+msgid "Building old list of available updates... "
+msgstr "Construindo antiga lista de atualizaÃ§Ãµes disponÃ­veis... "
+
+#: daptup:217
+msgid "Building old list of watched packages... "
+msgstr "Construindo antiga lista de pacotes em observaÃ§Ã£o... "
+
+#: daptup:221
+msgid "aptitude returned non-zero code, daptup stopped here."
+msgstr "aptitude retornou cÃ³digo nÃ£o-zero, daptup parou aqui."
+
+#: daptup:223
+msgid "Building new list of packages... "
+msgstr "Construindo nova lista de pacotes..."
+
+#: daptup:227
+msgid "Building new list of available updates... "
+msgstr "Construindo nova lista de atualizaÃ§Ãµes disponÃ­veis... "
+
+#: daptup:231
+msgid "Building new list of watched packages... "
+msgstr "Construindo nova lista de pacotes em observaÃ§Ã£o... "
+
+#: daptup:244
+msgid "Building list of outdated packages... "
+msgstr "Construindo lista de pacotes obsoletos... "
+
+#: daptup:249
+msgid ""
+"error: DAPTUP_MINIMAL_DAY_COUNT_TREATING_OUTDATED contains non-numeric data"
+msgstr ""
+"erro: DAPTUP_MINIMAL_DAY_COUNT_TREATING_OUTDATED contÃ©m dados nÃ£o numÃ©ricos"
+
+#: daptup:252
+msgid "Skipping check for outdated packages."
+msgstr "Ignorando verificaÃ§Ã£o de pacotes desatualizados."
+
+#: daptup:264
+msgid "No new updates."
+msgstr "NÃ£o hÃ¡ novas atualizaÃ§Ãµes."
+
+#: daptup:266
+msgid "New updates:"
+msgstr "Novas atualizaÃ§Ãµes:"
+
+#: daptup:283
+msgid "No new or removed packages."
+msgstr "NÃ£o hÃ¡ pacotes novos ou removidos."
+
+#: daptup:285
+msgid "New and removed packages:"
+msgstr "Pacotes novos e removidos:"
+
+#: daptup:302
+msgid "No news in watched packages."
+msgstr "NÃ£o hÃ¡ novidades nos pacotes em observaÃ§Ã£o."
+
+#: daptup:304
+msgid "Changes in watched packages:"
+msgstr "MudanÃ§as nos pacotes em observaÃ§Ã£o:"
+
+#: daptup:321
+msgid "No outdated packages."
+msgstr "NÃ£o hÃ¡ pacotes desatualizados."
+
+#: daptup:323
+msgid "Outdated packages:"
+msgstr "Pacotes desatualizados:"
+

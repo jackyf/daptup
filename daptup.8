@@ -2,7 +2,7 @@
 .\" First parameter, NAME, should be all caps
 .\" Second parameter, SECTION, should be 1-8, maybe w/ subsection
 .\" other parameters are allowed: see man(7), man(1)
-.TH DAPTUP 8 "Aug 15, 2008"
+.TH DAPTUP 8 "Oct 12, 2008"
 .\" Please adjust this date whenever revising the manpage.
 .\"
 .\" Some roff macros, for reference:
@@ -18,10 +18,17 @@
 .SH NAME
 daptup \- wrapper script on 'aptitude update'
 .SH SYNOPSIS
-.B daptup [-h | --help | --nocolor]
+.B daptup
+[ \fB--pre\fP | \fB--post\fP ]
+[ \fB-h\fP | \fB--help\fP ] [ \fB--nocolor\fP ]
 .br
 .SH OPTIONS
-.br
+.TP
+.B --pre
+do only 'pre' stage: collect info that will be used as 'old'
+.TP
+.B --post
+do only 'post' stage: collect 'new' info and output changes
 .TP
 .B -h --help
 prints the help
@@ -38,8 +45,8 @@ self-documented configuration file
 .B /var/spool/daptup/outdated
 cached file with info about outdated packages
 .SH SEE ALSO
-.BR aptitude (8), apt-show-versions (1p)
-.br
+.BR aptitude (8),
+.BR apt-show-versions (1p)
 .SH AUTHOR
 daptup was written by Eugene V. Lyubimkin.
 .PP

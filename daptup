@@ -93,7 +93,7 @@ while [ "$#" -gt "0" ]; do
 			BASENAME=`basename ${0}`
 			eval_gettext "Usage: \$BASENAME [ -h | --help | --nocolor ]."; echo
 			echo
-			gettext "daptup runs 'aptitude update' command inside and outputs:"; echo
+			gettext "daptup runs 'aptitude update' or 'apt-get update' command inside and outputs:"; echo
 			gettext " - list of packages recently entered to repo;"; echo
 			gettext " - list of packages which got new updates;"; echo
 			gettext " - list of changes in 'watched' packages;"; echo

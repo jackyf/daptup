@@ -16,7 +16,7 @@
 .\" .sp <n>    insert n+1 empty lines
 .\" for manpage-specific macros, see man(7)
 .SH NAME
-daptup \- wrapper script on 'aptitude update'
+daptup \- wrapper script on 'aptitude update' or 'apt-get update'
 .SH SYNOPSIS
 .B daptup
 [ \fB--pre\fP | \fB--post\fP ]
@@ -36,7 +36,7 @@ prints the help
 .B --nocolor
 disables color output, useful for scripts or when output is not terminal
 .PP
-\fBdaptup\fP is a script that run "aptitude update" command inside and outputs list of packages recently entered to repo, list of packages which got new updates, list of changes in 'watched' packages and, optionally, list of outdated packages.
+\fBdaptup\fP is a script that runs "aptitude update" if aptitude is installed or "apt-get update" otherwise inside and outputs list of packages recently entered to repo, list of packages which got new updates, list of changes in 'watched' packages and, optionally, list of outdated packages.
 .SH FILES
 .TP
 .B /etc/daptup.conf
@@ -45,6 +45,7 @@ self-documented configuration file
 .B /var/spool/daptup/outdated
 cached file with info about outdated packages
 .SH SEE ALSO
+.BR apt-get (8),
 .BR aptitude (8),
 .BR apt-show-versions (1p)
 .SH AUTHOR

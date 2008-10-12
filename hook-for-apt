@@ -1,0 +1,2 @@
+APT::Update::PreInvoke { "/usr/bin/daptup --pre"; };
+APT::Update::PostInvoke { "/usr/bin/daptup --post"; };

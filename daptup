@@ -379,7 +379,12 @@ if [ "$DAPTUP_ONLY_POST" != "y" ]; then
 fi
 
 if [ "$DAPTUP_ONLY_PRE" != "y" ] && [ "$DAPTUP_ONLY_POST" != "y" ]; then
-	aptitude update || (gettext "aptitude returned non-zero code, daptup stopped here."; echo; do_exit 8)
+	if [ -f /usr/bin/aptitude ]; then
+		DAPTUP_UPDATE_CMD=aptitude
+	else
+		DAPTUP_UPDATE_CMD=apt-get
+	fi
+	$DAPTUP_UPDATE_CMD update || (gettext "Update command returned non-zero code, daptup stopped here."; echo; do_exit 8)
 fi
 
 if [ "$DAPTUP_ONLY_PRE" != "y" ]; then

@@ -37,6 +37,8 @@ prints the help
 disables color output, useful for scripts or when output is not terminal
 .PP
 \fBdaptup\fP is a script that runs "aptitude update" if aptitude is installed or "apt-get update" otherwise inside and outputs list of packages recently entered to repo, list of packages which got new updates, list of changes in 'watched' packages and, optionally, list of outdated packages.
+.PP
+Starting with 0.8.0 version, \fBdaptup\fP uses apt hooks and you don't need to explicitly call it. Just calling 'aptitude update' or 'apt-get update' is sufficient.
 .SH FILES
 .TP
 .B /etc/daptup.conf

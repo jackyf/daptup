@@ -130,12 +130,16 @@ fi
 
 # $1 - output
 # $2 - errors
-function get_new()
+function get_avail_pkg_list()
 {
-	aptitude search ~N \
-		--display-format "$DAPTUP_NEW_DISPLAY_FORMAT" \
-		--width $DAPTUP_NEW_DISPLAY_WIDTH \
-		$DAPTUP_EXTRA_APTITUDE_ARGUMENTS > $1 2> $2
+	if [ -f /usr/bin/aptitude ]; then
+		aptitude search "~n(.*)" \
+			--display-format "$DAPTUP_NEW_DISPLAY_FORMAT" \
+			--width $DAPTUP_NEW_DISPLAY_WIDTH \
+			$DAPTUP_EXTRA_APTITUDE_ARGUMENTS > $1 2> $2
+	else
+		apt-cache search ".*" | sort > $1 2> $2
+	fi
 }
 
 # $1 - output
@@ -237,7 +241,7 @@ function reset_color()
 function do_pre
 {
 	gettext "Building old list of packages... "
-	get_new $DAPTUP_NEW_BEFORE $DAPTUP_ERRORS_FILE
+	get_avail_pkg_list $DAPTUP_NEW_BEFORE $DAPTUP_ERRORS_FILE
 
 	APTITUDE_RESULT=`wc -l < $DAPTUP_ERRORS_FILE`
 	if [ "$APTITUDE_RESULT" != "0" ]; then
@@ -258,7 +262,7 @@ function do_pre
 function do_post
 {
 	gettext "Building new list of packages... "
-	get_new $DAPTUP_NEW_AFTER /dev/null
+	get_avail_pkg_list $DAPTUP_NEW_AFTER /dev/null
 	print_done
 
 	gettext "Building new list of available updates... "

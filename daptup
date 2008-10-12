@@ -160,11 +160,23 @@ function get_watched()
 	done
 	if [ -z "$GREP_EXPRESSION" ]; then # no packages to watch
 		touch $1
-	else
+	elif [ -f /usr/bin/aptitude ]; then
 		aptitude search "~n($GREP_EXPRESSION)" \
 			--display-format "$DAPTUP_WATCH_DISPLAY_FORMAT" \
 			--width $DAPTUP_WATCH_DISPLAY_WIDTH \
 			$DAPTUP_EXTRA_APTITUDE_ARGUMENTS > $1
+	else
+		local WATCHED_PACKAGES=`apt-cache search --names-only "$GREP_EXPRESSION" | sed 's/ .*//'`
+		local VERSION
+
+		rm -f $1
+		touch $1
+	
+		for package in $WATCHED_PACKAGES; do
+			VERSION=`apt-cache policy $package | fgrep "Candidate" | sed 's/.*Candidate: //'`
+			echo "$package $VERSION" >> $1
+		done
+
 	fi
 }
 

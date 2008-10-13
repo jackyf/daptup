@@ -73,7 +73,7 @@ DAPTUP_USE_COLOR=y
 function check_subcommand
 {
 	if [ -n "$DAPTUP_SUBCOMMAND" ]; then
-		gettext "You cannot mix '--pre', '--post' and '--last' options."; echo
+		gettext "You cannot mix '--pre', '--post' and '--last' options or repeat them."; echo
 		do_exit 4
 	fi
 }

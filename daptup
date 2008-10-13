@@ -281,17 +281,21 @@ function do_pre
 
 function do_post
 {
-	gettext "Building new list of packages... "
-	get_avail_pkg_list $DAPTUP_NEW_AFTER /dev/null
-	print_done
+	if [ "$DAPTUP_SUBCOMMAND" != "last" ]; then
 
-	gettext "Building new list of available updates... "
-	get_updates $DAPTUP_UPDATES_AFTER
-	print_done
+		gettext "Building new list of packages... "
+		get_avail_pkg_list $DAPTUP_NEW_AFTER /dev/null
+		print_done
 
-	gettext "Building new list of watched packages... "
-	get_watched $DAPTUP_WATCH_AFTER
-	print_done
+		gettext "Building new list of available updates... "
+		get_updates $DAPTUP_UPDATES_AFTER
+		print_done
+
+		gettext "Building new list of watched packages... "
+		get_watched $DAPTUP_WATCH_AFTER
+		print_done
+	
+	fi
 
 	OUTPUT_OUTDATED=n
 	if [ "$DAPTUP_CHECK_FOR_OUTDATED_PACKAGES" == "y" ]; then
@@ -312,84 +316,90 @@ function do_post
 	else
 		gettext "Skipping check for outdated packages."; echo
 	fi
-		
-	if [ "$DAPTUP_USE_COLOR" == "y" ]; then
-		tput init
-	fi
-	# by default daptup tries to use colors now, it can be disabled by specifying '--nocolor' option
 
-	echo
+	if [ "$DAPTUP_SUBCOMMAND" == "last" ] || [ "$DAPTUP_SHOW_CHANGES_IN_POST" == "y" ]; then
 
-	diff_cmd $DAPTUP_UPDATES_BEFORE $DAPTUP_UPDATES_AFTER $DAPTUP_TMP_FILE
-	if [ "`wc -l < $DAPTUP_TMP_FILE`" == "0" ]; then # no updates
-		gettext "No new updates."; echo
-	else
-		gettext "New updates:"; echo
-		cat $DAPTUP_TMP_FILE | sed s/upgradeable\ from/-/g | sed 's/ to / -> /g' | while read line; do
-			if [ "$DAPTUP_USE_COLOR" == "y" ]; then
-				if [ "`expr "$line" : '<'`" == "0" ]; then
-					tput setf 2; # green
-				else
-					tput setf 4; # red
-				fi;
-			fi;
-			echo $line;
-			done
-	fi
-
-	reset_color
-
-	diff_cmd $DAPTUP_NEW_BEFORE $DAPTUP_NEW_AFTER $DAPTUP_TMP_FILE
-	if [ "`wc -l < $DAPTUP_TMP_FILE`" == "0" ]; then # no new
-		gettext "No new or removed packages."; echo
-	else
-		gettext "New and removed packages:"; echo
-		cat $DAPTUP_TMP_FILE | while read line; do
-			if [ "$DAPTUP_USE_COLOR" == "y" ]; then
-				if [ "`expr "$line" : '<'`" == "0" ]; then
-					tput setf 3; # blue
-				else
-					tput setf 4; # red
-				fi;
-			fi;
-			echo $line;
-			done
-	fi
-
-	reset_color
-
-	diff_cmd $DAPTUP_WATCH_BEFORE $DAPTUP_WATCH_AFTER $DAPTUP_TMP_FILE
-	if [ "`wc -l < $DAPTUP_TMP_FILE`" == "0" ]; then # no changes in watched
-		gettext "No news in watched packages."; echo
-	else
-		gettext "Changes in watched packages:"; echo
-		cat $DAPTUP_TMP_FILE | while read line; do
-			if [ "$DAPTUP_USE_COLOR" == "y" ]; then
-				if [ "`expr "$line" : '<'`" == "0" ]; then
-					tput setf 2; # green
-				else
-					tput setf 4; # red
-				fi;
-			fi;
-			echo $line;
-			done
-	fi
-
-	reset_color
-
-	if [ "$OUTPUT_OUTDATED" == "y" ]; then
-		if [ "`wc -l < $DAPTUP_OUTDATED`" == "0" ]; then # no data in outdated
-			gettext "No outdated packages."; echo
-		else
-			gettext "Outdated packages:"; echo
-			if [ "$DAPTUP_USE_COLOR" == "y" ]; then
-				tput setf 5 # magenta
-			fi
-			cat $DAPTUP_OUTDATED | sed 's/upgradeable from/-/g' | sed 's/ to / -> /g' | sed 's/^/  /'
+		# show changes
+			
+		if [ "$DAPTUP_USE_COLOR" == "y" ]; then
+			tput init
 		fi
-	fi
+		# by default daptup tries to use colors now, it can be disabled by specifying '--nocolor' option
 
-	reset_color
+		echo
+
+		diff_cmd $DAPTUP_UPDATES_BEFORE $DAPTUP_UPDATES_AFTER $DAPTUP_TMP_FILE
+		if [ "`wc -l < $DAPTUP_TMP_FILE`" == "0" ]; then # no updates
+			gettext "No new updates."; echo
+		else
+			gettext "New updates:"; echo
+			cat $DAPTUP_TMP_FILE | sed s/upgradeable\ from/-/g | sed 's/ to / -> /g' | while read line; do
+				if [ "$DAPTUP_USE_COLOR" == "y" ]; then
+					if [ "`expr "$line" : '<'`" == "0" ]; then
+						tput setf 2; # green
+					else
+						tput setf 4; # red
+					fi;
+				fi;
+				echo $line;
+				done
+		fi
+
+		reset_color
+
+		diff_cmd $DAPTUP_NEW_BEFORE $DAPTUP_NEW_AFTER $DAPTUP_TMP_FILE
+		if [ "`wc -l < $DAPTUP_TMP_FILE`" == "0" ]; then # no new
+			gettext "No new or removed packages."; echo
+		else
+			gettext "New and removed packages:"; echo
+			cat $DAPTUP_TMP_FILE | while read line; do
+				if [ "$DAPTUP_USE_COLOR" == "y" ]; then
+					if [ "`expr "$line" : '<'`" == "0" ]; then
+						tput setf 3; # blue
+					else
+						tput setf 4; # red
+					fi;
+				fi;
+				echo $line;
+				done
+		fi
+
+		reset_color
+
+		diff_cmd $DAPTUP_WATCH_BEFORE $DAPTUP_WATCH_AFTER $DAPTUP_TMP_FILE
+		if [ "`wc -l < $DAPTUP_TMP_FILE`" == "0" ]; then # no changes in watched
+			gettext "No news in watched packages."; echo
+		else
+			gettext "Changes in watched packages:"; echo
+			cat $DAPTUP_TMP_FILE | while read line; do
+				if [ "$DAPTUP_USE_COLOR" == "y" ]; then
+					if [ "`expr "$line" : '<'`" == "0" ]; then
+						tput setf 2; # green
+					else
+						tput setf 4; # red
+					fi;
+				fi;
+				echo $line;
+				done
+		fi
+
+		reset_color
+
+		if [ "$OUTPUT_OUTDATED" == "y" ]; then
+			if [ "`wc -l < $DAPTUP_OUTDATED`" == "0" ]; then # no data in outdated
+				gettext "No outdated packages."; echo
+			else
+				gettext "Outdated packages:"; echo
+				if [ "$DAPTUP_USE_COLOR" == "y" ]; then
+					tput setf 5 # magenta
+				fi
+				cat $DAPTUP_OUTDATED | sed 's/upgradeable from/-/g' | sed 's/ to / -> /g' | sed 's/^/  /'
+			fi
+		fi
+
+		reset_color
+
+	fi
 }
 
 # start of program
@@ -407,11 +417,7 @@ if [ -z "$DAPTUP_SUBCOMMAND" ]; then
 	$DAPTUP_UPDATE_CMD update || (gettext "Update command returned non-zero code, daptup stopped here."; echo; do_exit 8)
 fi
 
-if [ -z "$DAPTUP_SUBCOMMAND" ]; then
-	do_post
-elif [ "$DAPTUP_SUBCOMMAND" == "last" ]; then
-	do_post
-elif [ "$DAPTUP_SUBCOMMAND" == "post" ] && [ "$DAPTUP_SHOW_CHANGES_IN_POST" == "y" ]; then
+if [ "$DAPTUP_SUBCOMMAND" != "pre" ] ; then
 	do_post
 fi
 

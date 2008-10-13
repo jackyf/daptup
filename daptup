@@ -70,21 +70,27 @@ fi
 
 DAPTUP_USE_COLOR=y
 
+function check_subcommand
+{
+	if [ -n "$DAPTUP_SUBCOMMAND" ]; then
+		gettext "You cannot mix '--pre', '--post' and '--last' options."; echo
+		do_exit 4
+	fi
+}
+
 while [ "$#" -gt "0" ]; do
 	case $1 in
 		--pre)
-			if [ "$DAPTUP_ONLY_POST" == "y" ]; then
-				gettext "You cannot specify both '--pre' and '--post' options."; echo
-				do_exit 4
-			fi
-			DAPTUP_ONLY_PRE=y
+			check_subcommand
+			DAPTUP_SUBCOMMAND=pre
 			;;
 		--post)
-			if [ "$DAPTUP_ONLY_PRE" == "y" ]; then
-				gettext "You cannot specify both '--pre' and '--post' options."; echo
-				do_exit 4
-			fi
-			DAPTUP_ONLY_POST=y
+			check_subcommand
+			DAPTUP_SUBCOMMAND=post
+			;;
+		--last)
+			check_subcommand
+			DAPTUP_SUBCOMMAND=last
 			;;
 		--nocolor)
 			DAPTUP_USE_COLOR=n	
@@ -386,11 +392,11 @@ function do_post
 
 # start of program
 
-if [ "$DAPTUP_ONLY_POST" != "y" ]; then
+if [ -z "$DAPTUP_SUBCOMMAND" ] || [ "$DAPTUP_SUBCOMMAND" == "pre" ]; then
 	do_pre
 fi
 
-if [ "$DAPTUP_ONLY_PRE" != "y" ] && [ "$DAPTUP_ONLY_POST" != "y" ]; then
+if [ -z "$DAPTUP_SUBCOMMAND" ]; then
 	if [ -f /usr/bin/aptitude ]; then
 		DAPTUP_UPDATE_CMD=aptitude
 	else
@@ -399,7 +405,11 @@ if [ "$DAPTUP_ONLY_PRE" != "y" ] && [ "$DAPTUP_ONLY_POST" != "y" ]; then
 	$DAPTUP_UPDATE_CMD update || (gettext "Update command returned non-zero code, daptup stopped here."; echo; do_exit 8)
 fi
 
-if [ "$DAPTUP_ONLY_PRE" != "y" ]; then
+if [ -z "$DAPTUP_SUBCOMMAND" ]; then
+	do_post
+elif [ "$DAPTUP_SUBCOMMAND" == "last" ]; then
+	do_post
+elif [ "$DAPTUP_SUBCOMMAND" == "post" ] && [ "$DAPTUP_SHOW_CHANGES_IN_POST" == "y" ]; then
 	do_post
 fi
 

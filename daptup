@@ -109,9 +109,9 @@ while [ "$#" -gt "0" ]; do
 			gettext " -h, --help: output this help and exit"; echo
 			gettext " --nocolor: do not use colored output"; echo
 			gettext " --pre: do only 'pre' stage: collect info that will be used as 'old'"; echo
-			gettext " --last: do only 'post' stage: collect 'new' info and output changes"; echo
-			gettext " --post: same as '--last', but do this when only"; echo
-			gettext "         appropriate option is not disabled in config file"; echo
+			gettext " --post: do only 'post' stage: collect 'new' info and output changes"; echo
+			gettext "         if appropriate option is not disabled in config file"; echo
+			gettext " --last: only output last changes"; echo
 			do_exit 0
 			;;
 		*)

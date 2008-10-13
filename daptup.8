@@ -2,7 +2,7 @@
 .\" First parameter, NAME, should be all caps
 .\" Second parameter, SECTION, should be 1-8, maybe w/ subsection
 .\" other parameters are allowed: see man(7), man(1)
-.TH DAPTUP 8 "Oct 12, 2008"
+.TH DAPTUP 8 "Oct 13, 2008"
 .\" Please adjust this date whenever revising the manpage.
 .\"
 .\" Some roff macros, for reference:
@@ -19,16 +19,19 @@
 daptup \- wrapper script on 'aptitude update' or 'apt-get update'
 .SH SYNOPSIS
 .B daptup
-[ \fB--pre\fP | \fB--post\fP ]
+[ \fB--pre\fP | \fB--post\fP | \fB--last\fP ]
 [ \fB-h\fP | \fB--help\fP ] [ \fB--nocolor\fP ]
 .br
 .SH OPTIONS
 .TP
 .B --pre
-do only 'pre' stage: collect info that will be used as 'old'
+Do only 'pre' stage: collect info that will be used as 'old'. Usually need to be specified only in apt hooks.
 .TP
 .B --post
-do only 'post' stage: collect 'new' info and output changes
+If appropriate option is enabled in config file, do only 'post' stage: collect 'new' info and output changes. Otherwise do nothing. Usually need to be specified only in apt hooks.
+.TP
+.B --last
+Unconditionally do 'post' stage: collect 'new' info and output changes. This option is supposed to be specified when you want to see changes made in the last update.
 .TP
 .B -h --help
 prints the help

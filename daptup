@@ -131,6 +131,13 @@ if [ "$MY_UID" != "0" ]; then
 	do_exit 2
 fi
 
+if [ -z "$DAPTUP_SUBCOMMAND" ]; then
+	# As we now have apt hook, just do 'apt-get update'.
+	# It will call daptup itself.
+	apt-get update
+	do_exit $?
+fi
+
 if [ "$DAPTUP_DISABLE_COLUMNS" == "y" ]; then
 	DAPTUP_EXTRA_APTITUDE_ARGUMENTS="$DAPTUP_EXTRA_APTITUDE_ARGUMENTS --disable-columns"
 fi

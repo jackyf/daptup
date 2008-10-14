@@ -304,30 +304,30 @@ function do_post
 	
 	fi
 
-	OUTPUT_OUTDATED=n
-	if [ "$DAPTUP_CHECK_FOR_OUTDATED_PACKAGES" == "y" ]; then
-		# if DAPTUP_MINIMAL_DAY_COUNT_TREATING_OUTDATED variable contains non-numeric
-		# data, print an error and don't try to check for outdated packages
-		set +e
-		expr "$DAPTUP_MINIMAL_DAY_COUNT_TREATING_OUTDATED" + 0 >/dev/null 2>/dev/null
-		exit_code=$?
-		set -e
-		if [ "$exit_code" == "0" ]; then
-			gettext "Building list of outdated packages... "
-			find_old_packages $DAPTUP_OUTDATED
-			OUTPUT_OUTDATED=y
-			print_done
-		else
-			gettext "error: DAPTUP_MINIMAL_DAY_COUNT_TREATING_OUTDATED contains non-numeric data"; echo
-		fi
-	else
-		gettext "Skipping check for outdated packages."; echo
-	fi
-
 	if [ "$DAPTUP_SUBCOMMAND" == "last" ] || [ "$DAPTUP_SHOW_CHANGES_IN_POST" == "y" ]; then
 
 		# show changes
 			
+		OUTPUT_OUTDATED=n
+		if [ "$DAPTUP_CHECK_FOR_OUTDATED_PACKAGES" == "y" ]; then
+			# if DAPTUP_MINIMAL_DAY_COUNT_TREATING_OUTDATED variable contains non-numeric
+			# data, print an error and don't try to check for outdated packages
+			set +e
+			expr "$DAPTUP_MINIMAL_DAY_COUNT_TREATING_OUTDATED" + 0 >/dev/null 2>/dev/null
+			exit_code=$?
+			set -e
+			if [ "$exit_code" == "0" ]; then
+				gettext "Building list of outdated packages... "
+				find_old_packages $DAPTUP_OUTDATED
+				OUTPUT_OUTDATED=y
+				print_done
+			else
+				gettext "error: DAPTUP_MINIMAL_DAY_COUNT_TREATING_OUTDATED contains non-numeric data"; echo
+			fi
+		else
+			gettext "Skipping check for outdated packages."; echo
+		fi
+
 		if [ "$DAPTUP_USE_COLOR" == "y" ]; then
 			tput init
 		fi

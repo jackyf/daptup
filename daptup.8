@@ -2,7 +2,7 @@
 .\" First parameter, NAME, should be all caps
 .\" Second parameter, SECTION, should be 1-8, maybe w/ subsection
 .\" other parameters are allowed: see man(7), man(1)
-.TH DAPTUP 8 "Oct 13, 2008"
+.TH DAPTUP 8 "Oct 15, 2008"
 .\" Please adjust this date whenever revising the manpage.
 .\"
 .\" Some roff macros, for reference:
@@ -16,7 +16,7 @@
 .\" .sp <n>    insert n+1 empty lines
 .\" for manpage-specific macros, see man(7)
 .SH NAME
-daptup \- wrapper script on 'aptitude update' or 'apt-get update'
+daptup \- wrapper script on 'apt-get update'
 .SH SYNOPSIS
 .B daptup
 [ \fB--pre\fP | \fB--post\fP | \fB--last\fP ]
@@ -39,7 +39,7 @@ prints the help
 .B --nocolor
 disables color output, useful for scripts or when output is not terminal
 .PP
-\fBdaptup\fP is a script that runs "aptitude update" if aptitude is installed or "apt-get update" otherwise inside and outputs list of packages recently entered to repo, list of packages which got new updates, list of changes in 'watched' packages and, optionally, list of outdated packages.
+\fBdaptup\fP is a script that runs "apt-get update" inside and outputs list of packages recently entered to repo, list of packages which got new updates, list of changes in 'watched' packages and, optionally, list of outdated packages.
 .PP
 Starting with 0.8.0 version, \fBdaptup\fP uses apt hooks and you don't need to explicitly call it if you use 'apt-get update'.
 .SH TROUBLESHOOTING

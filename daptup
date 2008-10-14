@@ -68,8 +68,6 @@ else
 fi
 
 
-DAPTUP_USE_COLOR=y
-
 function check_subcommand
 {
 	if [ -n "$DAPTUP_SUBCOMMAND" ]; then

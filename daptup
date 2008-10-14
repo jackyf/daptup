@@ -409,20 +409,9 @@ function do_post
 
 # start of program
 
-if [ -z "$DAPTUP_SUBCOMMAND" ] || [ "$DAPTUP_SUBCOMMAND" == "pre" ]; then
+if [ "$DAPTUP_SUBCOMMAND" == "pre" ]; then
 	do_pre
-fi
-
-if [ -z "$DAPTUP_SUBCOMMAND" ]; then
-	if [ -f /usr/bin/aptitude ]; then
-		DAPTUP_UPDATE_CMD=aptitude
-	else
-		DAPTUP_UPDATE_CMD=apt-get
-	fi
-	$DAPTUP_UPDATE_CMD update || (gettext "Update command returned non-zero code, daptup stopped here."; echo; do_exit 8)
-fi
-
-if [ "$DAPTUP_SUBCOMMAND" != "pre" ] ; then
+else # post or last
 	do_post
 fi
 

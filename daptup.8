@@ -42,6 +42,9 @@ disables color output, useful for scripts or when output is not terminal
 \fBdaptup\fP is a script that runs "aptitude update" if aptitude is installed or "apt-get update" otherwise inside and outputs list of packages recently entered to repo, list of packages which got new updates, list of changes in 'watched' packages and, optionally, list of outdated packages.
 .PP
 Starting with 0.8.0 version, \fBdaptup\fP uses apt hooks and you don't need to explicitly call it if you use 'apt-get update'.
+.SH TROUBLESHOOTING
+.PP
+If \fBdaptup\fP was interrupted while building the lists, the cached lists can stay in inconsistent state, which is inappropriate if you want to use '\fB--last\fP' option before the new update. There is nothing to do if interrupt was occured at the moment when old lists were building (besides running the new update). However, if interrupt was occured when the new lists were building, you can easily redo this stage by calling 'daptup --post'.
 .SH FILES
 .TP
 .B /etc/daptup.conf

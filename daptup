@@ -49,8 +49,8 @@ function delete_temp_files
 	rm -f $DAPTUP_TMP_FILE $DAPTUP_ERRORS_FILE
 }
 
-trap "echo `gettext \"SIGTERM received\"` && do_exit 1024" SIGTERM
-trap "echo `gettext \"SIGINT received\"` && do_exit 2048" SIGINT
+trap "do_exit 1024" SIGTERM
+trap "do_exit 2048" SIGINT
 
 # $1 - exit code
 function do_exit

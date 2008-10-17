@@ -138,6 +138,7 @@ if [ -z "$DAPTUP_SUBCOMMAND" ]; then
 	RETURN_CODE=$?
 	set -e
 	do_exit $RETURN_CODE
+fi
 
 if [ "$DAPTUP_DISABLE_COLUMNS" == "y" ]; then
 	DAPTUP_EXTRA_APTITUDE_ARGUMENTS="$DAPTUP_EXTRA_APTITUDE_ARGUMENTS --disable-columns"

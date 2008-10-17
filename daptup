@@ -271,8 +271,8 @@ function do_pre
 	gettext "Building old list of packages... "
 	get_avail_pkg_list $DAPTUP_NEW_BEFORE $DAPTUP_ERRORS_FILE
 
-	APTITUDE_RESULT=`wc -l < $DAPTUP_ERRORS_FILE`
-	if [ "$APTITUDE_RESULT" != "0" ]; then
+	RETURN_RESULT=`wc -l < $DAPTUP_ERRORS_FILE`
+	if [ "$RETURN_RESULT" != "0" ]; then
 		gettext "errors present. Is apt/dpkg running?"; echo
 		do_exit 8
 	fi

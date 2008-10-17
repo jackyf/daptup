@@ -225,7 +225,7 @@ function find_old_packages
 				# extracting date
 				# example: " -- James Troup <james@nocrew.org>  Mon, 24 Apr 2006 04:24:07 +0100"
 
-				DATE=`echo $LAST_MODIFIED_LINE | grep -Eo "[0-9 ][0-9] [A-Z][a-z][a-z] [0-9]{4,4}"`
+				DATE=`echo $LAST_MODIFIED_LINE | grep -Eo "[0-9 ][0-9] [A-Z][a-z][a-z] [0-9]{4}"`
 				if [ -n "$DATE" ]; then # date is extracted correctly
 					CURRENT_TIMESTAMP=`date +%s`
 					PACKAGE_TIMESTAMP=`date -d "$DATE" +%s`

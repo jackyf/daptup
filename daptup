@@ -342,7 +342,7 @@ function do_post
 			gettext "No new updates."; echo
 		else
 			gettext "New updates:"; echo
-			cat $DAPTUP_TMP_FILE | sed s/upgradeable\ from/-/g | sed 's/ to / -> /g' | while read line; do
+			cat $DAPTUP_TMP_FILE | sed 's/upgradeable from/-/g' | sed 's/ to / -> /g' | while read line; do
 				if [ "$DAPTUP_USE_COLOR" == "y" ]; then
 					if [ "`expr "$line" : '<'`" == "0" ]; then
 						tput setf 2; # green

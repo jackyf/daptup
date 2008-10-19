@@ -7,173 +7,192 @@ msgid ""
 msgstr ""
 "Project-Id-Version: daptup\n"
 "Report-Msgid-Bugs-To: jackyf.devel@gmail.com\n"
-"POT-Creation-Date: 2008-09-02 22:26+0300\n"
+"POT-Creation-Date: 2008-10-19 11:24+0300\n"
 "PO-Revision-Date: 2008-08-31 17:33+0300\n"
 "Last-Translator: Eugene V. Lyubimkin <jackyf.devel@gmail.com>\n"
-"Language-Team: English\n"
+"Language-Team: English <jackyf.devel@gmail.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: daptup:36
-msgid "SIGTERM received"
-msgstr "SIGTERM received"
-
-#: daptup:37
-msgid "SIGINT received"
-msgstr "SIGINT received"
-
-#: daptup:50
+#: daptup:66
 #, sh-format
 msgid "Cannot read configuration from '$DAPTUP_CONFFILE'."
 msgstr "Cannot read configuration from '$DAPTUP_CONFFILE'."
 
-#: daptup:64
-#, sh-format
-msgid "Usage: $BASENAME [ -h | --help | --nocolor ]."
+#: daptup:74
+msgid "You cannot mix '--pre', '--post' and '--last' options or repeat them."
+msgstr ""
+
+#: daptup:98
+#, fuzzy, sh-format
+msgid ""
+"Usage: $BASENAME [ --pre | --post | --last ] [ -h | --help | --nocolor ]."
 msgstr "Usage: $BASENAME [ -h | --help | --nocolor ]."
 
-#: daptup:66
-msgid "daptup runs 'aptitude update' command inside and outputs:"
+#: daptup:100
+#, fuzzy
+msgid "daptup runs 'apt-get update' command inside and outputs:"
 msgstr "daptup runs 'aptitude update' command inside and outputs:"
 
-#: daptup:67
+#: daptup:101
 msgid " - list of packages recently entered to repo;"
 msgstr " - list of packages recently entered to repo;"
 
-#: daptup:68
+#: daptup:102
 msgid " - list of packages which got new updates;"
 msgstr " - list of packages which got new updates;"
 
-#: daptup:69
+#: daptup:103
 msgid " - list of changes in 'watched' packages;"
 msgstr " - list of changes in 'watched' packages;"
 
-#: daptup:70
+#: daptup:104
 msgid " - list of outdated packages (optionally)."
 msgstr " - list of outdated packages (optionally)."
 
-#: daptup:72
+#: daptup:106
 msgid "Options:"
 msgstr "Options:"
 
-#: daptup:73
+#: daptup:107
 msgid " -h, --help: output this help and exit"
 msgstr " -h, --help: output this help and exit"
 
-#: daptup:74
+#: daptup:108
 msgid " --nocolor: do not use colored output"
 msgstr " --nocolor: do not use colored output"
 
-#: daptup:79
+#: daptup:109
+msgid " --pre: do only 'pre' stage: collect info that will be used as 'old'"
+msgstr ""
+
+#: daptup:110
+msgid " --post: do only 'post' stage: collect 'new' info and output changes"
+msgstr ""
+
+#: daptup:111
+msgid "         if appropriate option is not disabled in config file"
+msgstr ""
+
+#: daptup:112
+msgid " --last: only output last changes"
+msgstr ""
+
+#: daptup:117
 #, sh-format
 msgid "Unknown param: $PARAM"
 msgstr "Unknown param: $PARAM"
 
-#: daptup:88
+#: daptup:128
 msgid "You must run daptup with root privileges."
 msgstr "You must run daptup with root privileges."
 
-#: daptup:150
+#: daptup:217
 #, sh-format
 msgid "warning: cannot find any changelog for package '$package'"
 msgstr "warning: cannot find any changelog for package '$package'"
 
-#: daptup:169
+#: daptup:236
 msgid "day"
 msgid_plural "days"
 msgstr[0] "day"
 msgstr[1] "days"
 
-#: daptup:173
+#: daptup:240
 #, sh-format
 msgid "error: cannot extract last modification date for package '$package'"
 msgstr "error: cannot extract last modification date for package '$package'"
 
-#: daptup:176
+#: daptup:243
 #, sh-format
 msgid "error: cannot fetch last entry from changelog for package '$package'"
 msgstr "error: cannot fetch last entry from changelog for package '$package'"
 
-#: daptup:184
+#: daptup:251
 msgid "[done]"
 msgstr "[done]"
 
-#: daptup:203
+#: daptup:272
 msgid "Building old list of packages... "
 msgstr "Building old list of packages... "
 
-#: daptup:208
+#: daptup:277
 msgid "errors present. Is apt/dpkg running?"
 msgstr "errors present. Is apt/dpkg running?"
 
-#: daptup:213
+#: daptup:282
 msgid "Building old list of available updates... "
 msgstr "Building old list of available updates... "
 
-#: daptup:217
+#: daptup:286
 msgid "Building old list of watched packages... "
 msgstr "Building old list of watched packages... "
 
-#: daptup:221
-msgid "aptitude returned non-zero code, daptup stopped here."
-msgstr "aptitude returned non-zero code, daptup stopped here."
-
-#: daptup:223
+#: daptup:295
 msgid "Building new list of packages... "
 msgstr "Building new list of packages... "
 
-#: daptup:227
+#: daptup:299
 msgid "Building new list of available updates... "
 msgstr "Building new list of available updates... "
 
-#: daptup:231
+#: daptup:303
 msgid "Building new list of watched packages... "
 msgstr "Building new list of watched packages... "
 
-#: daptup:244
+#: daptup:322
 msgid "Building list of outdated packages... "
 msgstr "Building list of outdated packages... "
 
-#: daptup:249
+#: daptup:327
 msgid ""
 "error: DAPTUP_MINIMAL_DAY_COUNT_TREATING_OUTDATED contains non-numeric data"
 msgstr ""
 "error: DAPTUP_MINIMAL_DAY_COUNT_TREATING_OUTDATED contains non-numeric data"
 
-#: daptup:252
+#: daptup:330
 msgid "Skipping check for outdated packages."
 msgstr "Skipping check for outdated packages."
 
-#: daptup:264
+#: daptup:342
 msgid "No new updates."
 msgstr "No new updates."
 
-#: daptup:266
+#: daptup:344
 msgid "New updates:"
 msgstr "New updates:"
 
-#: daptup:283
+#: daptup:361
 msgid "No new or removed packages."
 msgstr "No new or removed packages."
 
-#: daptup:285
+#: daptup:363
 msgid "New and removed packages:"
 msgstr "New and removed packages:"
 
-#: daptup:302
+#: daptup:380
 msgid "No news in watched packages."
 msgstr "No news in watched packages."
 
-#: daptup:304
+#: daptup:382
 msgid "Changes in watched packages:"
 msgstr "Changes in watched packages:"
 
-#: daptup:321
+#: daptup:399
 msgid "No outdated packages."
 msgstr "No outdated packages."
 
-#: daptup:323
+#: daptup:401
 msgid "Outdated packages:"
 msgstr "Outdated packages:"
+
+#~ msgid "SIGTERM received"
+#~ msgstr "SIGTERM received"
+
+#~ msgid "SIGINT received"
+#~ msgstr "SIGINT received"
+
+#~ msgid "aptitude returned non-zero code, daptup stopped here."
+#~ msgstr "aptitude returned non-zero code, daptup stopped here."

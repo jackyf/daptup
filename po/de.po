@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: daptup\n"
 "Report-Msgid-Bugs-To: jackyf.devel@gmail.com\n"
-"POT-Creation-Date: 2008-09-07 22:06+0300\n"
+"POT-Creation-Date: 2008-10-19 11:24+0300\n"
 "PO-Revision-Date: 2008-09-21 07:40+0200\n"
 "Last-Translator: Helge Kreutzmann <debian@helgefjell.de>\n"
 "Language-Team: de <debian-l10n-german@lists.debian.org>\n"
@@ -14,168 +14,188 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: daptup:36
-msgid "SIGTERM received"
-msgstr "SIGTERM erhalten"
-
-#: daptup:37
-msgid "SIGINT received"
-msgstr "SIGINT erhalten"
-
-#: daptup:50
+#: daptup:66
 #, sh-format
 msgid "Cannot read configuration from '$DAPTUP_CONFFILE'."
 msgstr "Kann Konfiguration nicht aus »$DAPTUP_CONFFILE« lesen."
 
-#: daptup:64
-#, sh-format
-msgid "Usage: $BASENAME [ -h | --help | --nocolor ]."
+#: daptup:74
+msgid "You cannot mix '--pre', '--post' and '--last' options or repeat them."
+msgstr ""
+
+#: daptup:98
+#, fuzzy, sh-format
+msgid ""
+"Usage: $BASENAME [ --pre | --post | --last ] [ -h | --help | --nocolor ]."
 msgstr "Verwendung: $BASENAME [ -h | --help | --nocolor ]."
 
-#: daptup:66
-msgid "daptup runs 'aptitude update' command inside and outputs:"
+#: daptup:100
+#, fuzzy
+msgid "daptup runs 'apt-get update' command inside and outputs:"
 msgstr "Daptup führt intern »aptitude update« aus und liefert:"
 
-#: daptup:67
+#: daptup:101
 msgid " - list of packages recently entered to repo;"
 msgstr " - eine Liste von Paketen, die kürzlich zum Depot hinzu kamen"
 
-#: daptup:68
+#: daptup:102
 msgid " - list of packages which got new updates;"
 msgstr " - eine Liste von Paketen, die neue Aktualisierungen erhielten"
 
-#: daptup:69
+#: daptup:103
 msgid " - list of changes in 'watched' packages;"
 msgstr " - eine Liste von Änderungen in »beobachteten« Paketen"
 
-#: daptup:70
+#: daptup:104
 msgid " - list of outdated packages (optionally)."
 msgstr " - eine Liste von veralteten Paketen (optional)"
 
-#: daptup:72
+#: daptup:106
 msgid "Options:"
 msgstr "Optionen:"
 
-#: daptup:73
+#: daptup:107
 msgid " -h, --help: output this help and exit"
 msgstr " -h, --help: gibt diese Hilfe aus und beendet sich"
 
-#: daptup:74
+#: daptup:108
 msgid " --nocolor: do not use colored output"
 msgstr " --nocolor: es wird keine farbige Ausgabe verwandt"
 
-#: daptup:79
+#: daptup:109
+msgid " --pre: do only 'pre' stage: collect info that will be used as 'old'"
+msgstr ""
+
+#: daptup:110
+msgid " --post: do only 'post' stage: collect 'new' info and output changes"
+msgstr ""
+
+#: daptup:111
+msgid "         if appropriate option is not disabled in config file"
+msgstr ""
+
+#: daptup:112
+msgid " --last: only output last changes"
+msgstr ""
+
+#: daptup:117
 #, sh-format
 msgid "Unknown param: $PARAM"
 msgstr "Unbekannter Parameter: $PARAM"
 
-#: daptup:88
+#: daptup:128
 msgid "You must run daptup with root privileges."
 msgstr "Sie müssen Daptup mit Root-Privilegien ausführen."
 
-#: daptup:150
+#: daptup:217
 #, sh-format
 msgid "warning: cannot find any changelog for package '$package'"
 msgstr "Warnung: Kann kein Changelog für Paket »$package« finden"
 
-#: daptup:169
+#: daptup:236
 msgid "day"
 msgid_plural "days"
 msgstr[0] "Tag"
 msgstr[1] "Tage"
 
-#: daptup:173
+#: daptup:240
 #, sh-format
 msgid "error: cannot extract last modification date for package '$package'"
 msgstr ""
 "Fehler: Kann das letzte Änderungsdatum für Paket »$package« nicht ermitteln"
 
-#: daptup:176
+#: daptup:243
 #, sh-format
 msgid "error: cannot fetch last entry from changelog for package '$package'"
 msgstr ""
 "Fehler: Kann den letzten Eintrag des Changelogs für Paket »$package« nicht "
 "holen"
 
-#: daptup:184
+#: daptup:251
 msgid "[done]"
 msgstr "[erledigt]"
 
-#: daptup:203
+#: daptup:272
 msgid "Building old list of packages... "
 msgstr "Erstelle alte Liste von Paketen... "
 
-#: daptup:208
+#: daptup:277
 msgid "errors present. Is apt/dpkg running?"
 msgstr "Fehler vorhanden. Läuft Apt/Dpkg?"
 
-#: daptup:213
+#: daptup:282
 msgid "Building old list of available updates... "
 msgstr "Erstelle alte Liste von verfügbaren Aktualisierungen... "
 
-#: daptup:217
+#: daptup:286
 msgid "Building old list of watched packages... "
 msgstr "Erstelle alte Liste von beobachteten Paketen... "
 
-#: daptup:221
-msgid "aptitude returned non-zero code, daptup stopped here."
-msgstr "Aptitude lieferte einen nicht-leeren Wert, Daptup beendet sich hier."
-
-#: daptup:223
+#: daptup:295
 msgid "Building new list of packages... "
 msgstr "Erstelle neue Liste von Paketen... "
 
-#: daptup:227
+#: daptup:299
 msgid "Building new list of available updates... "
 msgstr "Erstelle neue Liste von verfügbaren Aktualisierungen... "
 
-#: daptup:231
+#: daptup:303
 msgid "Building new list of watched packages... "
 msgstr "Erstelle neue Liste von beobachteten Paketen... "
 
-#: daptup:244
+#: daptup:322
 msgid "Building list of outdated packages... "
 msgstr "Erstelle Liste von veralteten Paketen... "
 
-#: daptup:249
+#: daptup:327
 msgid ""
 "error: DAPTUP_MINIMAL_DAY_COUNT_TREATING_OUTDATED contains non-numeric data"
 msgstr ""
 "Fehler: DAPTUP_MINIMAL_DAY_COUNT_TREATING_OUTDATED enthält nicht-numerische "
 "Daten."
 
-#: daptup:252
+#: daptup:330
 msgid "Skipping check for outdated packages."
 msgstr "Überspringe Prüfung auf veraltete Pakete."
 
-#: daptup:264
+#: daptup:342
 msgid "No new updates."
 msgstr "Keine neuen Aktualisierungen."
 
-#: daptup:266
+#: daptup:344
 msgid "New updates:"
 msgstr "Neue Aktualisierungen:"
 
-#: daptup:283
+#: daptup:361
 msgid "No new or removed packages."
 msgstr "Keine neuen oder entfernten Pakete."
 
-#: daptup:285
+#: daptup:363
 msgid "New and removed packages:"
 msgstr "Neue und entfernte Pakete:"
 
-#: daptup:302
+#: daptup:380
 msgid "No news in watched packages."
 msgstr "Keine Neuigkeiten in beobachteten Paketen."
 
-#: daptup:304
+#: daptup:382
 msgid "Changes in watched packages:"
 msgstr "Änderungen in beobachteten Paketen:"
 
-#: daptup:321
+#: daptup:399
 msgid "No outdated packages."
 msgstr "Keine veralteten Pakete."
 
-#: daptup:323
+#: daptup:401
 msgid "Outdated packages:"
 msgstr "Veraltete Pakete:"
+
+#~ msgid "SIGTERM received"
+#~ msgstr "SIGTERM erhalten"
+
+#~ msgid "SIGINT received"
+#~ msgstr "SIGINT erhalten"
+
+#~ msgid "aptitude returned non-zero code, daptup stopped here."
+#~ msgstr ""
+#~ "Aptitude lieferte einen nicht-leeren Wert, Daptup beendet sich hier."

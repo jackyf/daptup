@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: daptup\n"
 "Report-Msgid-Bugs-To: jackyf.devel@gmail.com\n"
-"POT-Creation-Date: 2008-09-07 22:06+0300\n"
+"POT-Creation-Date: 2008-10-19 11:24+0300\n"
 "PO-Revision-Date: 2008-09-20 17:14+0300\n"
 "Last-Translator: Eugene V. Lyubimkin <jackyf.devel@gmail.com>\n"
 "Language-Team: Ukrainian\n"
@@ -17,164 +17,186 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%"
 "10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
-#: daptup:36
-msgid "SIGTERM received"
-msgstr "Отримано SIGTERM"
-
-#: daptup:37
-msgid "SIGINT received"
-msgstr "Отримано SIGINT"
-
-#: daptup:50
+#: daptup:66
 #, sh-format
 msgid "Cannot read configuration from '$DAPTUP_CONFFILE'."
 msgstr "Не можу прочитати конфігураційний файл '$DAPTUP_CONFFILE'."
 
-#: daptup:64
-#, sh-format
-msgid "Usage: $BASENAME [ -h | --help | --nocolor ]."
+#: daptup:74
+msgid "You cannot mix '--pre', '--post' and '--last' options or repeat them."
+msgstr ""
+
+#: daptup:98
+#, fuzzy, sh-format
+msgid ""
+"Usage: $BASENAME [ --pre | --post | --last ] [ -h | --help | --nocolor ]."
 msgstr "Користування: $BASENAME [ -h | --help | --nocolor ]."
 
-#: daptup:66
-msgid "daptup runs 'aptitude update' command inside and outputs:"
+#: daptup:100
+#, fuzzy
+msgid "daptup runs 'apt-get update' command inside and outputs:"
 msgstr "daptup запускає команду 'aptitude update' та виводить:"
 
-#: daptup:67
+#: daptup:101
 msgid " - list of packages recently entered to repo;"
 msgstr " - список пакетів, що тільки що прийшли до репозиторію;"
 
-#: daptup:68
+#: daptup:102
 msgid " - list of packages which got new updates;"
 msgstr " - список пакетів, що отримали нові обновлення;"
 
-#: daptup:69
+#: daptup:103
 msgid " - list of changes in 'watched' packages;"
 msgstr " - список змін у 'спостерігаємих' пакетах;"
 
-#: daptup:70
+#: daptup:104
 msgid " - list of outdated packages (optionally)."
 msgstr " - список застарілих пакетів (необов'язково)."
 
-#: daptup:72
+#: daptup:106
 msgid "Options:"
 msgstr "Параметри:"
 
-#: daptup:73
+#: daptup:107
 msgid " -h, --help: output this help and exit"
 msgstr " -h, --help: вивести цю довідку та вийти"
 
-#: daptup:74
+#: daptup:108
 msgid " --nocolor: do not use colored output"
 msgstr " --nocolor: не використовувати кольоровий вивід"
 
-#: daptup:79
+#: daptup:109
+msgid " --pre: do only 'pre' stage: collect info that will be used as 'old'"
+msgstr ""
+
+#: daptup:110
+msgid " --post: do only 'post' stage: collect 'new' info and output changes"
+msgstr ""
+
+#: daptup:111
+msgid "         if appropriate option is not disabled in config file"
+msgstr ""
+
+#: daptup:112
+msgid " --last: only output last changes"
+msgstr ""
+
+#: daptup:117
 #, sh-format
 msgid "Unknown param: $PARAM"
 msgstr "Незрозумілий параметр: $PARAM"
 
-#: daptup:88
+#: daptup:128
 msgid "You must run daptup with root privileges."
 msgstr "Ви повинні запускати daptup з привілегіями суперкористувача."
 
-#: daptup:150
+#: daptup:217
 #, sh-format
 msgid "warning: cannot find any changelog for package '$package'"
 msgstr "попередження: не можу знайти список змін для пакету '$package'"
 
-#: daptup:169
+#: daptup:236
 msgid "day"
 msgid_plural "days"
 msgstr[0] "день"
 msgstr[1] "дня"
 msgstr[2] "днів"
 
-#: daptup:173
+#: daptup:240
 #, sh-format
 msgid "error: cannot extract last modification date for package '$package'"
-msgstr "помилка: не можу знайти дату останньої модифікації для пакету '$package'"
+msgstr ""
+"помилка: не можу знайти дату останньої модифікації для пакету '$package'"
 
-#: daptup:176
+#: daptup:243
 #, sh-format
 msgid "error: cannot fetch last entry from changelog for package '$package'"
-msgstr "помилка: не можу знайти останній запис у списку змін для пакету '$package'"
+msgstr ""
+"помилка: не можу знайти останній запис у списку змін для пакету '$package'"
 
-#: daptup:184
+#: daptup:251
 msgid "[done]"
 msgstr "[виконано]"
 
-#: daptup:203
+#: daptup:272
 msgid "Building old list of packages... "
 msgstr "Будування старого списку пакетів... "
 
-#: daptup:208
+#: daptup:277
 msgid "errors present. Is apt/dpkg running?"
 msgstr "знайдено помилки. Можливо, зараз працюють apt/dpkg?"
 
-#: daptup:213
+#: daptup:282
 msgid "Building old list of available updates... "
 msgstr "Будування старого списка доступних обновлень... "
 
-#: daptup:217
+#: daptup:286
 msgid "Building old list of watched packages... "
 msgstr "Будування старого списка спостерігаємих пакетів... "
 
-#: daptup:221
-msgid "aptitude returned non-zero code, daptup stopped here."
-msgstr "aptitude вернула ненульовий код завершення, daptup зупинено."
-
-#: daptup:223
+#: daptup:295
 msgid "Building new list of packages... "
 msgstr "Будування нового списка пакетів... "
 
-#: daptup:227
+#: daptup:299
 msgid "Building new list of available updates... "
 msgstr "Будування нового списка доступних обновлень... "
 
-#: daptup:231
+#: daptup:303
 msgid "Building new list of watched packages... "
 msgstr "Будування нового списка спостерігаємих пакетів... "
 
-#: daptup:244
+#: daptup:322
 msgid "Building list of outdated packages... "
 msgstr "Будування списка застарілих пакетів... "
 
-#: daptup:249
+#: daptup:327
 msgid ""
 "error: DAPTUP_MINIMAL_DAY_COUNT_TREATING_OUTDATED contains non-numeric data"
-msgstr "помилка: DAPTUP_MINIMAL_DAY_COUNT_TREATING_OUTDATED містить нечислові дані"
+msgstr ""
+"помилка: DAPTUP_MINIMAL_DAY_COUNT_TREATING_OUTDATED містить нечислові дані"
 
-#: daptup:252
+#: daptup:330
 msgid "Skipping check for outdated packages."
 msgstr "Пропущено сканування на застарілі пакети."
 
-#: daptup:264
+#: daptup:342
 msgid "No new updates."
 msgstr "Немає нових обновлень."
 
-#: daptup:266
+#: daptup:344
 msgid "New updates:"
 msgstr "Нові обновлення:"
 
-#: daptup:283
+#: daptup:361
 msgid "No new or removed packages."
 msgstr "Немає нових чи видалених пакетів."
 
-#: daptup:285
+#: daptup:363
 msgid "New and removed packages:"
 msgstr "Нові та видалені пакети:"
 
-#: daptup:302
+#: daptup:380
 msgid "No news in watched packages."
 msgstr "Немає нових в спостерігаємих пакетах."
 
-#: daptup:304
+#: daptup:382
 msgid "Changes in watched packages:"
 msgstr "Зміни в спостерігаємих пакетах:"
 
-#: daptup:321
+#: daptup:399
 msgid "No outdated packages."
 msgstr "Немає застарілих пакетів."
 
-#: daptup:323
+#: daptup:401
 msgid "Outdated packages:"
 msgstr "Застарілі пакети:"
+
+#~ msgid "SIGTERM received"
+#~ msgstr "Отримано SIGTERM"
+
+#~ msgid "SIGINT received"
+#~ msgstr "Отримано SIGINT"
+
+#~ msgid "aptitude returned non-zero code, daptup stopped here."
+#~ msgstr "aptitude вернула ненульовий код завершення, daptup зупинено."

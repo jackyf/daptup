@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: daptup\n"
 "Report-Msgid-Bugs-To: jackyf.devel@gmail.com\n"
 "POT-Creation-Date: 2008-10-19 11:24+0300\n"
-"PO-Revision-Date: 2008-10-12 13:13+0100\n"
+"PO-Revision-Date: 2008-10-20 19:38+0100\n"
 "Last-Translator: Miguel Figueiredo <elmig@debianpt.org>\n"
 "Language-Team: Portuguese <traduz@debianpt.org>\n"
 "MIME-Version: 1.0\n"
@@ -23,18 +23,18 @@ msgstr "Não pode ler a configuração a partir de '$DAPTUP_CONFFILE'."
 
 #: daptup:74
 msgid "You cannot mix '--pre', '--post' and '--last' options or repeat them."
-msgstr ""
+msgstr "Não pode misturar ou repetir as opções '--pre', '--post' e '--last'"
 
 #: daptup:98
-#, fuzzy, sh-format
+#, sh-format
 msgid ""
 "Usage: $BASENAME [ --pre | --post | --last ] [ -h | --help | --nocolor ]."
-msgstr "Utilização: $BASENAME [ -h | --help | --nocolor ]."
+msgstr ""
+"Utilização: $BASENAME [ --pre | --post | --last ] [-h | --help | --nocolor ]."
 
 #: daptup:100
-#, fuzzy
 msgid "daptup runs 'apt-get update' command inside and outputs:"
-msgstr "O daptup corre o comando 'aptitude update' e mostra:"
+msgstr "O daptup corre o comando 'apt-get update' e mostra:"
 
 #: daptup:101
 msgid " - list of packages recently entered to repo;"
@@ -66,19 +66,19 @@ msgstr " --nocolor: não mostrar cores"
 
 #: daptup:109
 msgid " --pre: do only 'pre' stage: collect info that will be used as 'old'"
-msgstr ""
+msgstr " --pre: fazer apenas a etapa 'pre': obter info que será utilizada como 'old'"
 
 #: daptup:110
 msgid " --post: do only 'post' stage: collect 'new' info and output changes"
-msgstr ""
+msgstr " --post: fazer apenas a etapa 'post': obter info 'new' e mostrar as alterações"
 
 #: daptup:111
 msgid "         if appropriate option is not disabled in config file"
-msgstr ""
+msgstr "         se a opção apropriada não estiver desabilitada no ficheiro de configuração"
 
 #: daptup:112
 msgid " --last: only output last changes"
-msgstr ""
+msgstr " --last: apenas mostras as últimas alterações"
 
 #: daptup:117
 #, sh-format
@@ -122,9 +122,8 @@ msgid "Building old list of packages... "
 msgstr "A construir a antiga lista de pacotes... "
 
 #: daptup:277
-#, fuzzy
 msgid "errors present. Is apt/dpkg running?"
-msgstr "ocorreram erros. O apt/dpkg está a correr?.."
+msgstr "existem erros. O apt/dpkg está a correr?"
 
 #: daptup:282
 msgid "Building old list of available updates... "

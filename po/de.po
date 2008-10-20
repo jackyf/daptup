@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: daptup\n"
 "Report-Msgid-Bugs-To: jackyf.devel@gmail.com\n"
 "POT-Creation-Date: 2008-10-19 11:24+0300\n"
-"PO-Revision-Date: 2008-09-21 07:40+0200\n"
+"PO-Revision-Date: 2008-10-20 19:36+0200\n"
 "Last-Translator: Helge Kreutzmann <debian@helgefjell.de>\n"
 "Language-Team: de <debian-l10n-german@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
@@ -22,17 +22,19 @@ msgstr "Kann Konfiguration nicht aus »$DAPTUP_CONFFILE« lesen."
 #: daptup:74
 msgid "You cannot mix '--pre', '--post' and '--last' options or repeat them."
 msgstr ""
+"Sie können die Optionen »--pre«, »--post« und »--last« nicht gleichzeitig "
+"verwenden oder wiederholen."
 
 #: daptup:98
-#, fuzzy, sh-format
+#, sh-format
 msgid ""
 "Usage: $BASENAME [ --pre | --post | --last ] [ -h | --help | --nocolor ]."
-msgstr "Verwendung: $BASENAME [ -h | --help | --nocolor ]."
+msgstr ""
+"Verwendung: $BASENAME [ --pre | --post | --last ] [ -h | --help | --nocolor ]."
 
 #: daptup:100
-#, fuzzy
 msgid "daptup runs 'apt-get update' command inside and outputs:"
-msgstr "Daptup führt intern »aptitude update« aus und liefert:"
+msgstr "Daptup führt intern »apt-get update« aus und liefert:"
 
 #: daptup:101
 msgid " - list of packages recently entered to repo;"
@@ -65,18 +67,24 @@ msgstr " --nocolor: es wird keine farbige Ausgabe verwandt"
 #: daptup:109
 msgid " --pre: do only 'pre' stage: collect info that will be used as 'old'"
 msgstr ""
+" --pre: führe nur die »pre«-Stufe aus: Sammle Informationen, die als »alt« "
+"verwendet werden."
 
 #: daptup:110
 msgid " --post: do only 'post' stage: collect 'new' info and output changes"
 msgstr ""
+" --post: führe nur die »post«-Stufe aus: Sammle »neu«-Informationen und gib "
+"Änderungen aus."
 
 #: daptup:111
 msgid "         if appropriate option is not disabled in config file"
 msgstr ""
+"         falls zugehörige Option nicht in der Konfigurationsdatei deaktiviert "
+"ist."
 
 #: daptup:112
 msgid " --last: only output last changes"
-msgstr ""
+msgstr " --last: gibt nur die neusten Änderungen aus"
 
 #: daptup:117
 #, sh-format

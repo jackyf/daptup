@@ -1,0 +1,205 @@
+# French po translation
+# Copyright (C) 2008 Eugene V. Lyubimkin
+# This file is distributed under the same license as the daptup package.
+# Steve Petruzzello <dlist@bluewin.ch>, 2008.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: daptup_0.8.0\n"
+"Report-Msgid-Bugs-To: jackyf.devel@gmail.com\n"
+"POT-Creation-Date: 2008-10-19 11:24+0300\n"
+"PO-Revision-Date: 2008-10-20 01:02+0200\n"
+"Last-Translator: Steve Petruzzello <dlist@bluewin.ch>\n"
+"Language-Team: French <debian-l10n-french@lists.debian.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n>1);\n"
+
+#: daptup:66
+#, sh-format
+msgid "Cannot read configuration from '$DAPTUP_CONFFILE'."
+msgstr ""
+"Impossible de lire la configuration depuis le fichier'$DAPTUP_CONFFILE'"
+
+#: daptup:74
+msgid "You cannot mix '--pre', '--post' and '--last' options or repeat them."
+msgstr ""
+"Vous ne pouvez pas mélanger les options '--pre', '--post' et '--last' ni les "
+"répéter."
+
+#: daptup:98
+#, sh-format
+msgid ""
+"Usage: $BASENAME [ --pre | --post | --last ] [ -h | --help | --nocolor ]."
+msgstr ""
+"Usage : $BASENAME [ --pre | --post | --last ] [ -h | --help | --nocolor ]."
+
+#: daptup:100
+msgid "daptup runs 'apt-get update' command inside and outputs:"
+msgstr "daptup exécute la commande 'apt-get update' en interne et retourne :"
+
+#: daptup:101
+msgid " - list of packages recently entered to repo;"
+msgstr " - liste des paquets récemment introduits dans le dépôt ;"
+
+#: daptup:102
+msgid " - list of packages which got new updates;"
+msgstr " - liste des paquets mis à jour ;"
+
+#: daptup:103
+msgid " - list of changes in 'watched' packages;"
+msgstr "- liste des changements pour les paquets 'surveillés' ;"
+
+#: daptup:104
+msgid " - list of outdated packages (optionally)."
+msgstr " - liste des paquets obsolètes (en option)"
+
+#: daptup:106
+msgid "Options:"
+msgstr "Options :"
+
+#: daptup:107
+msgid " -h, --help: output this help and exit"
+msgstr " -h, --help : affiche cette aide et quitte"
+
+#: daptup:108
+msgid " --nocolor: do not use colored output"
+msgstr " --nocolor : n'utilise pas de couleur pour l'affichage"
+
+#: daptup:109
+msgid " --pre: do only 'pre' stage: collect info that will be used as 'old'"
+msgstr ""
+" --pre : n'effectue que l'étape 'pre' : collecte l'information qui sera "
+"utilisée pour 'old'"
+
+#: daptup:110
+msgid " --post: do only 'post' stage: collect 'new' info and output changes"
+msgstr ""
+" --post : n'effectue que l'étape 'post' : collecte l'information et affiche "
+"les changements"
+
+#: daptup:111
+msgid "         if appropriate option is not disabled in config file"
+msgstr ""
+"si l'option adéquate n'est pas désactivée dans le fichier de configuration"
+
+#: daptup:112
+msgid " --last: only output last changes"
+msgstr " --last : n'affiche que les derniers changements"
+
+#: daptup:117
+#, sh-format
+msgid "Unknown param: $PARAM"
+msgstr "Paramètre inconnu : $PARAM"
+
+#: daptup:128
+msgid "You must run daptup with root privileges."
+msgstr "Vous devez exécutez daptup avec les privilèges du superutilisateur"
+
+#: daptup:217
+#, sh-format
+msgid "warning: cannot find any changelog for package '$package'"
+msgstr ""
+"Attention : impossible de trouver un journal des modifications pour le "
+"paquet '$package'"
+
+#: daptup:236
+msgid "day"
+msgid_plural "days"
+msgstr[0] "jour"
+msgstr[1] "jours"
+
+#: daptup:240
+#, sh-format
+msgid "error: cannot extract last modification date for package '$package'"
+msgstr ""
+"Erreur : impossible d'extraire la date de dernière modification pour le "
+"paquet '$package'"
+
+#: daptup:243
+#, sh-format
+msgid "error: cannot fetch last entry from changelog for package '$package'"
+msgstr ""
+"Erreur : impossible de récupérer la dernière entrée du journal de "
+"modifications pour le paquet '$package'"
+
+#: daptup:251
+msgid "[done]"
+msgstr "[Fait]"
+
+#: daptup:272
+msgid "Building old list of packages... "
+msgstr "Construction de l'ancienne liste des paquets..."
+
+#: daptup:277
+msgid "errors present. Is apt/dpkg running?"
+msgstr "Erreurs : est-ce que apt ou dpkg est en cours d'exécution ?"
+
+#: daptup:282
+msgid "Building old list of available updates... "
+msgstr "Construction de l'ancienne liste des mises à jour disponibles..."
+
+#: daptup:286
+msgid "Building old list of watched packages... "
+msgstr "Construction de l'ancienne liste des paquets surveillés..."
+
+#: daptup:295
+msgid "Building new list of packages... "
+msgstr "Construction de la nouvelle liste de paquets..."
+
+#: daptup:299
+msgid "Building new list of available updates... "
+msgstr "Construction de la nouvelle liste des mises à jour disponibles..."
+
+#: daptup:303
+msgid "Building new list of watched packages... "
+msgstr "Construction de la nouvelle liste des paquets surveillés..."
+
+#: daptup:322
+msgid "Building list of outdated packages... "
+msgstr "Construction de la liste des paquets obsolètes..."
+
+#: daptup:327
+msgid ""
+"error: DAPTUP_MINIMAL_DAY_COUNT_TREATING_OUTDATED contains non-numeric data"
+msgstr ""
+"Erreur : DAPTUP_MINIMAL_DAY_COUNT_TREATING_OUTDATED contient des données non-"
+"numériques"
+
+#: daptup:330
+msgid "Skipping check for outdated packages."
+msgstr "Omission de la vérification des paquets obsolètes"
+
+#: daptup:342
+msgid "No new updates."
+msgstr "Pas de nouvelle mise à jour"
+
+#: daptup:344
+msgid "New updates:"
+msgstr "Nouvelles mises à jour :"
+
+#: daptup:361
+msgid "No new or removed packages."
+msgstr "Pas de nouveau paquet ni de paquet retiré."
+
+#: daptup:363
+msgid "New and removed packages:"
+msgstr "Nouveaux paquets et paquets retirés :"
+
+#: daptup:380
+msgid "No news in watched packages."
+msgstr "Pas de nouvelle dans les paquets surveillés."
+
+#: daptup:382
+msgid "Changes in watched packages:"
+msgstr "Changements dans les paquets surveillés :"
+
+#: daptup:399
+msgid "No outdated packages."
+msgstr "Pas de paquet obsolète"
+
+#: daptup:401
+msgid "Outdated packages:"
+msgstr "Paquets obsolètes :"

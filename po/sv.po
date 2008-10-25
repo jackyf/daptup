@@ -1,0 +1,200 @@
+# translation of daptup.po to swedish
+# Copyright (C) 2008 Eugene V. Lyubimkin
+# This file is distributed under the same license as the daptup package.
+#
+# Martin Bagge <brother@bsnet.se>, 2008.
+msgid ""
+msgstr ""
+"Project-Id-Version: daptup\n"
+"Report-Msgid-Bugs-To: jackyf.devel@gmail.com\n"
+"POT-Creation-Date: 2008-10-19 11:24+0300\n"
+"PO-Revision-Date: 2008-10-25 10:50+0200\n"
+"Last-Translator: brother <brother@bsnet.se>\n"
+"Language-Team: Swedish\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: KBabel 1.11.4\n"
+
+#: daptup:66
+#, sh-format
+msgid "Cannot read configuration from '$DAPTUP_CONFFILE'."
+msgstr "kan inte läsa inställningar från '$DAPTUP_CONFFILE'."
+
+#: daptup:74
+msgid "You cannot mix '--pre', '--post' and '--last' options or repeat them."
+msgstr ""
+"Du kan inte blanda alternativen '--pre', '--post' och '--last', ej heller "
+"upprepa dem."
+
+#: daptup:98
+#, sh-format
+msgid ""
+"Usage: $BASENAME [ --pre | --post | --last ] [ -h | --help | --nocolor ]."
+msgstr ""
+"Användning: $BASENAME [ --pre | --post | --last ] [ -h | --help | --"
+"nocolor ]."
+
+#: daptup:100
+msgid "daptup runs 'apt-get update' command inside and outputs:"
+msgstr "daptup kör kommandot 'aptitude update' och skriver ut:"
+
+#: daptup:101
+msgid " - list of packages recently entered to repo;"
+msgstr " lista över paket som nyligen lagts till idatalagret;"
+
+#: daptup:102
+msgid " - list of packages which got new updates;"
+msgstr " - lista över paket med uppdateringar;"
+
+#: daptup:103
+msgid " - list of changes in 'watched' packages;"
+msgstr " - lista över förändringar i bevakade paket;"
+
+#: daptup:104
+msgid " - list of outdated packages (optionally)."
+msgstr " - lista över föråldrade paket (valbart)."
+
+#: daptup:106
+msgid "Options:"
+msgstr "Alternativ:"
+
+#: daptup:107
+msgid " -h, --help: output this help and exit"
+msgstr " -h, --help: visar denna hjälptext"
+
+#: daptup:108
+msgid " --nocolor: do not use colored output"
+msgstr " --nocolor: undviker färg vid utskrift"
+
+#: daptup:109
+msgid " --pre: do only 'pre' stage: collect info that will be used as 'old'"
+msgstr " --pre: utför bara förstadiet, samlar in information om gamla paket"
+
+#: daptup:110
+msgid " --post: do only 'post' stage: collect 'new' info and output changes"
+msgstr ""
+" --post: gör bara slutstadiet, samlar in information om nya paket och "
+"skriver ut förändringarna"
+
+#: daptup:111
+msgid "         if appropriate option is not disabled in config file"
+msgstr "         om alternativet 'appropriate' inte avaktiverats"
+
+#: daptup:112
+msgid " --last: only output last changes"
+msgstr " --last: skriver bara ut förädndringar sedan förra körningen"
+
+#: daptup:117
+#, sh-format
+msgid "Unknown param: $PARAM"
+msgstr "Okänd parameter: $PARAM"
+
+#: daptup:128
+msgid "You must run daptup with root privileges."
+msgstr "Daptup måste köras med root-behörighet."
+
+#: daptup:217
+#, sh-format
+msgid "warning: cannot find any changelog for package '$package'"
+msgstr ""
+"varning: kunde inte hitta någon förändringshistorik för paketet '$package'"
+
+#: daptup:236
+msgid "day"
+msgid_plural "days"
+msgstr[0] "dag"
+msgstr[1] "dagar"
+
+#: daptup:240
+#, sh-format
+msgid "error: cannot extract last modification date for package '$package'"
+msgstr ""
+"fel: kunde inte hämta datum för senaste förändringar av paketet '$package'"
+
+#: daptup:243
+#, sh-format
+msgid "error: cannot fetch last entry from changelog for package '$package'"
+msgstr ""
+"fel: kan inte läsa sista inlägget i förändringshistoriken för paketet "
+"'$package'"
+
+#: daptup:251
+msgid "[done]"
+msgstr "[klar]"
+
+#: daptup:272
+msgid "Building old list of packages... "
+msgstr "Skapar lista över gamla paket..."
+
+#: daptup:277
+msgid "errors present. Is apt/dpkg running?"
+msgstr "fel uppstod. Körs apt/dpkg?"
+
+#: daptup:282
+msgid "Building old list of available updates... "
+msgstr "Skapar lista för gamla paket med tillgängliga uppdateringar..."
+
+#: daptup:286
+msgid "Building old list of watched packages... "
+msgstr "Skapar lista för gamla paket som är bevakade..."
+
+#: daptup:295
+msgid "Building new list of packages... "
+msgstr "Skapar lista med nya paket..."
+
+#: daptup:299
+msgid "Building new list of available updates... "
+msgstr "Skapar lista för nya paket med tillgängliga uppdateringar..."
+
+#: daptup:303
+msgid "Building new list of watched packages... "
+msgstr "Skapar lista för nya paket som är bevakade..."
+
+#: daptup:322
+msgid "Building list of outdated packages... "
+msgstr "Skapar lista för föråldrade paket..."
+
+#: daptup:327
+msgid ""
+"error: DAPTUP_MINIMAL_DAY_COUNT_TREATING_OUTDATED contains non-numeric data"
+msgstr ""
+"fel: DAPTUP_MINIMAL_DAY_COUNT_TREATING_OUTDATED innehöll ett ickenumeriska "
+"värde"
+
+#: daptup:330
+msgid "Skipping check for outdated packages."
+msgstr "Hoppar över kontroll av föråldrade paket."
+
+#: daptup:342
+msgid "No new updates."
+msgstr "Inga nya uppdateringar"
+
+#: daptup:344
+msgid "New updates:"
+msgstr "Nya uppdateringar:"
+
+#: daptup:361
+msgid "No new or removed packages."
+msgstr "Inga nya eller borttagna paket."
+
+#: daptup:363
+msgid "New and removed packages:"
+msgstr "Nya och borttagna paket:"
+
+#: daptup:380
+msgid "No news in watched packages."
+msgstr "Inga nyheter i bevakade paket."
+
+#: daptup:382
+msgid "Changes in watched packages:"
+msgstr "Förändringar i bevakade paket:"
+
+#: daptup:399
+msgid "No outdated packages."
+msgstr "Inga föråldrade paket."
+
+#: daptup:401
+msgid "Outdated packages:"
+msgstr "Föråldrade paket:"

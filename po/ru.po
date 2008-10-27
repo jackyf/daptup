@@ -24,18 +24,17 @@ msgstr "Не могу прочитать конфигурацию из '$DAPTUP_
 
 #: daptup:74
 msgid "You cannot mix '--pre', '--post' and '--last' options or repeat them."
-msgstr ""
+msgstr "Нельзя смешивать параметры '--pre', '--post' и '--last' или повторять их."
 
 #: daptup:98
-#, fuzzy, sh-format
+#, sh-format
 msgid ""
 "Usage: $BASENAME [ --pre | --post | --last ] [ -h | --help | --nocolor ]."
-msgstr "Использование: $BASENAME [ -h | --help | --nocolor]."
+msgstr "Использование: $BASENAME [ --pre | --post | --last ] [ -h | --help | --nocolor ]."
 
 #: daptup:100
-#, fuzzy
 msgid "daptup runs 'apt-get update' command inside and outputs:"
-msgstr "daptup запускает команду 'aptitude update' внутри себя и выводит:"
+msgstr "daptup запускает команду 'apt-get update' внутри себя и выводит:"
 
 #: daptup:101
 msgid " - list of packages recently entered to repo;"
@@ -67,19 +66,21 @@ msgstr " --nocolor: не использовать цветной вывод"
 
 #: daptup:109
 msgid " --pre: do only 'pre' stage: collect info that will be used as 'old'"
-msgstr ""
+msgstr " --pre: выполнить только фазу 'pre': собрать информацию, которая будет\n"
+	   "        использована как старая"
 
 #: daptup:110
 msgid " --post: do only 'post' stage: collect 'new' info and output changes"
-msgstr ""
+msgstr " --post: выполнить только фазу 'post': собрать \"новую\" информацию и\n"
+	   "         вывести изменения"
 
 #: daptup:111
 msgid "         if appropriate option is not disabled in config file"
-msgstr ""
+msgstr "         если соответствующий параметр не отключён в конфигурационном файле"
 
 #: daptup:112
 msgid " --last: only output last changes"
-msgstr ""
+msgstr " --last: только вывести последние изменения"
 
 #: daptup:117
 #, sh-format

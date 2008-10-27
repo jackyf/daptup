@@ -23,18 +23,17 @@ msgstr "Cannot read configuration from '$DAPTUP_CONFFILE'."
 
 #: daptup:74
 msgid "You cannot mix '--pre', '--post' and '--last' options or repeat them."
-msgstr ""
+msgstr "You cannot mix '--pre', '--post' and '--last' options or repeat them."
 
 #: daptup:98
-#, fuzzy, sh-format
+#, sh-format
 msgid ""
 "Usage: $BASENAME [ --pre | --post | --last ] [ -h | --help | --nocolor ]."
-msgstr "Usage: $BASENAME [ -h | --help | --nocolor ]."
+msgstr "Usage: $BASENAME [ --pre | --post | --last ] [ -h | --help | --nocolor ]."
 
 #: daptup:100
-#, fuzzy
 msgid "daptup runs 'apt-get update' command inside and outputs:"
-msgstr "daptup runs 'aptitude update' command inside and outputs:"
+msgstr "daptup runs 'apt-get update' command inside and outputs:"
 
 #: daptup:101
 msgid " - list of packages recently entered to repo;"
@@ -66,19 +65,19 @@ msgstr " --nocolor: do not use colored output"
 
 #: daptup:109
 msgid " --pre: do only 'pre' stage: collect info that will be used as 'old'"
-msgstr ""
+msgstr " --pre: do only 'pre' stage: collect info that will be used as 'old'"
 
 #: daptup:110
 msgid " --post: do only 'post' stage: collect 'new' info and output changes"
-msgstr ""
+msgstr " --post: do only 'post' stage: collect 'new' info and output changes"
 
 #: daptup:111
 msgid "         if appropriate option is not disabled in config file"
-msgstr ""
+msgstr "         if appropriate option is not disabled in config file"
 
 #: daptup:112
 msgid " --last: only output last changes"
-msgstr ""
+msgstr " --last: only output last changes"
 
 #: daptup:117
 #, sh-format

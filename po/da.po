@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: daptup\n"
 "Report-Msgid-Bugs-To: jackyf.devel@gmail.com\n"
 "POT-Creation-Date: 2008-10-19 11:24+0300\n"
-"PO-Revision-Date: 2008-09-28 11:20+0200\n"
+"PO-Revision-Date: 2008-10-26 16:43+0100\n"
 "Last-Translator: Frank Damgaard <debian@overbygaard.dk>\n"
 "Language-Team: Danish <debian-l10n-danish@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
@@ -24,17 +24,19 @@ msgstr "Kan ikke læse opsætning fra '$DAPTUP_CONFFILE'."
 #: daptup:74
 msgid "You cannot mix '--pre', '--post' and '--last' options or repeat them."
 msgstr ""
+"Følgende flag må ikke blandes eller gentages:  '--pre', '--post' and '--"
+"last'."
 
+# sh-format
 #: daptup:98
-#, fuzzy, sh-format
 msgid ""
 "Usage: $BASENAME [ --pre | --post | --last ] [ -h | --help | --nocolor ]."
-msgstr "Brug: $BASENAME [ -h | --help | --nocolor ]."
+msgstr ""
+"Brug: $BASENAME [ --pre | --post | --last ] [ -h | --help | --nocolor ]."
 
 #: daptup:100
-#, fuzzy
 msgid "daptup runs 'apt-get update' command inside and outputs:"
-msgstr "daptup udfører internt kommandoen 'aptitude update', og viser:"
+msgstr "daptup udfører internt kommandoen 'apt-get update', og viser:"
 
 #: daptup:101
 msgid " - list of packages recently entered to repo;"
@@ -67,18 +69,19 @@ msgstr " --nocolor: brug ikke farver"
 #: daptup:109
 msgid " --pre: do only 'pre' stage: collect info that will be used as 'old'"
 msgstr ""
+" --pre: udfør kun 'pre' trin: indsaml info som vil blive brugs som 'old'"
 
 #: daptup:110
 msgid " --post: do only 'post' stage: collect 'new' info and output changes"
-msgstr ""
+msgstr " --post: udfør kun 'post' trin: indsaml 'new' info og vis ændringer"
 
 #: daptup:111
 msgid "         if appropriate option is not disabled in config file"
-msgstr ""
+msgstr "         hvis passende flag ikke er slået fra i konfigurationsfilen"
 
 #: daptup:112
 msgid " --last: only output last changes"
-msgstr ""
+msgstr " --last: vis kun seneste ændringer"
 
 #: daptup:117
 #, sh-format

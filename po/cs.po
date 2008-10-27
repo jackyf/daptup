@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: daptup\n"
 "Report-Msgid-Bugs-To: jackyf.devel@gmail.com\n"
 "POT-Creation-Date: 2008-10-19 11:24+0300\n"
-"PO-Revision-Date: 2008-09-20 12:07+0200\n"
+"PO-Revision-Date: 2008-10-26 19:45+0100\n"
 "Last-Translator: Miroslav Kure <kurem@debian.cz>\n"
 "Language-Team: Czech <debian-l10n-czech@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
@@ -24,18 +24,18 @@ msgstr "Nelze přečíst konfigurace ze souboru „$DAPTUP_CONFFILE“."
 
 #: daptup:74
 msgid "You cannot mix '--pre', '--post' and '--last' options or repeat them."
-msgstr ""
+msgstr "Volby „--pre“, „--post“ a „--last“ nelze míchat ani opakovat."
 
 #: daptup:98
-#, fuzzy, sh-format
+#, sh-format
 msgid ""
 "Usage: $BASENAME [ --pre | --post | --last ] [ -h | --help | --nocolor ]."
-msgstr "Použití: $BASENAME [ -h | --help | --nocolor ]."
+msgstr ""
+"Použití: $BASENAME [ --pre | --post | --last ] [ -h | --help | --nocolor ]."
 
 #: daptup:100
-#, fuzzy
 msgid "daptup runs 'apt-get update' command inside and outputs:"
-msgstr "daptup interně spustí příkaz „aptitude update“ a vypíše:"
+msgstr "daptup interně spustí příkaz „apt-get update“ a vypíše:"
 
 #: daptup:101
 msgid " - list of packages recently entered to repo;"
@@ -67,19 +67,19 @@ msgstr " --nocolor: nepoužije obarvený výstup"
 
 #: daptup:109
 msgid " --pre: do only 'pre' stage: collect info that will be used as 'old'"
-msgstr ""
+msgstr " --pre: provede jen úvodní část: posbírá info o stávajících balících"
 
 #: daptup:110
 msgid " --post: do only 'post' stage: collect 'new' info and output changes"
-msgstr ""
+msgstr " --post: provede jen konečnou část: posbírá nové info a vypíše změny"
 
 #: daptup:111
 msgid "         if appropriate option is not disabled in config file"
-msgstr ""
+msgstr "         pokud v konfiguračním souboru není odpovídající volba zakázána"
 
 #: daptup:112
 msgid " --last: only output last changes"
-msgstr ""
+msgstr " --last: vypíše pouze poslední změny"
 
 #: daptup:117
 #, sh-format

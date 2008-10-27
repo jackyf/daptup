@@ -24,18 +24,17 @@ msgstr "Не можу прочитати конфігураційний файл
 
 #: daptup:74
 msgid "You cannot mix '--pre', '--post' and '--last' options or repeat them."
-msgstr ""
+msgstr "Не можна змішувати параметри '--pre', '--post' та '--last' або повторювати їх"
 
 #: daptup:98
-#, fuzzy, sh-format
+#, sh-format
 msgid ""
 "Usage: $BASENAME [ --pre | --post | --last ] [ -h | --help | --nocolor ]."
-msgstr "Користування: $BASENAME [ -h | --help | --nocolor ]."
+msgstr "Користування: $BASENAME [ --pre | --post | --last ] [ -h | --help | --nocolor ]."
 
 #: daptup:100
-#, fuzzy
 msgid "daptup runs 'apt-get update' command inside and outputs:"
-msgstr "daptup запускає команду 'aptitude update' та виводить:"
+msgstr "daptup запускає команду 'apt-get update' та виводить:"
 
 #: daptup:101
 msgid " - list of packages recently entered to repo;"
@@ -67,19 +66,21 @@ msgstr " --nocolor: не використовувати кольоровий в�
 
 #: daptup:109
 msgid " --pre: do only 'pre' stage: collect info that will be used as 'old'"
-msgstr ""
+msgstr " --pre: виконати тільки фазу 'pre': зібрати інформацію, що будет використана\n"
+	   "        як стара"
 
 #: daptup:110
 msgid " --post: do only 'post' stage: collect 'new' info and output changes"
-msgstr ""
+msgstr " --post: виконати тільки фазу 'post': зібрати \"нову\" інформацію\n"
+       "         та вивести зміни"
 
 #: daptup:111
 msgid "         if appropriate option is not disabled in config file"
-msgstr ""
+msgstr "         якщо відповідний параметр не було вимкнуто у конфігураційному файлі"
 
 #: daptup:112
 msgid " --last: only output last changes"
-msgstr ""
+msgstr " --last: тільки вивести останні зміни"
 
 #: daptup:117
 #, sh-format

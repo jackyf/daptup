@@ -27,6 +27,11 @@ export TEXTDOMAIN
 TEXTDOMAINDIR=/usr/share/locale
 export TEXTDOMAINDIR
 
+# own eval_gettexte function, as official one doesn't allow to pass -e
+eval_gettexte () {
+  gettext -e "$1" | (export PATH `envsubst --variables "$1"`; envsubst "$1")
+}
+
 # exit if any command returned non-zero status
 set -e
 
@@ -63,7 +68,7 @@ DAPTUP_CONFFILE=/etc/daptup.conf
 if [ -f $DAPTUP_CONFFILE ]; then
 	. $DAPTUP_CONFFILE
 else
-	eval_gettext "Cannot read configuration from '\$DAPTUP_CONFFILE'."; echo
+	eval_gettexte "Cannot read configuration from '\$DAPTUP_CONFFILE'."; echo
 	do_exit 1
 fi
 
@@ -71,7 +76,7 @@ fi
 function check_subcommand
 {
 	if [ -n "$DAPTUP_SUBCOMMAND" ]; then
-		gettext "You cannot mix '--pre', '--post' and '--last' options or repeat them."; echo
+		gettext -e "You cannot mix '--pre', '--post' and '--last' options or repeat them."; echo
 		do_exit 4
 	fi
 }
@@ -95,26 +100,26 @@ while [ "$#" -gt "0" ]; do
 			;;
 		-h|--help)
 			BASENAME=`basename ${0}`
-			eval_gettext "Usage: \$BASENAME [ --pre | --post | --last ] [ -h | --help | --nocolor ]."; echo
+			eval_gettexte "Usage: \$BASENAME [ --pre | --post | --last ] [ -h | --help | --nocolor ]."; echo
 			echo
-			gettext "daptup runs 'apt-get update' command inside and outputs:"; echo
-			gettext " - list of packages recently entered to repo;"; echo
-			gettext " - list of packages which got new updates;"; echo
-			gettext " - list of changes in 'watched' packages;"; echo
-			gettext " - list of outdated packages (optionally)."; echo
+			gettext -e "daptup runs 'apt-get update' command inside and outputs:"; echo
+			gettext -e " - list of packages recently entered to repo;"; echo
+			gettext -e " - list of packages which got new updates;"; echo
+			gettext -e " - list of changes in 'watched' packages;"; echo
+			gettext -e " - list of outdated packages (optionally)."; echo
 			echo
-			gettext "Options:"; echo
-			gettext " -h, --help: output this help and exit"; echo
-			gettext " --nocolor: do not use colored output"; echo
-			gettext " --pre: do only 'pre' stage: collect info that will be used as 'old'"; echo
-			gettext " --post: do only 'post' stage: collect 'new' info and output changes"; echo
-			gettext "         if appropriate option is not disabled in config file"; echo
-			gettext " --last: only output last changes"; echo
+			gettext -e "Options:"; echo
+			gettext -e " -h, --help: output this help and exit"; echo
+			gettext -e " --nocolor: do not use colored output"; echo
+			gettext -e " --pre: do only 'pre' stage: collect info that will be used as 'old'"; echo
+			gettext -e " --post: do only 'post' stage: collect 'new' info and output changes"; echo
+			gettext -e "         if appropriate option is not disabled in config file"; echo
+			gettext -e " --last: only output last changes"; echo
 			do_exit 0
 			;;
 		*)
 			if [ "$PARAM" != "" ]; then
-				eval_gettext "Unknown param: \$PARAM"; echo
+				eval_gettexte "Unknown param: \$PARAM"; echo
 				do_exit 4
 			fi
 			;;
@@ -125,7 +130,7 @@ done
 # Checking for root privileges
 MY_UID=`id -u`
 if [ "$MY_UID" != "0" ]; then
-	gettext "You must run daptup with root privileges."; echo
+	gettext -e "You must run daptup with root privileges."; echo
 	do_exit 2
 fi
 
@@ -214,7 +219,7 @@ function find_old_packages
 		elif [ -f $DOC_DIR/$package/changelog.gz ]; then
 			CHANGELOG_FILE=$DOC_DIR/$package/changelog.gz
 		else
-			eval_gettext "warning: cannot find any changelog for package '\$package'"; echo
+			eval_gettexte "warning: cannot find any changelog for package '\$package'"; echo
 		fi
 
 		if [ -n "$CHANGELOG_FILE" ]; then # if we've found a changelog
@@ -233,14 +238,14 @@ function find_old_packages
 					if [ $DAYS -gt $DAPTUP_MINIMAL_DAY_COUNT_TREATING_OUTDATED ]; then # package is old
 						echo -n $line >> $1
 						echo -n ", $DAYS " >> $1
-						ngettext "day" "days" $DAYS >> $1
+						ngettext -e "day" "days" $DAYS >> $1
 						echo >> $1
 					fi
 				else # date is extracted badly
-					eval_gettext "error: cannot extract last modification date for package '\$package'"; echo
+					eval_gettexte "error: cannot extract last modification date for package '\$package'"; echo
 				fi
 			else # changelog is not correct
-				eval_gettext "error: cannot fetch last entry from changelog for package '\$package'"; echo
+				eval_gettexte "error: cannot fetch last entry from changelog for package '\$package'"; echo
 			fi
 		fi
 	done
@@ -248,7 +253,7 @@ function find_old_packages
 
 function print_done
 {
-	gettext "[done]"; echo
+	gettext -e "[done]"; echo
 }
 
 # $1 - before
@@ -269,21 +274,21 @@ function reset_color()
 
 function do_pre
 {
-	gettext "Building old list of packages... "
+	gettext -e "Building old list of packages... "
 	get_avail_pkg_list $DAPTUP_NEW_BEFORE $DAPTUP_ERRORS_FILE
 
 	RETURN_RESULT=`wc -l < $DAPTUP_ERRORS_FILE`
 	if [ "$RETURN_RESULT" != "0" ]; then
-		gettext "errors present. Is apt/dpkg running?"; echo
+		gettext -e "errors present. Is apt/dpkg running?"; echo
 		do_exit 8
 	fi
 	print_done
 
-	gettext "Building old list of available updates... "
+	gettext -e "Building old list of available updates... "
 	get_updates $DAPTUP_UPDATES_BEFORE
 	print_done
 
-	gettext "Building old list of watched packages... "
+	gettext -e "Building old list of watched packages... "
 	get_watched $DAPTUP_WATCH_BEFORE
 	print_done
 }
@@ -292,15 +297,15 @@ function do_post
 {
 	if [ "$DAPTUP_SUBCOMMAND" != "last" ]; then
 
-		gettext "Building new list of packages... "
+		gettext -e "Building new list of packages... "
 		get_avail_pkg_list $DAPTUP_NEW_AFTER /dev/null
 		print_done
 
-		gettext "Building new list of available updates... "
+		gettext -e "Building new list of available updates... "
 		get_updates $DAPTUP_UPDATES_AFTER
 		print_done
 
-		gettext "Building new list of watched packages... "
+		gettext -e "Building new list of watched packages... "
 		get_watched $DAPTUP_WATCH_AFTER
 		print_done
 	
@@ -319,15 +324,15 @@ function do_post
 			exit_code=$?
 			set -e
 			if [ "$exit_code" == "0" ]; then
-				gettext "Building list of outdated packages... "
+				gettext -e "Building list of outdated packages... "
 				find_old_packages $DAPTUP_OUTDATED
 				OUTPUT_OUTDATED=y
 				print_done
 			else
-				gettext "error: DAPTUP_MINIMAL_DAY_COUNT_TREATING_OUTDATED contains non-numeric data"; echo
+				gettext -e "error: DAPTUP_MINIMAL_DAY_COUNT_TREATING_OUTDATED contains non-numeric data"; echo
 			fi
 		else
-			gettext "Skipping check for outdated packages."; echo
+			gettext -e "Skipping check for outdated packages."; echo
 		fi
 
 		if [ "$DAPTUP_USE_COLOR" == "y" ]; then
@@ -339,9 +344,9 @@ function do_post
 
 		diff_cmd $DAPTUP_UPDATES_BEFORE $DAPTUP_UPDATES_AFTER $DAPTUP_TMP_FILE
 		if [ "`wc -l < $DAPTUP_TMP_FILE`" == "0" ]; then # no updates
-			gettext "No new updates."; echo
+			gettext -e "No new updates."; echo
 		else
-			gettext "New updates:"; echo
+			gettext -e "New updates:"; echo
 			cat $DAPTUP_TMP_FILE | sed 's/upgradeable from/-/g' | sed 's/ to / -> /g' | while read line; do
 				if [ "$DAPTUP_USE_COLOR" == "y" ]; then
 					if [ "`expr "$line" : '<'`" == "0" ]; then
@@ -358,9 +363,9 @@ function do_post
 
 		diff_cmd $DAPTUP_NEW_BEFORE $DAPTUP_NEW_AFTER $DAPTUP_TMP_FILE
 		if [ "`wc -l < $DAPTUP_TMP_FILE`" == "0" ]; then # no new
-			gettext "No new or removed packages."; echo
+			gettext -e "No new or removed packages."; echo
 		else
-			gettext "New and removed packages:"; echo
+			gettext -e "New and removed packages:"; echo
 			cat $DAPTUP_TMP_FILE | while read line; do
 				if [ "$DAPTUP_USE_COLOR" == "y" ]; then
 					if [ "`expr "$line" : '<'`" == "0" ]; then
@@ -377,9 +382,9 @@ function do_post
 
 		diff_cmd $DAPTUP_WATCH_BEFORE $DAPTUP_WATCH_AFTER $DAPTUP_TMP_FILE
 		if [ "`wc -l < $DAPTUP_TMP_FILE`" == "0" ]; then # no changes in watched
-			gettext "No news in watched packages."; echo
+			gettext -e "No news in watched packages."; echo
 		else
-			gettext "Changes in watched packages:"; echo
+			gettext -e "Changes in watched packages:"; echo
 			cat $DAPTUP_TMP_FILE | while read line; do
 				if [ "$DAPTUP_USE_COLOR" == "y" ]; then
 					if [ "`expr "$line" : '<'`" == "0" ]; then
@@ -396,9 +401,9 @@ function do_post
 
 		if [ "$OUTPUT_OUTDATED" == "y" ]; then
 			if [ "`wc -l < $DAPTUP_OUTDATED`" == "0" ]; then # no data in outdated
-				gettext "No outdated packages."; echo
+				gettext -e "No outdated packages."; echo
 			else
-				gettext "Outdated packages:"; echo
+				gettext -e "Outdated packages:"; echo
 				if [ "$DAPTUP_USE_COLOR" == "y" ]; then
 					tput setf 5 # magenta
 				fi

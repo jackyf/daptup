@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: daptup_0.8.0\n"
 "Report-Msgid-Bugs-To: jackyf.devel@gmail.com\n"
 "POT-Creation-Date: 2008-10-19 11:24+0300\n"
-"PO-Revision-Date: 2008-10-20 01:02+0200\n"
+"PO-Revision-Date: 2008-11-02 16:19+0100\n"
 "Last-Translator: Steve Petruzzello <dlist@bluewin.ch>\n"
 "Language-Team: French <debian-l10n-french@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
@@ -26,83 +26,83 @@ msgstr ""
 #: daptup:74
 msgid "You cannot mix '--pre', '--post' and '--last' options or repeat them."
 msgstr ""
-"Vous ne pouvez pas mélanger les options '--pre', '--post' et '--last' ni les "
-"répéter."
+"Vous ne pouvez pas mÃ©langer les options '--pre', '--post' et '--last' ni les "
+"rÃ©pÃ©ter."
 
 #: daptup:98
 #, sh-format
 msgid ""
 "Usage: $BASENAME [ --pre | --post | --last ] [ -h | --help | --nocolor ]."
 msgstr ""
-"Usage : $BASENAME [ --pre | --post | --last ] [ -h | --help | --nocolor ]."
+"UsageÂ : $BASENAME [ --pre | --post | --last ] [ -h | --help | --nocolor ]."
 
 #: daptup:100
 msgid "daptup runs 'apt-get update' command inside and outputs:"
-msgstr "daptup exécute la commande 'apt-get update' en interne et retourne :"
+msgstr "daptup exÃ©cute la commande 'apt-get update' en interne et retourneÂ :"
 
 #: daptup:101
 msgid " - list of packages recently entered to repo;"
-msgstr " - liste des paquets récemment introduits dans le dépôt ;"
+msgstr " - liste des paquets rÃ©cemment introduits dans le dÃ©pÃ´tÂ ;"
 
 #: daptup:102
 msgid " - list of packages which got new updates;"
-msgstr " - liste des paquets mis à jour ;"
+msgstr " - liste des paquets mis Ã  jourÂ ;"
 
 #: daptup:103
 msgid " - list of changes in 'watched' packages;"
-msgstr "- liste des changements pour les paquets 'surveillés' ;"
+msgstr "- liste des changements pour les paquets 'surveillÃ©s'Â ;"
 
 #: daptup:104
 msgid " - list of outdated packages (optionally)."
-msgstr " - liste des paquets obsolètes (en option)"
+msgstr " - liste des paquets obsolÃ¨tes (en option)"
 
 #: daptup:106
 msgid "Options:"
-msgstr "Options :"
+msgstr "OptionsÂ :"
 
 #: daptup:107
 msgid " -h, --help: output this help and exit"
-msgstr " -h, --help : affiche cette aide et quitte"
+msgstr " -h, --helpÂ : affiche cette aide et quitte"
 
 #: daptup:108
 msgid " --nocolor: do not use colored output"
-msgstr " --nocolor : n'utilise pas de couleur pour l'affichage"
+msgstr " --nocolorÂ : n'utilise pas de couleur pour l'affichage"
 
 #: daptup:109
 msgid " --pre: do only 'pre' stage: collect info that will be used as 'old'"
 msgstr ""
-" --pre : n'effectue que l'étape 'pre' : collecte l'information qui sera "
-"utilisée pour 'old'"
+" --preÂ : n'effectue que l'Ã©tape 'pre'Â : collecte l'information qui sera "
+"utilisÃ©e pour 'old'"
 
 #: daptup:110
 msgid " --post: do only 'post' stage: collect 'new' info and output changes"
 msgstr ""
-" --post : n'effectue que l'étape 'post' : collecte l'information et affiche "
+" --postÂ : n'effectue que l'Ã©tape 'post'Â : collecte l'information et affiche "
 "les changements"
 
 #: daptup:111
 msgid "         if appropriate option is not disabled in config file"
 msgstr ""
-"si l'option adéquate n'est pas désactivée dans le fichier de configuration"
+"si l'option adÃ©quate n'est pas dÃ©sactivÃ©e dans le fichier de configuration"
 
 #: daptup:112
 msgid " --last: only output last changes"
-msgstr " --last : n'affiche que les derniers changements"
+msgstr " --lastÂ : n'affiche que les derniers changements"
 
 #: daptup:117
 #, sh-format
 msgid "Unknown param: $PARAM"
-msgstr "Paramètre inconnu : $PARAM"
+msgstr "ParamÃ¨tre inconnuÂ : $PARAM"
 
 #: daptup:128
 msgid "You must run daptup with root privileges."
-msgstr "Vous devez exécutez daptup avec les privilèges du superutilisateur"
+msgstr "Vous devez exÃ©cutez daptup avec les privilÃ¨ges du superutilisateur"
 
 #: daptup:217
 #, sh-format
 msgid "warning: cannot find any changelog for package '$package'"
 msgstr ""
-"Attention : impossible de trouver un journal des modifications pour le "
+"AttentionÂ : impossible de trouver un journal des modifications pour le "
 "paquet '$package'"
 
 #: daptup:236
@@ -115,14 +115,14 @@ msgstr[1] "jours"
 #, sh-format
 msgid "error: cannot extract last modification date for package '$package'"
 msgstr ""
-"Erreur : impossible d'extraire la date de dernière modification pour le "
+"ErreurÂ : impossible d'extraire la date de derniÃ¨re modification pour le "
 "paquet '$package'"
 
 #: daptup:243
 #, sh-format
 msgid "error: cannot fetch last entry from changelog for package '$package'"
 msgstr ""
-"Erreur : impossible de récupérer la dernière entrée du journal de "
+"ErreurÂ : impossible de rÃ©cupÃ©rer la derniÃ¨re entrÃ©e du journal de "
 "modifications pour le paquet '$package'"
 
 #: daptup:251
@@ -135,15 +135,15 @@ msgstr "Construction de l'ancienne liste des paquets..."
 
 #: daptup:277
 msgid "errors present. Is apt/dpkg running?"
-msgstr "Erreurs : est-ce que apt ou dpkg est en cours d'exécution ?"
+msgstr "ErreursÂ : est-ce que apt ou dpkg est en cours d'exÃ©cutionÂ ?"
 
 #: daptup:282
 msgid "Building old list of available updates... "
-msgstr "Construction de l'ancienne liste des mises à jour disponibles..."
+msgstr "Construction de l'ancienne liste des mises Ã  jour disponibles..."
 
 #: daptup:286
 msgid "Building old list of watched packages... "
-msgstr "Construction de l'ancienne liste des paquets surveillés..."
+msgstr "Construction de l'ancienne liste des paquets surveillÃ©s..."
 
 #: daptup:295
 msgid "Building new list of packages... "
@@ -151,55 +151,55 @@ msgstr "Construction de la nouvelle liste de paquets..."
 
 #: daptup:299
 msgid "Building new list of available updates... "
-msgstr "Construction de la nouvelle liste des mises à jour disponibles..."
+msgstr "Construction de la nouvelle liste des mises Ã  jour disponibles..."
 
 #: daptup:303
 msgid "Building new list of watched packages... "
-msgstr "Construction de la nouvelle liste des paquets surveillés..."
+msgstr "Construction de la nouvelle liste des paquets surveillÃ©s..."
 
 #: daptup:322
 msgid "Building list of outdated packages... "
-msgstr "Construction de la liste des paquets obsolètes..."
+msgstr "Construction de la liste des paquets obsolÃ¨tes..."
 
 #: daptup:327
 msgid ""
 "error: DAPTUP_MINIMAL_DAY_COUNT_TREATING_OUTDATED contains non-numeric data"
 msgstr ""
-"Erreur : DAPTUP_MINIMAL_DAY_COUNT_TREATING_OUTDATED contient des données non-"
-"numériques"
+"ErreurÂ : DAPTUP_MINIMAL_DAY_COUNT_TREATING_OUTDATED contient des donnÃ©es non-"
+"numÃ©riques"
 
 #: daptup:330
 msgid "Skipping check for outdated packages."
-msgstr "Omission de la vérification des paquets obsolètes"
+msgstr "Omission de la vÃ©rification des paquets obsolÃ¨tes"
 
 #: daptup:342
 msgid "No new updates."
-msgstr "Pas de nouvelle mise à jour"
+msgstr "Pas de nouvelle mise Ã  jour"
 
 #: daptup:344
 msgid "New updates:"
-msgstr "Nouvelles mises à jour :"
+msgstr "Nouvelles mises Ã  jourÂ :"
 
 #: daptup:361
 msgid "No new or removed packages."
-msgstr "Pas de nouveau paquet ni de paquet retiré."
+msgstr "Pas de nouveau paquet ni de paquet retirÃ©."
 
 #: daptup:363
 msgid "New and removed packages:"
-msgstr "Nouveaux paquets et paquets retirés :"
+msgstr "Nouveaux paquets et paquets retirÃ©sÂ :"
 
 #: daptup:380
 msgid "No news in watched packages."
-msgstr "Pas de nouvelle dans les paquets surveillés."
+msgstr "Pas de nouvelle dans les paquets surveillÃ©s."
 
 #: daptup:382
 msgid "Changes in watched packages:"
-msgstr "Changements dans les paquets surveillés :"
+msgstr "Changements dans les paquets surveillÃ©sÂ :"
 
 #: daptup:399
 msgid "No outdated packages."
-msgstr "Pas de paquet obsolète"
+msgstr "Pas de paquet obsolÃ¨te"
 
 #: daptup:401
 msgid "Outdated packages:"
-msgstr "Paquets obsolètes :"
+msgstr "Paquets obsolÃ¨tesÂ :"

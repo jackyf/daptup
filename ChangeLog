@@ -2,6 +2,11 @@
 Changelog of daptup utility
 ---------------------------
 
+0.8.1
+ * Added French translation by Steve Petruzzello.
+ * Allowed end-of-line's in translations.
+ * Typo fixes.
+
 0.8.0
  * Daptup can now work without aptitude.
  * Divided daptup into 'pre' and 'post' actions and added '--pre' and '--post'

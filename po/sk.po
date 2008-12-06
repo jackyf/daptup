@@ -1,0 +1,203 @@
+# Slovak translation of daptup.
+# Copyright (C) 2008 Eugene V. Lyubimkin
+# This file is distributed under the same license as the daptup package.
+# Ivan Masár <helix84@centrum.sk>, 2008.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: daptup\n"
+"Report-Msgid-Bugs-To: jackyf.devel@gmail.com\n"
+"POT-Creation-Date: 2008-11-25 14:56+0100\n"
+"PO-Revision-Date: 2008-11-25 14:32+0100\n"
+"Last-Translator: Ivan Masár <helix84@centrum.sk>\n"
+"Language-Team: Slovak <sk-i18n@lists.linux.sk>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=((n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2);\n"
+
+#: daptup:71
+#, sh-format
+msgid "Cannot read configuration from '$DAPTUP_CONFFILE'."
+msgstr "Nie je možné načítať „$DAPTUP_CONFFILE“."
+
+#: daptup:79
+msgid "You cannot mix '--pre', '--post' and '--last' options or repeat them."
+msgstr "Voľby „--pre“, „--post“ a „--last“ nemožno miešať ani opakovať."
+
+#: daptup:103
+#, sh-format
+msgid ""
+"Usage: $BASENAME [ --pre | --post | --last ] [ -h | --help | --nocolor ]."
+msgstr ""
+"Použitie: $BASENAME [ --pre | --post | --last ] [ -h | --help | --nocolor ]."
+
+#: daptup:105
+msgid "daptup runs 'apt-get update' command inside and outputs:"
+msgstr "daptup interne spúšťa príkaz „apt-get update“ a vypíše:"
+
+#: daptup:106
+msgid " - list of packages recently entered to repo;"
+msgstr " - zoznam balíkov nedávno pridaných do zdrojov softvéru;"
+
+#: daptup:107
+msgid " - list of packages which got new updates;"
+msgstr " - zoznam balíkov, ktoré majú nové aktualizácie;"
+
+#: daptup:108
+msgid " - list of changes in 'watched' packages;"
+msgstr " - zoznam zmien „sledovaných“ balíkov;"
+
+#: daptup:109
+msgid " - list of outdated packages (optionally)."
+msgstr " - zoznam zastaralých balíkov (nepovinné)."
+
+#: daptup:111
+msgid "Options:"
+msgstr "Voľby:"
+
+#: daptup:112
+msgid " -h, --help: output this help and exit"
+msgstr " -h, --help: vypíše tento text pomocníka a skončí"
+
+#: daptup:113
+msgid " --nocolor: do not use colored output"
+msgstr " --nocolor: nepoužije farebný výstup"
+
+#: daptup:114
+msgid " --pre: do only 'pre' stage: collect info that will be used as 'old'"
+msgstr ""
+" --pre: vykoná iba úvodnú časť: zhromaždí informácie o aktuálnych balíkoch"
+
+#: daptup:115
+msgid " --post: do only 'post' stage: collect 'new' info and output changes"
+msgstr ""
+" --post: vykoná iba konečnú časť: zhromaždí nové informácie a vypíše zmeny"
+
+#: daptup:116
+msgid "         if appropriate option is not disabled in config file"
+msgstr "         ak v konfiguračnom súbore nie je príslušná voľba zakázaná"
+
+#: daptup:117
+msgid " --last: only output last changes"
+msgstr " --last: vypíše iba posledné zmeny"
+
+#: daptup:122
+#, sh-format
+msgid "Unknown param: $PARAM"
+msgstr "Neznámy parameter: $PARAM"
+
+#: daptup:133
+msgid "You must run daptup with root privileges."
+msgstr "daptup musíte spustiť s oprávnením root."
+
+#: daptup:222
+#, sh-format
+msgid "warning: cannot find any changelog for package '$package'"
+msgstr "upozornenie: pre balík „$package“ nebol nájdený žiadny záznam zmien"
+
+#: daptup:241
+msgid "day"
+msgid_plural "days"
+msgstr[0] "deň"
+msgstr[1] "dni"
+msgstr[2] "dní"
+
+#: daptup:245
+#, sh-format
+msgid "error: cannot extract last modification date for package '$package'"
+msgstr "chyba: nebolo možné získať dátum poslednej zmeny balíka „$package“"
+
+#: daptup:248
+#, sh-format
+msgid "error: cannot fetch last entry from changelog for package '$package'"
+msgstr ""
+"chyba: nepodarilo sa stiahnuť poslednú položku záznamu zmien balíka "
+"„$package“"
+
+#: daptup:256
+msgid "[done]"
+msgstr "[hotovo]"
+
+#: daptup:277
+msgid "Building old list of packages... "
+msgstr "Zostavuje sa starý zoznam balíkov..."
+
+#: daptup:282
+msgid "errors present. Is apt/dpkg running?"
+msgstr "vyskytli sa chyby. Je možné, že apt/dpkg už beží?"
+
+#: daptup:287
+msgid "Building old list of available updates... "
+msgstr "Zostavuje sa starý zoznam aktualizácií..."
+
+#: daptup:291
+msgid "Building old list of watched packages... "
+msgstr "Zostavuje sa starý zoznam sledovaných balíkov..."
+
+#: daptup:300
+msgid "Building new list of packages... "
+msgstr "Zostavuje sa nový zoznam balíkov..."
+
+#: daptup:304
+msgid "Building new list of available updates... "
+msgstr "Zostavuje sa nový zoznam aktualizácií..."
+
+#: daptup:308
+msgid "Building new list of watched packages... "
+msgstr "Zostavuje sa nový zoznam sledovaných balíkov..."
+
+#: daptup:327
+msgid "Building list of outdated packages... "
+msgstr "Zostavuje sa zoznam zastaralých balíkov..."
+
+#: daptup:332
+msgid ""
+"error: DAPTUP_MINIMAL_DAY_COUNT_TREATING_OUTDATED contains non-numeric data"
+msgstr ""
+"chyba: DAPTUP_MINIMAL_DAY_COUNT_TREATING_OUTDATED obsahuje nenumerické údaje"
+
+#: daptup:335
+msgid "Skipping check for outdated packages."
+msgstr "Vynecháva sa kontrola zastaralých balíkov."
+
+#: daptup:347
+msgid "No new updates."
+msgstr "Žiadne nové aktualizácie."
+
+#: daptup:349
+msgid "New updates:"
+msgstr "Nové aktualizácie:"
+
+#: daptup:366
+msgid "No new or removed packages."
+msgstr "Žiadne nové alebo odstránené balíky."
+
+#: daptup:368
+msgid "New and removed packages:"
+msgstr "Nové a odstránené balíky:"
+
+#: daptup:385
+msgid "No news in watched packages."
+msgstr "Žiadne novinky u sledovaných balíkov."
+
+#: daptup:387
+msgid "Changes in watched packages:"
+msgstr "Zmeny v sledovaných balíkoch:"
+
+#: daptup:404
+msgid "No outdated packages."
+msgstr "Žiadne zastaralé balíky."
+
+#: daptup:406
+msgid "Outdated packages:"
+msgstr "Zastaralé balíky:"
+
+#~ msgid "SIGTERM received"
+#~ msgstr "Zachycen SIGTERM"
+
+#~ msgid "SIGINT received"
+#~ msgstr "Zachycen SIGINT"
+
+#~ msgid "aptitude returned non-zero code, daptup stopped here."
+#~ msgstr "aptitude skončila s nenulovým návratovým kódem, daptup končí."

@@ -2,6 +2,10 @@
 Changelog of daptup utility
 ---------------------------
 
+0.8.2
+ * Added Slovak translation by Ivan Masár.
+ * Fixed generating POT file (getpot).
+
 0.8.1
  * Added French translation by Steve Petruzzello.
  * Allowed end-of-line's in translations.

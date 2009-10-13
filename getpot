@@ -1,6 +1,4 @@
 #!/bin/sh
-sed -e 's/gettext -e/gettext/' -e 's/eval_gettexte/eval_gettext/' daptup | \
-	xgettext - --language=shell --copyright-holder="Eugene V. Lyubimkin" \
+xgettext daptup --language=perl --copyright-holder="Eugene V. Lyubimkin" \
 	--package-name=daptup --msgid-bugs-address="jackyf.devel@gmail.com" \
-	--output - | \
-	sed -e 's/#: standard input/#: daptup/' > messages.pot
+	-klsay -klprint --output messages.pot

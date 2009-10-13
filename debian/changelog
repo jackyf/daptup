@@ -7,6 +7,7 @@ daptup (0.9.0) unstable; urgency=low
     - Removed.
   * debian/control:
     - Updated my mail address.
+    - Bumped Standards-Version to 3.8.3.
   * debian/prerm:
     - Added the debhelper token.
 

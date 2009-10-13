@@ -152,7 +152,7 @@ sub get_avail_pkg_list {
 
 sub get_updates {
 	my ($output_file) = @_;
-	system("apt-show-versions -u | sort > $output_file");
+	system("apt-show-versions -u | sed -e 's/upgradeable from/-/g' -e 's/ to / -> /g' | sort > $output_file");
 }
 
 sub get_watched {
@@ -352,8 +352,6 @@ sub do_post {
 				print color 'magenta';
 				open(my $outdated_file_fd, '<', $outdated_file);
 				while (<$outdated_file_fd>) {
-					s/upgradeable from/-/g;
-					s/ to / -> /g;
 					s/^/  /;
 					print;
 				}

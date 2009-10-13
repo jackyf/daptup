@@ -7,6 +7,8 @@ daptup (0.9.0) unstable; urgency=low
     - Removed.
   * debian/control:
     - Updated my mail address.
+  * debian/prerm:
+    - Added the debhelper token.
 
  -- Eugene V. Lyubimkin <jackyf@debian.org>  Tue, 13 Oct 2009 13:39:21 +0300
 

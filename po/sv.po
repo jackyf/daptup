@@ -19,8 +19,8 @@ msgstr ""
 
 #: daptup:66
 #, sh-format
-msgid "Cannot read configuration from '$DAPTUP_CONFFILE'."
-msgstr "kan inte läsa inställningar från '$DAPTUP_CONFFILE'."
+msgid "Cannot read configuration from '%s'."
+msgstr "kan inte läsa inställningar från '%s'."
 
 #: daptup:74
 msgid "You cannot mix '--pre', '--post' and '--last' options or repeat them."
@@ -31,9 +31,9 @@ msgstr ""
 #: daptup:98
 #, sh-format
 msgid ""
-"Usage: $BASENAME [ --pre | --post | --last ] [ -h | --help | --nocolor ]."
+"Usage: %s [ --pre | --post | --last ] [ -h | --help | --nocolor ]."
 msgstr ""
-"Användning: $BASENAME [ --pre | --post | --last ] [ -h | --help | --"
+"Användning: %s [ --pre | --post | --last ] [ -h | --help | --"
 "nocolor ]."
 
 #: daptup:100
@@ -88,8 +88,8 @@ msgstr " --last: skriver bara ut förädndringar sedan förra körningen"
 
 #: daptup:117
 #, sh-format
-msgid "Unknown param: $PARAM"
-msgstr "Okänd parameter: $PARAM"
+msgid "Unknown param: %s"
+msgstr "Okänd parameter: %s"
 
 #: daptup:128
 msgid "You must run daptup with root privileges."
@@ -97,9 +97,9 @@ msgstr "Daptup måste köras med root-behörighet."
 
 #: daptup:217
 #, sh-format
-msgid "warning: cannot find any changelog for package '$package'"
+msgid "warning: cannot find any changelog for package '%s'"
 msgstr ""
-"varning: kunde inte hitta någon förändringshistorik för paketet '$package'"
+"varning: kunde inte hitta någon förändringshistorik för paketet '%s'"
 
 #: daptup:236
 msgid "day"
@@ -109,16 +109,16 @@ msgstr[1] "dagar"
 
 #: daptup:240
 #, sh-format
-msgid "error: cannot extract last modification date for package '$package'"
+msgid "error: cannot extract last modification date for package '%s'"
 msgstr ""
-"fel: kunde inte hämta datum för senaste förändringar av paketet '$package'"
+"fel: kunde inte hämta datum för senaste förändringar av paketet '%s'"
 
 #: daptup:243
 #, sh-format
-msgid "error: cannot fetch last entry from changelog for package '$package'"
+msgid "error: cannot fetch last entry from changelog for package '%s'"
 msgstr ""
 "fel: kan inte läsa sista inlägget i förändringshistoriken för paketet "
-"'$package'"
+"'%s'"
 
 #: daptup:251
 msgid "[done]"

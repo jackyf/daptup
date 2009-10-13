@@ -18,8 +18,8 @@ msgstr ""
 
 #: daptup:71
 #, sh-format
-msgid "Cannot read configuration from '$DAPTUP_CONFFILE'."
-msgstr "Nie je možné načítať „$DAPTUP_CONFFILE“."
+msgid "Cannot read configuration from '%s'."
+msgstr "Nie je možné načítať „%s“."
 
 #: daptup:79
 msgid "You cannot mix '--pre', '--post' and '--last' options or repeat them."
@@ -28,9 +28,9 @@ msgstr "Voľby „--pre“, „--post“ a „--last“ nemožno miešať ani op
 #: daptup:103
 #, sh-format
 msgid ""
-"Usage: $BASENAME [ --pre | --post | --last ] [ -h | --help | --nocolor ]."
+"Usage: %s [ --pre | --post | --last ] [ -h | --help | --nocolor ]."
 msgstr ""
-"Použitie: $BASENAME [ --pre | --post | --last ] [ -h | --help | --nocolor ]."
+"Použitie: %s [ --pre | --post | --last ] [ -h | --help | --nocolor ]."
 
 #: daptup:105
 msgid "daptup runs 'apt-get update' command inside and outputs:"
@@ -84,8 +84,8 @@ msgstr " --last: vypíše iba posledné zmeny"
 
 #: daptup:122
 #, sh-format
-msgid "Unknown param: $PARAM"
-msgstr "Neznámy parameter: $PARAM"
+msgid "Unknown param: %s"
+msgstr "Neznámy parameter: %s"
 
 #: daptup:133
 msgid "You must run daptup with root privileges."
@@ -93,8 +93,8 @@ msgstr "daptup musíte spustiť s oprávnením root."
 
 #: daptup:222
 #, sh-format
-msgid "warning: cannot find any changelog for package '$package'"
-msgstr "upozornenie: pre balík „$package“ nebol nájdený žiadny záznam zmien"
+msgid "warning: cannot find any changelog for package '%s'"
+msgstr "upozornenie: pre balík „%s“ nebol nájdený žiadny záznam zmien"
 
 #: daptup:241
 msgid "day"
@@ -105,15 +105,15 @@ msgstr[2] "dní"
 
 #: daptup:245
 #, sh-format
-msgid "error: cannot extract last modification date for package '$package'"
-msgstr "chyba: nebolo možné získať dátum poslednej zmeny balíka „$package“"
+msgid "error: cannot extract last modification date for package '%s'"
+msgstr "chyba: nebolo možné získať dátum poslednej zmeny balíka „%s“"
 
 #: daptup:248
 #, sh-format
-msgid "error: cannot fetch last entry from changelog for package '$package'"
+msgid "error: cannot fetch last entry from changelog for package '%s'"
 msgstr ""
 "chyba: nepodarilo sa stiahnuť poslednú položku záznamu zmien balíka "
-"„$package“"
+"„%s“"
 
 #: daptup:256
 msgid "[done]"

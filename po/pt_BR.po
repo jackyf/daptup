@@ -20,8 +20,8 @@ msgstr ""
 
 #: daptup:66
 #, sh-format
-msgid "Cannot read configuration from '$DAPTUP_CONFFILE'."
-msgstr "NÃ£o foi possÃ­vel ler as configuraÃ§Ãµes de '$DAPTUP_CONFFILE'."
+msgid "Cannot read configuration from '%s'."
+msgstr "NÃ£o foi possÃ­vel ler as configuraÃ§Ãµes de '%s'."
 
 #: daptup:74
 msgid "You cannot mix '--pre', '--post' and '--last' options or repeat them."
@@ -30,8 +30,8 @@ msgstr ""
 #: daptup:98
 #, fuzzy, sh-format
 msgid ""
-"Usage: $BASENAME [ --pre | --post | --last ] [ -h | --help | --nocolor ]."
-msgstr "Use: $BASENAME [ -h | --help | --nocolor ]."
+"Usage: %s [ --pre | --post | --last ] [ -h | --help | --nocolor ]."
+msgstr "Use: %s [ -h | --help | --nocolor ]."
 
 #: daptup:100
 #, fuzzy
@@ -84,8 +84,8 @@ msgstr ""
 
 #: daptup:117
 #, sh-format
-msgid "Unknown param: $PARAM"
-msgstr "ParÃ¢metro desconhecido: $PARAM"
+msgid "Unknown param: %s"
+msgstr "ParÃ¢metro desconhecido: %s"
 
 #: daptup:128
 msgid "You must run daptup with root privileges."
@@ -93,10 +93,10 @@ msgstr "VocÃª precisa executar o daptup com privilÃ©gios de root."
 
 #: daptup:217
 #, sh-format
-msgid "warning: cannot find any changelog for package '$package'"
+msgid "warning: cannot find any changelog for package '%s'"
 msgstr ""
 "atenÃ§Ã£o: nÃ£o foi possÃ­vel localizar registro de mudanÃ§as do pacote "
-"'$package'"
+"'%s'"
 
 #: daptup:236
 msgid "day"
@@ -106,17 +106,17 @@ msgstr[1] "dias"
 
 #: daptup:240
 #, sh-format
-msgid "error: cannot extract last modification date for package '$package'"
+msgid "error: cannot extract last modification date for package '%s'"
 msgstr ""
 "erro: nÃ£o foi possÃ­vel extrair a data da Ãºltima modificaÃ§Ã£o do pacote "
-"'$package'"
+"'%s'"
 
 #: daptup:243
 #, sh-format
-msgid "error: cannot fetch last entry from changelog for package '$package'"
+msgid "error: cannot fetch last entry from changelog for package '%s'"
 msgstr ""
 "erro: nÃ£o foi possÃ­vel obter o Ãºltimo registro de mudanÃ§as do pacote "
-"'$package'"
+"'%s'"
 
 #: daptup:251
 msgid "[done]"

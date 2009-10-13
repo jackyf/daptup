@@ -18,8 +18,8 @@ msgstr ""
 
 #: daptup:66
 #, sh-format
-msgid "Cannot read configuration from '$DAPTUP_CONFFILE'."
-msgstr "Cannot read configuration from '$DAPTUP_CONFFILE'."
+msgid "Cannot read configuration from '%s'."
+msgstr "Cannot read configuration from '%s'."
 
 #: daptup:74
 msgid "You cannot mix '--pre', '--post' and '--last' options or repeat them."
@@ -28,8 +28,8 @@ msgstr "You cannot mix '--pre', '--post' and '--last' options or repeat them."
 #: daptup:98
 #, sh-format
 msgid ""
-"Usage: $BASENAME [ --pre | --post | --last ] [ -h | --help | --nocolor ]."
-msgstr "Usage: $BASENAME [ --pre | --post | --last ] [ -h | --help | --nocolor ]."
+"Usage: %s [ --pre | --post | --last ] [ -h | --help | --nocolor ]."
+msgstr "Usage: %s [ --pre | --post | --last ] [ -h | --help | --nocolor ]."
 
 #: daptup:100
 msgid "daptup runs 'apt-get update' command inside and outputs:"
@@ -81,8 +81,8 @@ msgstr " --last: only output last changes"
 
 #: daptup:117
 #, sh-format
-msgid "Unknown param: $PARAM"
-msgstr "Unknown param: $PARAM"
+msgid "Unknown param: %s"
+msgstr "Unknown param: %s"
 
 #: daptup:128
 msgid "You must run daptup with root privileges."
@@ -90,8 +90,8 @@ msgstr "You must run daptup with root privileges."
 
 #: daptup:217
 #, sh-format
-msgid "warning: cannot find any changelog for package '$package'"
-msgstr "warning: cannot find any changelog for package '$package'"
+msgid "warning: cannot find any changelog for package '%s'"
+msgstr "warning: cannot find any changelog for package '%s'"
 
 #: daptup:236
 msgid "day"
@@ -101,13 +101,13 @@ msgstr[1] "days"
 
 #: daptup:240
 #, sh-format
-msgid "error: cannot extract last modification date for package '$package'"
-msgstr "error: cannot extract last modification date for package '$package'"
+msgid "error: cannot extract last modification date for package '%s'"
+msgstr "error: cannot extract last modification date for package '%s'"
 
 #: daptup:243
 #, sh-format
-msgid "error: cannot fetch last entry from changelog for package '$package'"
-msgstr "error: cannot fetch last entry from changelog for package '$package'"
+msgid "error: cannot fetch last entry from changelog for package '%s'"
+msgstr "error: cannot fetch last entry from changelog for package '%s'"
 
 #: daptup:251
 msgid "[done]"

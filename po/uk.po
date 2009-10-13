@@ -19,8 +19,8 @@ msgstr ""
 
 #: daptup:66
 #, sh-format
-msgid "Cannot read configuration from '$DAPTUP_CONFFILE'."
-msgstr "Не можу прочитати конфігураційний файл '$DAPTUP_CONFFILE'."
+msgid "Cannot read configuration from '%s'."
+msgstr "Не можу прочитати конфігураційний файл '%s'."
 
 #: daptup:74
 msgid "You cannot mix '--pre', '--post' and '--last' options or repeat them."
@@ -29,8 +29,8 @@ msgstr "Не можна змішувати параметри '--pre', '--post' 
 #: daptup:98
 #, sh-format
 msgid ""
-"Usage: $BASENAME [ --pre | --post | --last ] [ -h | --help | --nocolor ]."
-msgstr "Користування: $BASENAME [ --pre | --post | --last ] [ -h | --help | --nocolor ]."
+"Usage: %s [ --pre | --post | --last ] [ -h | --help | --nocolor ]."
+msgstr "Користування: %s [ --pre | --post | --last ] [ -h | --help | --nocolor ]."
 
 #: daptup:100
 msgid "daptup runs 'apt-get update' command inside and outputs:"
@@ -84,8 +84,8 @@ msgstr " --last: тільки вивести останні зміни"
 
 #: daptup:117
 #, sh-format
-msgid "Unknown param: $PARAM"
-msgstr "Незрозумілий параметр: $PARAM"
+msgid "Unknown param: %s"
+msgstr "Незрозумілий параметр: %s"
 
 #: daptup:128
 msgid "You must run daptup with root privileges."
@@ -93,8 +93,8 @@ msgstr "Ви повинні запускати daptup з привілегіям�
 
 #: daptup:217
 #, sh-format
-msgid "warning: cannot find any changelog for package '$package'"
-msgstr "попередження: не можу знайти список змін для пакету '$package'"
+msgid "warning: cannot find any changelog for package '%s'"
+msgstr "попередження: не можу знайти список змін для пакету '%s'"
 
 #: daptup:236
 msgid "day"
@@ -105,15 +105,15 @@ msgstr[2] "днів"
 
 #: daptup:240
 #, sh-format
-msgid "error: cannot extract last modification date for package '$package'"
+msgid "error: cannot extract last modification date for package '%s'"
 msgstr ""
-"помилка: не можу знайти дату останньої модифікації для пакету '$package'"
+"помилка: не можу знайти дату останньої модифікації для пакету '%s'"
 
 #: daptup:243
 #, sh-format
-msgid "error: cannot fetch last entry from changelog for package '$package'"
+msgid "error: cannot fetch last entry from changelog for package '%s'"
 msgstr ""
-"помилка: не можу знайти останній запис у списку змін для пакету '$package'"
+"помилка: не можу знайти останній запис у списку змін для пакету '%s'"
 
 #: daptup:251
 msgid "[done]"

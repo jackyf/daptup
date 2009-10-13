@@ -22,13 +22,13 @@ msgstr "SIGINT وصلت"
 
 #: daptup:50
 #, sh-format
-msgid "Cannot read configuration from '$DAPTUP_CONFFILE'."
-msgstr "عجز أثناء قراءة الإعدادات من  '$DAPTUP_CONFFILE'."
+msgid "Cannot read configuration from '%s'."
+msgstr "عجز أثناء قراءة الإعدادات من  '%s'."
 
 #: daptup:64
 #, sh-format
-msgid "Usage: $BASENAME [ -h | --help | --nocolor ]."
-msgstr "الاستعمال: $BASENAME [ -h | --help | --nocolor ]."
+msgid "Usage: %s [ -h | --help | --nocolor ]."
+msgstr "الاستعمال: %s [ -h | --help | --nocolor ]."
 
 #: daptup:66
 msgid "daptup runs 'aptitude update' command inside and outputs:"
@@ -64,8 +64,8 @@ msgstr " --nocolor: خرج غير ملون"
 
 #: daptup:79
 #, sh-format
-msgid "Unknown param: $PARAM"
-msgstr "بارمتر مجهول: $PARAM"
+msgid "Unknown param: %s"
+msgstr "بارمتر مجهول: %s"
 
 #: daptup:88
 msgid "You must run daptup with root privileges."
@@ -73,8 +73,8 @@ msgstr "لابد أن تشغل داب‌تب بصلاحيات الجذر."
 
 #: daptup:150
 #, sh-format
-msgid "warning: cannot find any changelog for package '$package'"
-msgstr "تحذير: عجز عن إيجاد أي سجل تغييرات للحزمة '$package'"
+msgid "warning: cannot find any changelog for package '%s'"
+msgstr "تحذير: عجز عن إيجاد أي سجل تغييرات للحزمة '%s'"
 
 #: daptup:169
 msgid "day"
@@ -84,13 +84,13 @@ msgstr[1] "أيام"
 
 #: daptup:173
 #, sh-format
-msgid "error: cannot extract last modification date for package '$package'"
-msgstr "خطأ: عجز عن استخراج تاريخ آخر تعديل للحزمة  '$package'"
+msgid "error: cannot extract last modification date for package '%s'"
+msgstr "خطأ: عجز عن استخراج تاريخ آخر تعديل للحزمة  '%s'"
 
 #: daptup:176
 #, sh-format
-msgid "error: cannot fetch last entry from changelog for package '$package'"
-msgstr "خطأ: عجز عن جلب آخر مدخلة من سجل التغييرات للحزمة '$package'"
+msgid "error: cannot fetch last entry from changelog for package '%s'"
+msgstr "خطأ: عجز عن جلب آخر مدخلة من سجل التغييرات للحزمة '%s'"
 
 #: daptup:184
 msgid "[done]"

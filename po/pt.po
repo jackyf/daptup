@@ -18,8 +18,8 @@ msgstr ""
 
 #: daptup:66
 #, sh-format
-msgid "Cannot read configuration from '$DAPTUP_CONFFILE'."
-msgstr "Não pode ler a configuração a partir de '$DAPTUP_CONFFILE'."
+msgid "Cannot read configuration from '%s'."
+msgstr "Não pode ler a configuração a partir de '%s'."
 
 #: daptup:74
 msgid "You cannot mix '--pre', '--post' and '--last' options or repeat them."
@@ -28,9 +28,9 @@ msgstr "Não pode misturar ou repetir as opções '--pre', '--post' e '--last'"
 #: daptup:98
 #, sh-format
 msgid ""
-"Usage: $BASENAME [ --pre | --post | --last ] [ -h | --help | --nocolor ]."
+"Usage: %s [ --pre | --post | --last ] [ -h | --help | --nocolor ]."
 msgstr ""
-"Utilização: $BASENAME [ --pre | --post | --last ] [-h | --help | --nocolor ]."
+"Utilização: %s [ --pre | --post | --last ] [-h | --help | --nocolor ]."
 
 #: daptup:100
 msgid "daptup runs 'apt-get update' command inside and outputs:"
@@ -82,8 +82,8 @@ msgstr " --last: apenas mostras as últimas alterações"
 
 #: daptup:117
 #, sh-format
-msgid "Unknown param: $PARAM"
-msgstr "Parâmetro desconhecido: $PARAM"
+msgid "Unknown param: %s"
+msgstr "Parâmetro desconhecido: %s"
 
 #: daptup:128
 msgid "You must run daptup with root privileges."
@@ -91,9 +91,9 @@ msgstr "Tem de correr o daptup com privilégios de root."
 
 #: daptup:217
 #, sh-format
-msgid "warning: cannot find any changelog for package '$package'"
+msgid "warning: cannot find any changelog for package '%s'"
 msgstr ""
-"aviso: não foi possível encontrar qualquer changelog para o pacote '$package'"
+"aviso: não foi possível encontrar qualquer changelog para o pacote '%s'"
 
 #: daptup:236
 msgid "day"
@@ -103,15 +103,15 @@ msgstr[1] "dias"
 
 #: daptup:240
 #, sh-format
-msgid "error: cannot extract last modification date for package '$package'"
+msgid "error: cannot extract last modification date for package '%s'"
 msgstr ""
-"erro: não pode extrair a última data de modificação para o pacote '$package'"
+"erro: não pode extrair a última data de modificação para o pacote '%s'"
 
 #: daptup:243
 #, sh-format
-msgid "error: cannot fetch last entry from changelog for package '$package'"
+msgid "error: cannot fetch last entry from changelog for package '%s'"
 msgstr ""
-"erro: não pode obter a última entrada do 'changelog' para o pacote '$package'"
+"erro: não pode obter a última entrada do 'changelog' para o pacote '%s'"
 
 #: daptup:251
 msgid "[done]"

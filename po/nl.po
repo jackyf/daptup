@@ -27,13 +27,13 @@ msgstr "SIGINT ontvangen"
 
 #: daptup:50
 #, sh-format
-msgid "Cannot read configuration from '$DAPTUP_CONFFILE'."
-msgstr "De instellingen in '$DAPTUP_CONFFILE' kunnen niet ingelezen worden."
+msgid "Cannot read configuration from '%s'."
+msgstr "De instellingen in '%s' kunnen niet ingelezen worden."
 
 #: daptup:64
 #, sh-format
-msgid "Usage: $BASENAME [ -h | --help | --nocolor ]."
-msgstr "Gebruik: $BASENAME [ -h | --help | --nocolor ]."
+msgid "Usage: %s [ -h | --help | --nocolor ]."
+msgstr "Gebruik: %s [ -h | --help | --nocolor ]."
 
 #: daptup:66
 msgid "daptup runs 'aptitude update' command inside and outputs:"
@@ -69,8 +69,8 @@ msgstr " --nocolor: gebruik geen kleurenweergave"
 
 #: daptup:79
 #, sh-format
-msgid "Unknown param: $PARAM"
-msgstr "Onbekende parameter: $PARAM"
+msgid "Unknown param: %s"
+msgstr "Onbekende parameter: %s"
 
 #: daptup:88
 msgid "You must run daptup with root privileges."
@@ -78,8 +78,8 @@ msgstr "U dient 'daptup' te draaien met beheerdersrechten ('root')."
 
 #: daptup:150
 #, sh-format
-msgid "warning: cannot find any changelog for package '$package'"
-msgstr "waarschuwing: het bestand 'changelog' van het pakket '$package' kan niet gevonden worden."
+msgid "warning: cannot find any changelog for package '%s'"
+msgstr "waarschuwing: het bestand 'changelog' van het pakket '%s' kan niet gevonden worden."
 
 #: daptup:169
 msgid "day"
@@ -89,13 +89,13 @@ msgstr[1] "dagen"
 
 #: daptup:173
 #, sh-format
-msgid "error: cannot extract last modification date for package '$package'"
-msgstr "fout: het is niet mogelijk om de laatste wijzigingsdatum voor het pakket '$package' uit te lezen."
+msgid "error: cannot extract last modification date for package '%s'"
+msgstr "fout: het is niet mogelijk om de laatste wijzigingsdatum voor het pakket '%s' uit te lezen."
 
 #: daptup:176
 #, sh-format
-msgid "error: cannot fetch last entry from changelog for package '$package'"
-msgstr "fout: het is niet mogelijk om de laatste toevoeging in 'changelog' van het pakket '$package' uit te lezen."
+msgid "error: cannot fetch last entry from changelog for package '%s'"
+msgstr "fout: het is niet mogelijk om de laatste toevoeging in 'changelog' van het pakket '%s' uit te lezen."
 
 #: daptup:184
 msgid "[done]"

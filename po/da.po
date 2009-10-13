@@ -18,8 +18,8 @@ msgstr ""
 
 #: daptup:66
 #, sh-format
-msgid "Cannot read configuration from '$DAPTUP_CONFFILE'."
-msgstr "Kan ikke læse opsætning fra '$DAPTUP_CONFFILE'."
+msgid "Cannot read configuration from '%s'."
+msgstr "Kan ikke læse opsætning fra '%s'."
 
 #: daptup:74
 msgid "You cannot mix '--pre', '--post' and '--last' options or repeat them."
@@ -30,9 +30,9 @@ msgstr ""
 # sh-format
 #: daptup:98
 msgid ""
-"Usage: $BASENAME [ --pre | --post | --last ] [ -h | --help | --nocolor ]."
+"Usage: %s [ --pre | --post | --last ] [ -h | --help | --nocolor ]."
 msgstr ""
-"Brug: $BASENAME [ --pre | --post | --last ] [ -h | --help | --nocolor ]."
+"Brug: %s [ --pre | --post | --last ] [ -h | --help | --nocolor ]."
 
 #: daptup:100
 msgid "daptup runs 'apt-get update' command inside and outputs:"
@@ -85,8 +85,8 @@ msgstr " --last: vis kun seneste ændringer"
 
 #: daptup:117
 #, sh-format
-msgid "Unknown param: $PARAM"
-msgstr "Ukendt parameter: $PARAM"
+msgid "Unknown param: %s"
+msgstr "Ukendt parameter: %s"
 
 #: daptup:128
 msgid "You must run daptup with root privileges."
@@ -94,8 +94,8 @@ msgstr "daptup skal køres med root-rettigheder."
 
 #: daptup:217
 #, sh-format
-msgid "warning: cannot find any changelog for package '$package'"
-msgstr "advarsel: kan ikke finde changelog med ændringer for pakken '$package'"
+msgid "warning: cannot find any changelog for package '%s'"
+msgstr "advarsel: kan ikke finde changelog med ændringer for pakken '%s'"
 
 #: daptup:236
 msgid "day"
@@ -105,14 +105,14 @@ msgstr[1] "dage"
 
 #: daptup:240
 #, sh-format
-msgid "error: cannot extract last modification date for package '$package'"
-msgstr "fejl: kan ikke finde seneste ændringsdato for pakken '$package'"
+msgid "error: cannot extract last modification date for package '%s'"
+msgstr "fejl: kan ikke finde seneste ændringsdato for pakken '%s'"
 
 #: daptup:243
 #, sh-format
-msgid "error: cannot fetch last entry from changelog for package '$package'"
+msgid "error: cannot fetch last entry from changelog for package '%s'"
 msgstr ""
-"fejl: kan ikke hente sidste datasæt fra changelog for pakken '$package'"
+"fejl: kan ikke hente sidste datasæt fra changelog for pakken '%s'"
 
 #: daptup:251
 msgid "[done]"

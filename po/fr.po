@@ -19,9 +19,9 @@ msgstr ""
 
 #: daptup:66
 #, sh-format
-msgid "Cannot read configuration from '$DAPTUP_CONFFILE'."
+msgid "Cannot read configuration from '%s'."
 msgstr ""
-"Impossible de lire la configuration depuis le fichier'$DAPTUP_CONFFILE'"
+"Impossible de lire la configuration depuis le fichier'%s'"
 
 #: daptup:74
 msgid "You cannot mix '--pre', '--post' and '--last' options or repeat them."
@@ -32,9 +32,9 @@ msgstr ""
 #: daptup:98
 #, sh-format
 msgid ""
-"Usage: $BASENAME [ --pre | --post | --last ] [ -h | --help | --nocolor ]."
+"Usage: %s [ --pre | --post | --last ] [ -h | --help | --nocolor ]."
 msgstr ""
-"Usage : $BASENAME [ --pre | --post | --last ] [ -h | --help | --nocolor ]."
+"Usage : %s [ --pre | --post | --last ] [ -h | --help | --nocolor ]."
 
 #: daptup:100
 msgid "daptup runs 'apt-get update' command inside and outputs:"
@@ -91,8 +91,8 @@ msgstr " --last : n'affiche que les derniers changements"
 
 #: daptup:117
 #, sh-format
-msgid "Unknown param: $PARAM"
-msgstr "Paramètre inconnu : $PARAM"
+msgid "Unknown param: %s"
+msgstr "Paramètre inconnu : %s"
 
 #: daptup:128
 msgid "You must run daptup with root privileges."
@@ -100,10 +100,10 @@ msgstr "Vous devez exécutez daptup avec les privilèges du superutilisateur"
 
 #: daptup:217
 #, sh-format
-msgid "warning: cannot find any changelog for package '$package'"
+msgid "warning: cannot find any changelog for package '%s'"
 msgstr ""
 "Attention : impossible de trouver un journal des modifications pour le "
-"paquet '$package'"
+"paquet '%s'"
 
 #: daptup:236
 msgid "day"
@@ -113,17 +113,17 @@ msgstr[1] "jours"
 
 #: daptup:240
 #, sh-format
-msgid "error: cannot extract last modification date for package '$package'"
+msgid "error: cannot extract last modification date for package '%s'"
 msgstr ""
 "Erreur : impossible d'extraire la date de dernière modification pour le "
-"paquet '$package'"
+"paquet '%s'"
 
 #: daptup:243
 #, sh-format
-msgid "error: cannot fetch last entry from changelog for package '$package'"
+msgid "error: cannot fetch last entry from changelog for package '%s'"
 msgstr ""
 "Erreur : impossible de récupérer la dernière entrée du journal de "
-"modifications pour le paquet '$package'"
+"modifications pour le paquet '%s'"
 
 #: daptup:251
 msgid "[done]"

@@ -16,8 +16,8 @@ msgstr ""
 
 #: daptup:66
 #, sh-format
-msgid "Cannot read configuration from '$DAPTUP_CONFFILE'."
-msgstr "Kann Konfiguration nicht aus »$DAPTUP_CONFFILE« lesen."
+msgid "Cannot read configuration from '%s'."
+msgstr "Kann Konfiguration nicht aus »%s« lesen."
 
 #: daptup:74
 msgid "You cannot mix '--pre', '--post' and '--last' options or repeat them."
@@ -28,9 +28,9 @@ msgstr ""
 #: daptup:98
 #, sh-format
 msgid ""
-"Usage: $BASENAME [ --pre | --post | --last ] [ -h | --help | --nocolor ]."
+"Usage: %s [ --pre | --post | --last ] [ -h | --help | --nocolor ]."
 msgstr ""
-"Verwendung: $BASENAME [ --pre | --post | --last ] [ -h | --help | --nocolor ]."
+"Verwendung: %s [ --pre | --post | --last ] [ -h | --help | --nocolor ]."
 
 #: daptup:100
 msgid "daptup runs 'apt-get update' command inside and outputs:"
@@ -88,8 +88,8 @@ msgstr " --last: gibt nur die neusten Änderungen aus"
 
 #: daptup:117
 #, sh-format
-msgid "Unknown param: $PARAM"
-msgstr "Unbekannter Parameter: $PARAM"
+msgid "Unknown param: %s"
+msgstr "Unbekannter Parameter: %s"
 
 #: daptup:128
 msgid "You must run daptup with root privileges."
@@ -97,8 +97,8 @@ msgstr "Sie müssen Daptup mit Root-Privilegien ausführen."
 
 #: daptup:217
 #, sh-format
-msgid "warning: cannot find any changelog for package '$package'"
-msgstr "Warnung: Kann kein Changelog für Paket »$package« finden"
+msgid "warning: cannot find any changelog for package '%s'"
+msgstr "Warnung: Kann kein Changelog für Paket »%s« finden"
 
 #: daptup:236
 msgid "day"
@@ -108,15 +108,15 @@ msgstr[1] "Tage"
 
 #: daptup:240
 #, sh-format
-msgid "error: cannot extract last modification date for package '$package'"
+msgid "error: cannot extract last modification date for package '%s'"
 msgstr ""
-"Fehler: Kann das letzte Änderungsdatum für Paket »$package« nicht ermitteln"
+"Fehler: Kann das letzte Änderungsdatum für Paket »%s« nicht ermitteln"
 
 #: daptup:243
 #, sh-format
-msgid "error: cannot fetch last entry from changelog for package '$package'"
+msgid "error: cannot fetch last entry from changelog for package '%s'"
 msgstr ""
-"Fehler: Kann den letzten Eintrag des Changelogs für Paket »$package« nicht "
+"Fehler: Kann den letzten Eintrag des Changelogs für Paket »%s« nicht "
 "holen"
 
 #: daptup:251

@@ -8,7 +8,8 @@ Homepage: http://sourceforge.net/projects/daptup
 
 Package: daptup
 Architecture: all
-Depends: ${perl:Depends}, ${misc:Depends}, apt (>= 0.7.10), apt-show-versions, gettext-base
+Depends: ${perl:Depends}, ${misc:Depends}, apt (>= 0.7.10),
+  apt-show-versions, liblocale-gettext-perl
 Suggests: aptitude
 Description: reporter of changes in list of available packages from repositories
  Daptup runs "aptitude update" or "apt-get update' inside and then outputs four

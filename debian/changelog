@@ -8,6 +8,8 @@ daptup (0.9.0) unstable; urgency=low
   * debian/control:
     - Updated my mail address.
     - Bumped Standards-Version to 3.8.3.
+    - Dropped 'gettext-base' dependency, substituted it with
+      'liblocale-gettext-perl' one.
   * debian/prerm:
     - Added the debhelper token.
 

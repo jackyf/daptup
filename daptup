@@ -112,6 +112,7 @@ GetOptions(
 		lsay("         if appropriate option is not disabled in config file");
 		lsay(" --last: only output last changes");
 		say "";
+		exit 0;
 	},
 );
 

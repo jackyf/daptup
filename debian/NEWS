@@ -1,0 +1,9 @@
+daptup (0.8.0~svn140-1) unstable; urgency=low
+
+  Daptup can now work without aptitude.  
+
+  Command 'apt-get update' nows calls daptup automatically, so users of apt-get
+  are no longer needed to call daptup explicitly. However, aptitude users
+  should yet, due to bug in aptitude (see details in README.Debian).
+
+ -- Eugene V. Lyubimkin <jackyf.devel@gmail.com>  Sun, 12 Oct 2008 20:06:39 +0300

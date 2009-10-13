@@ -1,0 +1,32 @@
+#!/usr/bin/make -f
+# -*- makefile -*-
+
+%:
+	dh $@
+
+DESTDIR=debian/daptup
+TRANSLATIONS=$(shell ls -1 po | sed 's/\..*//')
+
+install: build
+
+binary-indep: build
+	dh binary-indep --before dh_install
+	
+	# installing translations
+	for translation in $(TRANSLATIONS); do \
+		TRANSLATE_DESTDIR=$(DESTDIR)/usr/share/locale/$${translation}/LC_MESSAGES; \
+		install -d -m 0755 $$TRANSLATE_DESTDIR; \
+		msgfmt "po/$${translation}.po" -o $$TRANSLATE_DESTDIR/daptup.mo; \
+	done
+
+	dh_install -i
+
+	# renaming apt hook
+	mv $(DESTDIR)/etc/apt/apt.conf.d/hook-for-apt $(DESTDIR)/etc/apt/apt.conf.d/11daptup
+	
+	dh binary-indep --remaining
+
+binary: binary-indep
+
+.PHONY:install
+

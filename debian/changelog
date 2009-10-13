@@ -1,0 +1,227 @@
+daptup (0.8.2-2) unstable; urgency=low
+
+  * Upload as requested by ftpmaster to test a DM code change.
+
+ -- Eugene V. Lyubimkin <jackyf.devel@gmail.com>  Sat, 03 Jan 2009 00:20:37 +0200
+
+daptup (0.8.2-1) unstable; urgency=low
+
+  * New upstream release:
+    - Added Slovak translation by Ivan Masár.
+    - Fixed generating POT file (getpot).
+  * debian/copyright:
+    - Updated list of translators.
+
+ -- Eugene V. Lyubimkin <jackyf.devel@gmail.com>  Sat, 06 Dec 2008 13:10:44 +0200
+
+daptup (0.8.1-1) unstable; urgency=low
+
+  * New upstream release:
+    - Added French translation by Steve Petruzzello. (Closes: #503376)
+    - Allowed end-of-line's in translations.
+    - Typo fixes.
+    - Translation updates. (Closes: #503587, #503574)
+  * debian/copyright:
+    - Updated list of translators.
+
+ -- Eugene V. Lyubimkin <jackyf.devel@gmail.com>  Sat, 08 Nov 2008 10:31:46 +0200
+
+daptup (0.8.0-1) unstable; urgency=low
+
+  * New upstream release:
+    - Added Swedish translation by Martin Bagge. (Closes: #503356)
+    - Updated Portuguese translation. (Closes: #502145, #502906)
+    - Updated German translation. (Closes: #502893)
+  * debian/control:
+    - Added versioned dependency on apt (>= 0.7.10) for using apt hooks.
+
+ -- Eugene V. Lyubimkin <jackyf.devel@gmail.com>  Sat, 25 Oct 2008 14:50:02 +0300
+
+daptup (0.8.0~svn160-1) experimental; urgency=low
+
+  * New upstream development snapshot:
+    - Added new '--last' command line option, which shows changes from the last
+      update.
+  * debian/rules:
+    - Changed 'mkdir -p' to 'install -d -m 0755' to avoid possible
+      umask-depended bugs. Thanks to Dmitry E. Oboukhov.
+  * debian/NEWS:
+    - Fixed indents to get rid of lintian warnings.
+
+ -- Eugene V. Lyubimkin <jackyf.devel@gmail.com>  Wed, 15 Oct 2008 11:02:42 +0300
+
+daptup (0.8.0~svn140-1) experimental; urgency=low
+
+  * New upstream development snapshot:
+    - Daptup can now work without aptitude.
+    - Divided daptup into 'pre' and 'post' actions and added '--pre' and
+      '--post' command line options. This allows using apt hooks.
+    - Added Portuguese (Brazilian) translation by Guilherme Rocha and
+      Felipe Augusto van de Wiel.
+  * debian/control:
+    - Moved 'aptitude' from Depends to Suggests.
+    - Updated long description.
+  * debian/daptup.install:
+    - Added apt hook.
+  * debian/dirs:
+    - Added '/etc/apt/apt.conf.d' (for hook).
+  * debian/README.Debian:
+    - Added with comments about "aptitude & apt update hooks" problem.
+  * debian/copyright:
+    - Added Portugal (Brazilian) translators.
+
+ -- Eugene V. Lyubimkin <jackyf.devel@gmail.com>  Sun, 12 Oct 2008 20:33:59 +0300
+
+daptup (0.7.2+svn119-2) unstable; urgency=low
+
+  * debian/copyright:
+    - Added translators.
+
+ -- Eugene V. Lyubimkin <jackyf.devel@gmail.com>  Sat, 04 Oct 2008 23:28:39 +0300
+
+daptup (0.7.2+svn119-1) unstable; urgency=low
+
+  * New upstream release:
+    - Added Danish translation by Frank Damgaard. (Closes: #500404)
+    - Added Dutch translation by Paul Gevers. (Closes: #500510)
+  * debian/daptup.prerm:
+    - Added 'set -e' to abort execution if something failed.
+
+ -- Eugene V. Lyubimkin <jackyf.devel@gmail.com>  Sat, 04 Oct 2008 21:49:34 +0300
+
+daptup (0.7.1-1) unstable; urgency=low
+
+  * New upstream release:
+    - Remove useless points in one of PO strings. (Closes: #499661)
+    - Added Ukrainian translation.
+    - Added Arabic translation by Mohamed Magdy.
+    - Added Czech translation by Miroslav Kure. (Closes: #499603)
+    - Added German translation by Helge Kreutzmann. (Closes: #499659)
+  * Applied upstream fix for encoding of Ukrainian translation.
+
+ -- Eugene V. Lyubimkin <jackyf.devel@gmail.com>  Fri, 26 Sep 2008 22:28:55 +0300
+
+daptup (0.7.0-1) unstable; urgency=low
+
+  * New upstream release:
+    - Implemented translation support (gettext).
+    - Some messages changed to more descriptive ones.
+    - Added Russian translation.
+  * debian/control:
+    - Added dependency on 'gettext-base' in order to support translations.
+    - Added build-dependency on 'gettext' in order to generate binary
+      translation files.
+    - Moved build-depencies to 'Build-Depends-Indep' field as we have only
+      'binary-indep' target.
+  * debian/rules:
+    - Now 'install' target builds translations.
+    - Now explicit 'binary' target builds only 'binary-indep' target.
+  * debian/daptup.install:
+    - Added translations files.
+  * debian/compat:
+    - Bumped to 7 to enable dh_install's fallback to using 'debian/tmp'.
+
+ -- Eugene V. Lyubimkin <jackyf.devel@gmail.com>  Sat, 06 Sep 2008 12:42:59 +0300
+
+daptup (0.6.1-1) unstable; urgency=low
+
+  * New upstream release.
+
+ -- Eugene V. Lyubimkin <jackyf.devel@gmail.com>  Sun, 31 Aug 2008 11:25:52 +0300
+
+daptup (0.6.0-2) unstable; urgency=low
+
+  * debian/control:
+    - Added 'Homepage' field.
+  * debian/copyright:
+    - Added download page.
+
+ -- Eugene V. Lyubimkin <jackyf.devel@gmail.com>  Sat, 16 Aug 2008 16:56:42 +0300
+
+daptup (0.6.0-1) unstable; urgency=low
+
+  * New upstream release.
+  * debian/control:
+    - Updated long description according to new features.
+
+ -- Eugene V. Lyubimkin <jackyf.devel@gmail.com>  Sat, 16 Aug 2008 01:09:30 +0300
+
+daptup (0.5.0-1) unstable; urgency=low
+
+  * New upstream release.
+  * Added debian/daptup.prerm to delete the content of /var/spool/daptup.
+
+ -- Eugene V. Lyubimkin <jackyf.devel@gmail.com>  Sat, 09 Aug 2008 14:12:52 +0300
+
+daptup (0.4.1-1) unstable; urgency=low
+
+  * New upstream release
+
+ -- Eugene V. Lyubimkin <jackyf.devel@gmail.com>  Sat, 09 Aug 2008 00:34:24 +0300
+
+daptup (0.4.0-3) unstable; urgency=low
+
+  * debian/install:
+    - Added, to simplify debian/rules.
+  * debian/rules:
+    - Rewrited using debhelper v7.
+  * debian/copyright:
+    - Added full GPLv3 clause.
+
+ -- Eugene V. Lyubimkin <jackyf.devel@gmail.com>  Fri, 08 Aug 2008 20:48:57 +0300
+
+daptup (0.4.0-2) unstable; urgency=low
+
+  * debian/control:
+    - Changed short description to more correct one. Thanks to Ben Finney.
+
+ -- Eugene V. Lyubimkin <jackyf.devel@gmail.com>  Mon, 04 Aug 2008 10:32:25 +0300
+
+daptup (0.4.0-1) unstable; urgency=low
+
+  * New upstream release.
+  * debian/control:
+    - Updated long description according to new features.
+
+ -- Eugene V. Lyubimkin <jackyf.devel@gmail.com>  Sun, 03 Aug 2008 00:54:50 +0300
+
+daptup (0.3.1-1) unstable; urgency=low
+
+  * New upstream release
+  * debian/rules:
+    - Removed unneeded 'configure-stamp' dependency.
+
+ -- Eugene V. Lyubimkin <jackyf.devel@gmail.com>  Mon, 23 Jun 2008 19:44:51 +0300
+
+daptup (0.3.0-1) unstable; urgency=low
+
+  * New upstream release.
+    + Now manpage is part of upstream.
+    + Now output is colored.
+  * debian/rules:
+    - Removed unnecessary 'configure*' rules.
+  * debian/watch:
+    - Added.
+
+ -- Eugene V. Lyubimkin <jackyf.devel@gmail.com>  Fri, 20 Jun 2008 13:13:08 +0300
+
+daptup (0.2.1-2) unstable; urgency=low
+
+  * Removed versioned dependency on aptitude, as now modern aptitude is not
+    needed.
+
+ -- Eugene V. Lyubimkin <jackyf.devel@gmail.com>  Thu, 19 Jun 2008 00:52:19 +0300
+
+daptup (0.2.1-1) unstable; urgency=low
+
+  * New upstream release
+  * debian/control:
+    - Bump 'Standards-Version' to 3.8.0. No changes needed.
+
+ -- Eugene V. Lyubimkin <jackyf.devel@gmail.com>  Mon, 16 Jun 2008 01:26:08 +0300
+
+daptup (0.2-2) unstable; urgency=low
+
+  * Initial release. (Closes: #482913)
+
+ -- Eugene V. Lyubimkin <jackyf.devel@gmail.com>  Mon, 26 May 2008 00:10:20 +0300

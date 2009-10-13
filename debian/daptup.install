@@ -1,0 +1,3 @@
+daptup usr/bin
+daptup.conf etc
+hook-for-apt etc/apt/apt.conf.d

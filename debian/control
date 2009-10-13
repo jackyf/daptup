@@ -1,0 +1,22 @@
+Source: daptup
+Section: admin
+Priority: extra
+Maintainer: Eugene V. Lyubimkin <jackyf.devel@gmail.com>
+Build-Depends-Indep: debhelper (>= 7), gettext
+Standards-Version: 3.8.0
+Homepage: http://sourceforge.net/projects/daptup
+
+Package: daptup
+Architecture: all
+Depends: ${misc:Depends}, apt (>= 0.7.10), apt-show-versions, gettext-base
+Suggests: aptitude
+Description: reporter of changes in list of available packages from repositories
+ Daptup runs "aptitude update" or "apt-get update' inside and then outputs four
+ lists:
+  - packages came to archive with this update;
+  - new upgradeable packages;
+  - changes in "watched" packages (not installed, such packages have to be
+   specified in configuration file);
+  - outdated packages that have a new install candidate (optionally).
+ .
+ Daptup also has apt hook to run automatically within 'apt-get update'.

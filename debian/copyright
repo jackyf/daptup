@@ -1,0 +1,49 @@
+This package was debianized by Eugene V. Lyubimkin <jackyf.devel@gmail.com> on
+Tue, 13 May 2008 20:56:20 +0300.
+
+Sources were downloaded from http://sf.net/projects/daptup.
+
+Upstream Author: 
+
+    Eugene V. Lyubimkin <jackyf.devel@gmail.com>
+
+Translators:
+
+	Arabic - Mohamed Magdy <mohamedmk@gmail.com>
+    Czech - Miroslav Kure <kurem@debian.cz>
+    Danish - Frank Damgaard <debian@overbygaard.dk>
+    Dutch - Paul Gevers <paul@climbing.nl>
+    English - Eugene V. Lyubimkin <jackyf.devel@gmail.com>
+    French - Steve Petruzzello <dlist@bluewin.ch>
+    German - Helge Kreutzmann <debian@helgefjell.de>
+    Portugal - Miguel Figueiredo <elmig@debianpt.org>
+    Portugal (Brazilian) - Guilherme Rocha <guilherme@gf7.com.br>
+        and Felipe Augusto van de Wiel (faw) <faw@debian.org>
+    Russian - Eugene V. Lyubimkin <jackyf.devel@gmail.com>
+    Slovak - Ivan Masár <helix84@centrum.sk>
+    Swedish - Martin Bagge <brother@bsnet.se>
+    Ukrainian - Eugene V. Lyubimkin <jackyf.devel@gmail.com>
+
+Program copyright: 
+
+    Copyright (C) 2008 Eugene V. Lyubimkin
+
+License: 
+
+    This program is free software; you can redistribute it and/or modify  
+    it under the terms of the GNU General Public License v3 or later      
+    as published by the Free Software Foundation.                         
+
+    This program is distributed in the hope that it will be useful,       
+    but WITHOUT ANY WARRANTY; without even the implied warranty of        
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the         
+    GNU General Public License for Libraries for more details.            
+
+    You should have received a copy of the GNU GPLv3                      
+    along with this program; if not, write to the                         
+    Free Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston,  
+    MA 02110-1301, USA                                                    
+
+The Debian packaging is (C) 2008, Eugene V. Lyubimkin <jackyf.devel@gmail.com>
+and is licensed under the GPLv3, see `/usr/share/common-licenses/GPL-3'.
+

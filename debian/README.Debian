@@ -1,0 +1,11 @@
+--------------------------------------
+Notes about 'daptup' package in Debian
+--------------------------------------
+
+Daptup now has support of apt hooks. In theory, this means that any apt-based
+package manager can run daptup inside. But, aptitude currently doesn't respect
+needed apt hooks (bug #501158). Thus, until aptitude had resolved this issue,
+you have to run 'daptup' explicitly if you have aptitude installed.
+
+---
+Eugene V. Lyubimkin <jackyf.devel@gmail.com>

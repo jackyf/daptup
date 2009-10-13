@@ -1,7 +1,7 @@
-#!/bin/bash
+#!/usr/bin/env perl
 
 ###########################################################################
-#   Copyright (C) 2008 by Eugene V. Lyubimkin aka JackYF                  #
+#   Copyright (C) 2008-2009 by Eugene V. Lyubimkin aka JackYF             #
 #                                                                         #
 #   This program is free software; you can redistribute it and/or modify  #
 #   it under the terms of the GNU General Public License                  #
@@ -20,411 +20,356 @@
 
 # Devoted to Evgeniya V. Katyuk.
 
-# translation support
-. gettext.sh
-TEXTDOMAIN=daptup
-export TEXTDOMAIN
-TEXTDOMAINDIR=/usr/share/locale
-export TEXTDOMAINDIR
+use 5.10.0;
+use strict;
+use warnings;
 
-# own eval_gettexte function, as official one doesn't allow to pass -e
-eval_gettexte () {
-  gettext -e "$1" | (export PATH `envsubst --variables "$1"`; envsubst "$1")
+use File::Temp qw(tempfile);
+use File::Basename;
+use Getopt::Long;
+use Locale::gettext qw(gettext ngettext);
+use Term::ANSIColor;
+
+INIT { require Carp; $SIG{__WARN__} = \&Carp::confess; $SIG{__DIE__} = \&Carp::confess; }
+
+# translation support
+Locale::gettext::textdomain("daptup");
+
+sub lprint {
+	my $pattern = shift;
+	print (sprintf gettext($pattern), @_);
 }
 
-# exit if any command returned non-zero status
-set -e
+sub lsay {
+	lprint(@_); print "\n";
+}
 
-SPOOL_DIR=/var/spool/daptup
+my $spool_dir = '/var/spool/daptup';
 
 # spool/cache files
-DAPTUP_UPDATES_BEFORE=$SPOOL_DIR/updates-before
-DAPTUP_UPDATES_AFTER=$SPOOL_DIR/updates-after
-DAPTUP_NEW_BEFORE=$SPOOL_DIR/new-before
-DAPTUP_NEW_AFTER=$SPOOL_DIR/new-after
-DAPTUP_WATCH_BEFORE=$SPOOL_DIR/watch-before
-DAPTUP_WATCH_AFTER=$SPOOL_DIR/watch-after
-DAPTUP_OUTDATED=$SPOOL_DIR/outdated
-# safe temporary files
-DAPTUP_ERRORS_FILE=$(tempfile)
-DAPTUP_TMP_FILE=$(tempfile)
+my $updates_before_file = "$spool_dir/updates-before";
+my $updates_after_file = "$spool_dir/updates-after";
+my $new_before_file = "$spool_dir/new-before";
+my $new_after_file = "$spool_dir/new-after";
+my $watch_before_file = "$spool_dir/watch-before";
+my $watch_after_file = "$spool_dir/watch-after";
+my $outdated_file="$spool_dir/outdated";
+# safe, self-destroying temporary files
+my $errors_file_obj = new File::Temp();
+my $temp_file_obj = new File::Temp();
 
-function delete_temp_files
-{
-	rm -f $DAPTUP_TMP_FILE $DAPTUP_ERRORS_FILE
+$SIG{TERM} = sub { exit 1024; };
+$SIG{INT} = sub { exit 1024; };
+
+my $subcommand;
+my $use_color = 1;
+
+my $config_file = '/etc/daptup.conf';
+if (-r $config_file) {
+	# sourcing it to obtain configuration variables
+	open(my $config_fd, '<', $config_file);
+	while (<$config_fd>) {
+		next if m/^\s*(#|$)/;
+		my ($variable, $value) = m/^(\w+)=(.*)/;
+		$ENV{$variable} = $value;
+	}
+	close($config_fd);
+} else {
+	lsay("Cannot read configuration from '%s'.", $config_file);
+	exit 1
 }
 
-trap "do_exit 1024" SIGTERM
-trap "do_exit 2048" SIGINT
-
-# $1 - exit code
-function do_exit
-{
-	delete_temp_files
-	exit $1
+sub check_subcommand {
+	my ($subcommand_name) = @_;
+	if (defined $subcommand) {
+		lsay("You cannot mix '--pre', '--post' and '--last' options or repeat them.");
+		exit 4;
+	} else {
+		$subcommand = $subcommand_name;
+	}
 }
 
-DAPTUP_CONFFILE=/etc/daptup.conf
-if [ -f $DAPTUP_CONFFILE ]; then
-	. $DAPTUP_CONFFILE
-else
-	eval_gettexte "Cannot read configuration from '\$DAPTUP_CONFFILE'."; echo
-	do_exit 1
-fi
+# processing options
+GetOptions(
+	'pre' => sub { check_subcommand('pre') },
+	'post' => sub { check_subcommand('post') },
+	'last' => sub { check_subcommand('last') },
+	'nocolor' => sub { $use_color = 0; },
+	'help|h' => sub {
+		lsay("Usage: %s [ --pre | --post | --last ] [ -h | --help | --nocolor ].", basename($0));
+		say "";
+		lsay("daptup runs 'apt-get update' command inside and outputs:");
+		lsay(" - list of packages recently entered to repo;");
+		lsay(" - list of packages which got new updates;");
+		lsay(" - list of changes in 'watched' packages;");
+		lsay(" - list of outdated packages (optionally).");
+		say "";
+		lsay("Options:");
+		lsay(" -h, --help: output this help and exit");
+		lsay(" --nocolor: do not use colored output");
+		lsay(" --pre: do only 'pre' stage: collect info that will be used as 'old'");
+		lsay(" --post: do only 'post' stage: collect 'new' info and output changes");
+		lsay("         if appropriate option is not disabled in config file");
+		lsay(" --last: only output last changes");
+		say "";
+	},
+);
 
-
-function check_subcommand
-{
-	if [ -n "$DAPTUP_SUBCOMMAND" ]; then
-		gettext -e "You cannot mix '--pre', '--post' and '--last' options or repeat them."; echo
-		do_exit 4
-	fi
+if ($ENV{"DAPTUP_USE_COLOR"} ne "y" || not $use_color) {
+	$ENV{"ANSI_COLORS_DISABLED"} = 1;
 }
-
-while [ "$#" -gt "0" ]; do
-	case $1 in
-		--pre)
-			check_subcommand
-			DAPTUP_SUBCOMMAND=pre
-			;;
-		--post)
-			check_subcommand
-			DAPTUP_SUBCOMMAND=post
-			;;
-		--last)
-			check_subcommand
-			DAPTUP_SUBCOMMAND=last
-			;;
-		--nocolor)
-			DAPTUP_USE_COLOR=n	
-			;;
-		-h|--help)
-			BASENAME=`basename ${0}`
-			eval_gettexte "Usage: \$BASENAME [ --pre | --post | --last ] [ -h | --help | --nocolor ]."; echo
-			echo
-			gettext -e "daptup runs 'apt-get update' command inside and outputs:"; echo
-			gettext -e " - list of packages recently entered to repo;"; echo
-			gettext -e " - list of packages which got new updates;"; echo
-			gettext -e " - list of changes in 'watched' packages;"; echo
-			gettext -e " - list of outdated packages (optionally)."; echo
-			echo
-			gettext -e "Options:"; echo
-			gettext -e " -h, --help: output this help and exit"; echo
-			gettext -e " --nocolor: do not use colored output"; echo
-			gettext -e " --pre: do only 'pre' stage: collect info that will be used as 'old'"; echo
-			gettext -e " --post: do only 'post' stage: collect 'new' info and output changes"; echo
-			gettext -e "         if appropriate option is not disabled in config file"; echo
-			gettext -e " --last: only output last changes"; echo
-			do_exit 0
-			;;
-		*)
-			if [ "$PARAM" != "" ]; then
-				eval_gettexte "Unknown param: \$PARAM"; echo
-				do_exit 4
-			fi
-			;;
-	esac
-	shift
-done
 
 # Checking for root privileges
-MY_UID=`id -u`
-if [ "$MY_UID" != "0" ]; then
-	gettext -e "You must run daptup with root privileges."; echo
-	do_exit 2
-fi
+if ($< != 0) {
+	lsay("You must run daptup with root privileges.");
+	exit 2;
+}
 
-if [ -z "$DAPTUP_SUBCOMMAND" ]; then
+unless (defined $subcommand) {
 	# As we now have apt hook, just do 'apt-get update'.
 	# It will call daptup itself.
-
-	set +e
-	apt-get update
-	RETURN_CODE=$?
-	set -e
-	do_exit $RETURN_CODE
-fi
-
-if [ "$DAPTUP_DISABLE_COLUMNS" == "y" ]; then
-	DAPTUP_EXTRA_APTITUDE_ARGUMENTS="$DAPTUP_EXTRA_APTITUDE_ARGUMENTS --disable-columns"
-fi
-
-
-# $1 - output
-# $2 - errors
-function get_avail_pkg_list()
-{
-	if [ -f /usr/bin/aptitude ]; then
-		aptitude search "~n(.*)" \
-			--display-format "$DAPTUP_NEW_DISPLAY_FORMAT" \
-			--width $DAPTUP_NEW_DISPLAY_WIDTH \
-			$DAPTUP_EXTRA_APTITUDE_ARGUMENTS > $1 2> $2
-	else
-		apt-cache search ".*" | sort > $1 2> $2
-	fi
+	exec("apt-get update");
 }
 
-# $1 - output
-function get_updates()
-{
-	apt-show-versions -u | sort > $1
+if ($ENV{'DAPTUP_DISABLE_COLUMNS'} eq 'y') {
+	$ENV{'DAPTUP_EXTRA_APTITUDE_ARGUMENTS'} .= " --disable-columns"
 }
 
-# $1 - output
-function get_watched()
-{
-	local GREP_EXPRESSION
-	for package in $DAPTUP_PACKAGES_WATCH_FOR; do
-		if [ -n "$GREP_EXPRESSION" ]; then
-			GREP_EXPRESSION="${GREP_EXPRESSION}|"
-		fi
-		GREP_EXPRESSION="${GREP_EXPRESSION}^${package}$"
-	done
-	if [ -z "$GREP_EXPRESSION" ]; then # no packages to watch
-		touch $1
-	elif [ -f /usr/bin/aptitude ]; then
-		aptitude search "~n($GREP_EXPRESSION)" \
-			--display-format "$DAPTUP_WATCH_DISPLAY_FORMAT" \
-			--width $DAPTUP_WATCH_DISPLAY_WIDTH \
-			$DAPTUP_EXTRA_APTITUDE_ARGUMENTS > $1
-	else
-		local WATCHED_PACKAGES=`apt-cache search --names-only "$GREP_EXPRESSION" | sed 's/ .*//'`
-		local VERSION
-
-		rm -f $1
-		touch $1
-	
-		for package in $WATCHED_PACKAGES; do
-			VERSION=`apt-cache policy $package | fgrep "Candidate" | sed 's/.*Candidate: //'`
-			echo "$package $VERSION" >> $1
-		done
-
-	fi
+sub get_avail_pkg_list {
+	my ($output_file, $errors_file) = @_;
+	my $command;
+	if (-x "/usr/bin/aptitude") {
+		$command = qq/aptitude search "~n(.*)"/;
+		$command .= qq/ --display-format $ENV{DAPTUP_NEW_DISPLAY_FORMAT}/;
+		$command .= qq/ --width $ENV{DAPTUP_NEW_DISPLAY_WIDTH}/;
+		$command .= qq/ $ENV{DAPTUP_EXTRA_APTITUDE_ARGUMENTS} > $output_file 2> $errors_file/;
+	} else {
+		$command = qq/apt-cache search ".*" | sort > $output_file 2> $errors_file/;
+	}
+	system($command);
 }
 
-# $1 - result file
-function find_old_packages
-{
-	local DOC_DIR=/usr/share/doc
-	local SECONDS_IN_DAY=`expr 60 \* 60 \* 24`
+sub get_updates {
+	my ($output_file) = @_;
+	system("apt-show-versions -u | sort > $output_file");
+}
 
-	rm -f $1
-	touch $1
-	
-	cat $DAPTUP_UPDATES_AFTER | while read line; do
-		package=`echo $line | grep -Eo "^.*/" | sed 's|/||'`
-		local CHANGELOG_FILE
-		if [ -f $DOC_DIR/$package/changelog.Debian.gz ]; then
-			CHANGELOG_FILE=$DOC_DIR/$package/changelog.Debian.gz
-		elif [ -f $DOC_DIR/$package/changelog.gz ]; then
-			CHANGELOG_FILE=$DOC_DIR/$package/changelog.gz
-		else
-			eval_gettexte "warning: cannot find any changelog for package '\$package'"; echo
-		fi
+sub get_watched {
+	my ($output_file) = @_;
+	my $regex = join('|', map { "^$_\$" } split(/ /, $ENV{"DAPTUP_PACKAGES_WATCH_FOR"}));
+	$regex =~ s/"//g;
+	if (!$regex) { # no packages to watch
+		# nothing to do
+	} elsif (-f '/usr/bin/aptitude') {
+		my $command = qq/aptitude search "~n($regex)"/;
+		$command .= qq/ --display-format $ENV{DAPTUP_WATCH_DISPLAY_FORMAT}/;
+		$command .= qq/ --width "$ENV{DAPTUP_WATCH_DISPLAY_WIDTH}"/;
+		$command .= qq/ $ENV{DAPTUP_EXTRA_APTITUDE_ARGUMENTS} > $output_file/;
+		system($command);
+	} else {
+		my @watched_packages = map { s/ .*// } split("\n", `apt-cache search --names-only "$regex"`);
+		open(my $output_file_fd, '>', $output_file);
+		foreach my $package_name (@watched_packages) {
+			my $version_string = `apt-cache policy $package_name | fgrep "Candidate" | sed 's/.*Candidate: //'`;
+			say $output_file "$package_name $version_string";
+		}
+		close($output_file_fd);
+	}
+}
 
-		if [ -n "$CHANGELOG_FILE" ]; then # if we've found a changelog
-			local LAST_MODIFIED_LINE
-			LAST_MODIFIED_LINE=`zgrep -E "^ -- " $CHANGELOG_FILE | head -1`;
-			if [ -n "$LAST_MODIFIED_LINE" ]; then # changelog is correct
+sub find_old_packages {
+	my ($output_file) = @_;
+	my $doc_dir = '/usr/share/doc';
+	my $seconds_in_day = 24 * 60 * 60;
+	my $current_timestamp = time();
 
+	open(my $output_file_fd, '>', $output_file);
+	open(my $updates_file_fd, '<', $updates_after_file);
+	while (my $line = <$updates_file_fd>) {
+		chomp($line);
+		my $package_name = $line;
+		$package_name =~ s{/.*}{};
+		my $changelog_file;
+		if (-f "$doc_dir/$package_name/changelog.Debian.gz") {
+			$changelog_file = "$doc_dir/$package_name/changelog.Debian.gz";
+		} elsif (-f "$doc_dir/$package_name/changelog.gz") {
+			$changelog_file = "$doc_dir/$package_name/changelog.gz";
+		} else {
+			lsay("warning: cannot find any changelog for package '%s'", $package_name);
+		}
+
+		if (defined $changelog_file) { # if we've found a changelog
+			my $last_modified_line=`zgrep -e "^ -- " $changelog_file | head -1`;
+			if ($last_modified_line ne '') { # changelog is correct
 				# extracting date
 				# example: " -- James Troup <james@nocrew.org>  Mon, 24 Apr 2006 04:24:07 +0100"
+				(my $date = $last_modified_line) =~ s/.*?([0-9 ][0-9] [A-Z][a-z][a-z] [0-9]{4}).*/$1/ or
+						do { # date is extracted badly
+							lsay("error: cannot extract last modification date for package '%s'", $package_name);
+							next;
+						};
 
-				DATE=`echo $LAST_MODIFIED_LINE | grep -Eo "[0-9 ][0-9] [A-Z][a-z][a-z] [0-9]{4}"`
-				if [ -n "$DATE" ]; then # date is extracted correctly
-					CURRENT_TIMESTAMP=`date +%s`
-					PACKAGE_TIMESTAMP=`date -d "$DATE" +%s`
-					DAYS=`expr \( $CURRENT_TIMESTAMP - $PACKAGE_TIMESTAMP \) / $SECONDS_IN_DAY`
-					if [ $DAYS -gt $DAPTUP_MINIMAL_DAY_COUNT_TREATING_OUTDATED ]; then # package is old
-						echo -n $line >> $1
-						echo -n ", $DAYS " >> $1
-						ngettext -e "day" "days" $DAYS >> $1
-						echo >> $1
-					fi
-				else # date is extracted badly
-					eval_gettexte "error: cannot extract last modification date for package '\$package'"; echo
-				fi
-			else # changelog is not correct
-				eval_gettexte "error: cannot fetch last entry from changelog for package '\$package'"; echo
-			fi
-		fi
-	done
+				my $package_timestamp = `date -d "$date" +%s`;
+				my $days = int(($current_timestamp - $package_timestamp) / $seconds_in_day);
+				if ($days > $ENV{'DAPTUP_MINIMAL_DAY_COUNT_TREATING_OUTDATED'}) { # package is old
+					say $output_file_fd "$line, $days " . ngettext("day", "days", $days);
+				}
+			} else { # changelog is not correct
+				lsay("error: cannot fetch last entry from changelog for package '%s'", $package_name);
+			}
+		}
+	}
+	close($output_file_fd);
+	close($updates_file_fd);
 }
 
-function print_done
-{
-	gettext -e "[done]"; echo
+sub print_done {
+	lsay("[done]");
 }
 
-# $1 - before
-# $2 - after
-# $3 - where result will be stored
-function diff_cmd()
-{
-	diff --minimal $1 $2 | grep -E "^[<>]" | sort > $3
+sub diff_cmd {
+	my ($before_file, $after_file, $output_file) = @_;
+	system(qq/diff --minimal $before_file $after_file | grep -E "^[<>]" | sort > $output_file/);
 }
 
-function reset_color()
-{
-	# resetting to default color if needed...
-	if [ "$DAPTUP_USE_COLOR" == "y" ]; then
-		tput sgr0
-	fi
+sub do_pre {
+	lprint("Building old list of packages... ");
+	get_avail_pkg_list($new_before_file, $errors_file_obj->filename);
+
+	if (-s $errors_file_obj->filename) {
+		lsay("errors present. Is apt/dpkg running?");
+		exit 8;
+	}
+	print_done();
+
+	lprint("Building old list of available updates... ");
+	get_updates($updates_before_file);
+	print_done();
+
+	lprint("Building old list of watched packages... ");
+	get_watched($watch_before_file);
+	print_done();
 }
 
-function do_pre
-{
-	gettext -e "Building old list of packages... "
-	get_avail_pkg_list $DAPTUP_NEW_BEFORE $DAPTUP_ERRORS_FILE
+sub do_post {
+	if (not defined $subcommand or $subcommand ne 'last') {
+		lprint("Building new list of packages... ");
+		get_avail_pkg_list($new_after_file, '/dev/null');
+		print_done();
 
-	RETURN_RESULT=`wc -l < $DAPTUP_ERRORS_FILE`
-	if [ "$RETURN_RESULT" != "0" ]; then
-		gettext -e "errors present. Is apt/dpkg running?"; echo
-		do_exit 8
-	fi
-	print_done
+		lprint("Building new list of available updates... ");
+		get_updates($updates_after_file);
+		print_done();
 
-	gettext -e "Building old list of available updates... "
-	get_updates $DAPTUP_UPDATES_BEFORE
-	print_done
+		lprint("Building new list of watched packages... ");
+		get_watched($watch_after_file);
+		print_done();
+	}
 
-	gettext -e "Building old list of watched packages... "
-	get_watched $DAPTUP_WATCH_BEFORE
-	print_done
-}
-
-function do_post
-{
-	if [ "$DAPTUP_SUBCOMMAND" != "last" ]; then
-
-		gettext -e "Building new list of packages... "
-		get_avail_pkg_list $DAPTUP_NEW_AFTER /dev/null
-		print_done
-
-		gettext -e "Building new list of available updates... "
-		get_updates $DAPTUP_UPDATES_AFTER
-		print_done
-
-		gettext -e "Building new list of watched packages... "
-		get_watched $DAPTUP_WATCH_AFTER
-		print_done
-	
-	fi
-
-	if [ "$DAPTUP_SUBCOMMAND" == "last" ] || [ "$DAPTUP_SHOW_CHANGES_IN_POST" == "y" ]; then
-
+	if ((defined $subcommand && $subcommand eq 'last') || $ENV{'DAPTUP_SHOW_CHANGES_IN_POST'} eq 'y') {
 		# show changes
-			
-		OUTPUT_OUTDATED=n
-		if [ "$DAPTUP_CHECK_FOR_OUTDATED_PACKAGES" == "y" ]; then
+		my $output_outdated = 0;
+		if ($ENV{'DAPTUP_CHECK_FOR_OUTDATED_PACKAGES'} eq 'y') {
 			# if DAPTUP_MINIMAL_DAY_COUNT_TREATING_OUTDATED variable contains non-numeric
 			# data, print an error and don't try to check for outdated packages
-			set +e
-			expr "$DAPTUP_MINIMAL_DAY_COUNT_TREATING_OUTDATED" + 0 >/dev/null 2>/dev/null
-			exit_code=$?
-			set -e
-			if [ "$exit_code" == "0" ]; then
-				gettext -e "Building list of outdated packages... "
-				find_old_packages $DAPTUP_OUTDATED
-				OUTPUT_OUTDATED=y
-				print_done
-			else
-				gettext -e "error: DAPTUP_MINIMAL_DAY_COUNT_TREATING_OUTDATED contains non-numeric data"; echo
-			fi
-		else
-			gettext -e "Skipping check for outdated packages."; echo
-		fi
+			if ($ENV{'DAPTUP_MINIMAL_DAY_COUNT_TREATING_OUTDATED'} !~ m/\D/) {
+				lprint("Building list of outdated packages... ");
+				find_old_packages($outdated_file);
+				$output_outdated = 1;
+				print_done();
+			} else {
+				lsay("error: DAPTUP_MINIMAL_DAY_COUNT_TREATING_OUTDATED contains non-numeric data");
+			}
+		} else {
+			lsay("Skipping check for outdated packages.");
+		}
 
-		if [ "$DAPTUP_USE_COLOR" == "y" ]; then
-			tput init
-		fi
-		# by default daptup tries to use colors now, it can be disabled by specifying '--nocolor' option
+		say("");
 
-		echo
+		diff_cmd($updates_before_file, $updates_after_file, $temp_file_obj->filename);
+		if (-z $temp_file_obj->filename) {
+			lsay("No new updates.");
+		} else {
+			lsay("New updates:");
+			open(my $tmp_file_fd, '<', $temp_file_obj->filename);
+			while (<$tmp_file_fd>) {
+				if (substr($_, 0, 1) eq '<') {
+					print color 'red';
+				} else {
+					print color 'green';
+				}
+				print;
+			}
+			close($tmp_file_fd);
+		}
 
-		diff_cmd $DAPTUP_UPDATES_BEFORE $DAPTUP_UPDATES_AFTER $DAPTUP_TMP_FILE
-		if [ "`wc -l < $DAPTUP_TMP_FILE`" == "0" ]; then # no updates
-			gettext -e "No new updates."; echo
-		else
-			gettext -e "New updates:"; echo
-			cat $DAPTUP_TMP_FILE | sed 's/upgradeable from/-/g' | sed 's/ to / -> /g' | while read line; do
-				if [ "$DAPTUP_USE_COLOR" == "y" ]; then
-					if [ "`expr "$line" : '<'`" == "0" ]; then
-						tput setf 2; # green
-					else
-						tput setf 4; # red
-					fi;
-				fi;
-				echo $line;
-				done
-		fi
+		print color 'reset';
 
-		reset_color
+		diff_cmd($new_before_file, $new_after_file, $temp_file_obj->filename);
+		if (-z $temp_file_obj->filename) {
+			lsay("No new or removed packages.");
+		} else {
+			lsay("New and removed packages:");
+			open(my $tmp_file_fd, '<', $temp_file_obj->filename);
+			while (<$tmp_file_fd>) {
+				if (substr($_, 0, 1) eq '<') {
+					print color 'red';
+				} else {
+					print color 'cyan';
+				}
+				print;
+			}
+			close($tmp_file_fd);
+		}
 
-		diff_cmd $DAPTUP_NEW_BEFORE $DAPTUP_NEW_AFTER $DAPTUP_TMP_FILE
-		if [ "`wc -l < $DAPTUP_TMP_FILE`" == "0" ]; then # no new
-			gettext -e "No new or removed packages."; echo
-		else
-			gettext -e "New and removed packages:"; echo
-			cat $DAPTUP_TMP_FILE | while read line; do
-				if [ "$DAPTUP_USE_COLOR" == "y" ]; then
-					if [ "`expr "$line" : '<'`" == "0" ]; then
-						tput setf 3; # blue
-					else
-						tput setf 4; # red
-					fi;
-				fi;
-				echo $line;
-				done
-		fi
+		print color 'reset';
 
-		reset_color
+		diff_cmd($watch_before_file, $watch_after_file, $temp_file_obj->filename);
+		if (-z $temp_file_obj->filename) {
+			lsay("No news in watched packages.");
+		} else {
+			lsay("Changes in watched packages:");
+			open(my $tmp_file_fd, '<', $temp_file_obj->filename);
+			while (<$tmp_file_fd>) {
+				if (substr($_, 0, 1) eq '<') {
+					print color 'red';
+				} else {
+					print color 'green';
+				}
+				print;
+			}
+			close($tmp_file_fd);
+		}
 
-		diff_cmd $DAPTUP_WATCH_BEFORE $DAPTUP_WATCH_AFTER $DAPTUP_TMP_FILE
-		if [ "`wc -l < $DAPTUP_TMP_FILE`" == "0" ]; then # no changes in watched
-			gettext -e "No news in watched packages."; echo
-		else
-			gettext -e "Changes in watched packages:"; echo
-			cat $DAPTUP_TMP_FILE | while read line; do
-				if [ "$DAPTUP_USE_COLOR" == "y" ]; then
-					if [ "`expr "$line" : '<'`" == "0" ]; then
-						tput setf 2; # green
-					else
-						tput setf 4; # red
-					fi;
-				fi;
-				echo $line;
-				done
-		fi
+		print color 'reset';
 
-		reset_color
+		if ($output_outdated) {
+			if (-z $outdated_file) {
+				lsay("No outdated packages.");
+			} else {
+				lsay("Outdated packages:");
+				print color 'magenta';
+				open(my $outdated_file_fd, '<', $outdated_file);
+				while (<$outdated_file_fd>) {
+					s/upgradeable from/-/g;
+					s/ to / -> /g;
+					s/^/  /;
+					print;
+				}
+				close($outdated_file_fd);
+			}
+		}
 
-		if [ "$OUTPUT_OUTDATED" == "y" ]; then
-			if [ "`wc -l < $DAPTUP_OUTDATED`" == "0" ]; then # no data in outdated
-				gettext -e "No outdated packages."; echo
-			else
-				gettext -e "Outdated packages:"; echo
-				if [ "$DAPTUP_USE_COLOR" == "y" ]; then
-					tput setf 5 # magenta
-				fi
-				cat $DAPTUP_OUTDATED | sed 's/upgradeable from/-/g' | sed 's/ to / -> /g' | sed 's/^/  /'
-			fi
-		fi
-
-		reset_color
-
-	fi
+		print color 'reset';
+	}
 }
 
 # start of program
+if ($subcommand eq 'pre') {
+	do_pre();
+} else { # post or last
+	do_post();
+}
 
-if [ "$DAPTUP_SUBCOMMAND" == "pre" ]; then
-	do_pre
-else # post or last
-	do_post
-fi
-
-delete_temp_files
-
-do_exit 0
+exit 0;
 

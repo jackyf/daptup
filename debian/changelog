@@ -3,6 +3,8 @@ daptup (0.9.0) unstable; urgency=low
   * Converted the package to Debian-native.
   * Rewritten the program in Perl.
   * Consequently fixed color output in non-X terminals. (Closes: #536282)
+  * debian/watch:
+    - Removed.
 
  -- Eugene V. Lyubimkin <jackyf@debian.org>  Tue, 13 Oct 2009 13:39:21 +0300
 

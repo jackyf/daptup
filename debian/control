@@ -1,7 +1,7 @@
 Source: daptup
 Section: admin
 Priority: extra
-Maintainer: Eugene V. Lyubimkin <jackyf.devel@gmail.com>
+Maintainer: Eugene V. Lyubimkin <jackyf@debian.org>
 Build-Depends-Indep: debhelper (>= 7), gettext
 Standards-Version: 3.8.0
 Homepage: http://sourceforge.net/projects/daptup

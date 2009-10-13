@@ -5,6 +5,8 @@ daptup (0.9.0) unstable; urgency=low
   * Consequently fixed color output in non-X terminals. (Closes: #536282)
   * debian/watch:
     - Removed.
+  * debian/control:
+    - Updated my mail address.
 
  -- Eugene V. Lyubimkin <jackyf@debian.org>  Tue, 13 Oct 2009 13:39:21 +0300
 

@@ -1,4 +1,4 @@
 usr/bin
 etc
 var/spool/daptup
-/etc/apt/apt.conf.d
+etc/apt/apt.conf.d

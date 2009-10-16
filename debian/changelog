@@ -3,6 +3,8 @@ daptup (0.9.1~) UNRELEASED; urgency=low
   * Don't crash if environment variable 'DAPTUP_EXTRA_APTITUDE_ARGUMENTS' is
     not defined. Thanks to Edward J. Shornock <ed.shornock@gmail.com>.
     (Closes: #551279)
+  * debian/control:
+    - Added 'Vcs-*' headers.
 
  -- Eugene V. Lyubimkin <jackyf@debian.org>  Sat, 17 Oct 2009 00:17:24 +0300
 

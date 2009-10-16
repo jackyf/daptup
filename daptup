@@ -140,10 +140,11 @@ sub get_avail_pkg_list {
 	my ($output_file, $errors_file) = @_;
 	my $command;
 	if (-x "/usr/bin/aptitude") {
+		my $extra_arguments = $ENV{DAPTUP_EXTRA_APTITUDE_ARGUMENTS} // '';
 		$command = qq/aptitude search "~n(.*)"/;
 		$command .= qq/ --display-format $ENV{DAPTUP_NEW_DISPLAY_FORMAT}/;
 		$command .= qq/ --width $ENV{DAPTUP_NEW_DISPLAY_WIDTH}/;
-		$command .= qq/ $ENV{DAPTUP_EXTRA_APTITUDE_ARGUMENTS} > $output_file 2> $errors_file/;
+		$command .= qq/ $extra_arguments > $output_file 2> $errors_file/;
 	} else {
 		$command = qq/apt-cache search ".*" | sort > $output_file 2> $errors_file/;
 	}

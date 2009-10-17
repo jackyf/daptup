@@ -1,3 +1,11 @@
+daptup (0.9.1.1) unstable; urgency=low
+
+  * Define the environment variable 'DAPTUP_EXTRA_APTITUDE_ARGUMENTS' before
+    it can be used. Thanks to Edward J. Shornock <ed.shornock@gmail.com>.
+    (Closes: #551279)
+
+ -- Eugene V. Lyubimkin <jackyf@debian.org>  Sat, 17 Oct 2009 18:08:17 +0300
+
 daptup (0.9.1) unstable; urgency=low
 
   * Don't crash if environment variable 'DAPTUP_EXTRA_APTITUDE_ARGUMENTS' is

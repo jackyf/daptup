@@ -174,7 +174,7 @@ sub get_watched {
 		open(my $output_file_fd, '>', $output_file);
 		foreach my $package_name (@watched_packages) {
 			my $version_string = `apt-cache policy $package_name | fgrep "Candidate" | sed 's/.*Candidate: //'`;
-			say $output_file "$package_name $version_string";
+			say $output_file_fd "$package_name $version_string";
 		}
 		close($output_file_fd);
 	}

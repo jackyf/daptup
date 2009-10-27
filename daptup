@@ -170,10 +170,13 @@ sub get_watched {
 		$command .= qq/ $ENV{DAPTUP_EXTRA_APTITUDE_ARGUMENTS} > $output_file/;
 		system($command);
 	} else {
-		my @watched_packages = map { s/ .*// } split("\n", `apt-cache search --names-only "$regex"`);
+		my @watched_packages = split("\n", `apt-cache search --names-only "$regex"`);
+		s/ .*// foreach @watched_packages;
+
 		open(my $output_file_fd, '>', $output_file);
 		foreach my $package_name (@watched_packages) {
 			my $version_string = `apt-cache policy $package_name | fgrep "Candidate" | sed 's/.*Candidate: //'`;
+			chomp($version_string);
 			say $output_file_fd "$package_name $version_string";
 		}
 		close($output_file_fd);

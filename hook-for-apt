@@ -1,2 +1,2 @@
-APT::Update::Pre-Invoke { "/usr/bin/daptup --pre"; };
-APT::Update::Post-Invoke { "/usr/bin/daptup --post"; };
+APT::Update::Pre-Invoke { "if [ -x /usr/bin/daptup ]; then /usr/bin/daptup --pre; fi;" };
+APT::Update::Post-Invoke { "if [ -x /usr/bin/daptup ]; then /usr/bin/daptup --post; fi;" };

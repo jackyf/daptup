@@ -38,7 +38,11 @@ sub get_avail_pkg_list {
 
 sub get_updates {
 	my ($self, $output_file) = @_;
-	system("apt-show-versions -u | sed -r -e 's/upgradeable from/-/g' -e 's/ to / -> /g' -e 's=/[a-z]+ - =: =g' | sort > $output_file");
+
+	my @sed_expressions = ('s/upgradeable from/-/g', 's/ to / -> /g',
+			's/ \*manually\*//', 's=/[a-z]+ - =: =g');
+	my $sed_command = 'sed -r ' . join(' ', map { "-e '$_'" } @sed_expressions);
+	system("apt-show-versions -u | $sed_command | sort > $output_file");
 }
 
 sub get_watched {

@@ -20,6 +20,164 @@
 
 # Devoted to Evgeniya V. Katyuk.
 
+package Daptup::Backend::Apt;
+
+use strict;
+use warnings;
+
+sub new {
+	my $class = shift;
+	return bless {} => $class;
+}
+
+sub get_avail_pkg_list {
+	my ($self, $output_file, $errors_file) = @_;
+
+	system(qq/apt-cache search ".*" | sort > $output_file 2> $errors_file/);
+}
+
+sub get_updates {
+	my ($self, $output_file) = @_;
+	system("apt-show-versions -u | sed -r -e 's/upgradeable from/-/g' -e 's/ to / -> /g' -e 's=/[a-z]+ - =: =g' | sort > $output_file");
+}
+
+sub get_watched {
+	my ($self, $output_file) = @_;
+
+	my $regex = main::get_watch_regex();
+	if ($regex) {
+		my @watched_packages = split("\n", `apt-cache search --names-only "$regex"`);
+		s/ .*// foreach @watched_packages;
+
+		open(my $output_file_fd, '>', $output_file);
+		foreach my $package_name (@watched_packages) {
+			my $version_string = `apt-cache policy $package_name | fgrep "Candidate" | sed 's/.*Candidate: //'`;
+			chomp($version_string);
+			say $output_file_fd "$package_name $version_string";
+		}
+		close($output_file_fd);
+	}
+}
+
+package Daptup::Backend::Aptitude;
+
+use base qw(Daptup::Backend::Apt);
+
+use strict;
+use warnings;
+
+sub new {
+	my $class = shift;
+
+	$ENV{'DAPTUP_EXTRA_APTITUDE_ARGUMENTS'} //= '';
+
+	if ($ENV{'DAPTUP_DISABLE_COLUMNS'} eq 'y') {
+		$ENV{'DAPTUP_EXTRA_APTITUDE_ARGUMENTS'} .= " --disable-columns"
+	}
+
+	return bless {} => $class;
+}
+
+sub get_avail_pkg_list {
+	my ($self, $output_file, $errors_file) = @_;
+
+	my $command = qq/aptitude search "~n(.*)"/;
+	$command .= qq/ --display-format $ENV{DAPTUP_NEW_DISPLAY_FORMAT}/;
+	$command .= qq/ --width $ENV{DAPTUP_NEW_DISPLAY_WIDTH}/;
+	$command .= qq/ $ENV{DAPTUP_EXTRA_APTITUDE_ARGUMENTS} > $output_file 2> $errors_file/;
+	system($command);
+}
+
+sub get_watched {
+	my ($self, $output_file) = @_;
+
+	my $regex = main::get_watch_regex();
+	if ($regex) {
+		my $command = qq/aptitude search "~n($regex)"/;
+		$command .= qq/ --display-format $ENV{DAPTUP_WATCH_DISPLAY_FORMAT}/;
+		$command .= qq/ --width "$ENV{DAPTUP_WATCH_DISPLAY_WIDTH}"/;
+		$command .= qq/ $ENV{DAPTUP_EXTRA_APTITUDE_ARGUMENTS} > $output_file/;
+		system($command);
+	}
+}
+
+package Daptup::Backend::Cupt;
+
+use strict;
+use warnings;
+
+sub new {
+	my $class = shift;
+
+	require Cupt::Config;
+	require Cupt::Cache::BinaryVersion;
+
+	my $self = bless {} => $class;
+	$self->{'config'} = Cupt::Config->new();
+	$self->{'cache'} = Cupt::Cache->new($self->{'config'}, '-source' => 0);
+	{
+		no warnings;
+		$Cupt::Cache::BinaryVersion::o_no_parse_relations = 1;
+	}
+
+	return $self;
+}
+
+sub get_avail_pkg_list {
+	my ($self, $output_file) = @_;
+
+	my $cache = $self->{'cache'};
+	open(my $output_file_fd, '>', $output_file);
+	foreach my $package_name (sort $cache->get_binary_package_names()) {
+		my $package = $cache->get_binary_package($package_name);
+		my $policy_version = $cache->get_policy_version($package);
+		defined $policy_version or die("unable to get policy version for the package '$package_name'");
+		print { $output_file_fd } $package_name . ' - ' . $policy_version->short_description . "\n";
+	}
+	close($output_file_fd);
+}
+
+sub get_updates {
+	my ($self, $output_file) = @_;
+
+	my $cache = $self->{'cache'};
+	open(my $output_file_fd, '>', $output_file);
+
+	my $ref_installed_versions = $cache->get_system_state()->export_installed_versions();
+	foreach my $installed_version (sort { $a->package_name cmp $b->package_name } @$ref_installed_versions) {
+		my $package_name = $installed_version->package_name;
+		my $package = $cache->get_binary_package($package_name);
+		my $policy_version = $cache->get_policy_version($package);
+		defined $policy_version or die("unable to get policy version for the package '$package_name'");
+		if ($policy_version->version_string ne $installed_version->version_string) {
+			# the package is upgradeable
+			print { $output_file_fd } $package_name . ': ' .
+					$installed_version->version_string . ' -> ' .
+					$policy_version->version_string . "\n";
+		}
+	}
+	close($output_file_fd);
+}
+
+sub get_watched {
+	my ($self, $output_file) = @_;
+
+	my $regex = main::get_watch_regex();
+	if ($regex) {
+		my $cache = $self->{'cache'};
+		open(my $output_file_fd, '>', $output_file);
+		foreach my $package_name (grep { m/$regex/o } sort $cache->get_binary_package_names()) {
+			my $package = $cache->get_binary_package($package_name);
+			my $policy_version = $cache->get_policy_version($package);
+			defined $policy_version or die("unable to get policy version for the package '$package_name'");
+			print { $output_file_fd } $package_name . ' - ' . $policy_version->version_string . "\n";
+		}
+		close($output_file_fd);
+	}
+}
+
+package main;
+
 use 5.10.0;
 use strict;
 use warnings;
@@ -31,6 +189,8 @@ use Locale::gettext qw(gettext ngettext);
 use Term::ANSIColor;
 
 INIT { require Carp; $SIG{__WARN__} = \&Carp::confess; $SIG{__DIE__} = \&Carp::confess; }
+
+$| = 1; # enabling autoflush
 
 # translation support
 Locale::gettext::textdomain("daptup");
@@ -79,6 +239,19 @@ if (-r $config_file) {
 	exit 1
 }
 
+# determining backend to use
+my $backend;
+eval {
+	require Cupt::Cache;
+};
+if (not $@) {
+	$backend = Daptup::Backend::Cupt->new();
+} elsif (-x '/usr/bin/aptitude') {
+	$backend = Daptup::Backend::Aptitude->new();
+} else {
+	$backend = Daptup::Backend::Apt->new();
+}
+
 sub check_subcommand {
 	my ($subcommand_name) = @_;
 	if (defined $subcommand) {
@@ -120,6 +293,13 @@ if ($ENV{"DAPTUP_USE_COLOR"} ne "y" || not $use_color) {
 	$ENV{"ANSI_COLORS_DISABLED"} = 1;
 }
 
+sub get_watch_regex {
+	my $regex = join('|', map { "^$_\$" } split(/ /, $ENV{"DAPTUP_PACKAGES_WATCH_FOR"}));
+	$regex =~ s/"//g;
+
+	return $regex;
+}
+
 # Checking for root privileges
 if ($< != 0) {
 	lsay("You must run daptup with root privileges.");
@@ -130,57 +310,6 @@ unless (defined $subcommand) {
 	# As we now have apt hook, just do 'apt-get update'.
 	# It will call daptup itself.
 	exec("apt-get update");
-}
-
-$ENV{'DAPTUP_EXTRA_APTITUDE_ARGUMENTS'} //= '';
-
-if ($ENV{'DAPTUP_DISABLE_COLUMNS'} eq 'y') {
-	$ENV{'DAPTUP_EXTRA_APTITUDE_ARGUMENTS'} .= " --disable-columns"
-}
-
-sub get_avail_pkg_list {
-	my ($output_file, $errors_file) = @_;
-	my $command;
-	if (-x "/usr/bin/aptitude") {
-		$command = qq/aptitude search "~n(.*)"/;
-		$command .= qq/ --display-format $ENV{DAPTUP_NEW_DISPLAY_FORMAT}/;
-		$command .= qq/ --width $ENV{DAPTUP_NEW_DISPLAY_WIDTH}/;
-		$command .= qq/ $ENV{DAPTUP_EXTRA_APTITUDE_ARGUMENTS} > $output_file 2> $errors_file/;
-	} else {
-		$command = qq/apt-cache search ".*" | sort > $output_file 2> $errors_file/;
-	}
-	system($command);
-}
-
-sub get_updates {
-	my ($output_file) = @_;
-	system("apt-show-versions -u | sed -e 's/upgradeable from/-/g' -e 's/ to / -> /g' | sort > $output_file");
-}
-
-sub get_watched {
-	my ($output_file) = @_;
-	my $regex = join('|', map { "^$_\$" } split(/ /, $ENV{"DAPTUP_PACKAGES_WATCH_FOR"}));
-	$regex =~ s/"//g;
-	if (!$regex) { # no packages to watch
-		# nothing to do
-	} elsif (-f '/usr/bin/aptitude') {
-		my $command = qq/aptitude search "~n($regex)"/;
-		$command .= qq/ --display-format $ENV{DAPTUP_WATCH_DISPLAY_FORMAT}/;
-		$command .= qq/ --width "$ENV{DAPTUP_WATCH_DISPLAY_WIDTH}"/;
-		$command .= qq/ $ENV{DAPTUP_EXTRA_APTITUDE_ARGUMENTS} > $output_file/;
-		system($command);
-	} else {
-		my @watched_packages = split("\n", `apt-cache search --names-only "$regex"`);
-		s/ .*// foreach @watched_packages;
-
-		open(my $output_file_fd, '>', $output_file);
-		foreach my $package_name (@watched_packages) {
-			my $version_string = `apt-cache policy $package_name | fgrep "Candidate" | sed 's/.*Candidate: //'`;
-			chomp($version_string);
-			say $output_file_fd "$package_name $version_string";
-		}
-		close($output_file_fd);
-	}
 }
 
 sub find_old_packages {
@@ -194,7 +323,7 @@ sub find_old_packages {
 	while (my $line = <$updates_file_fd>) {
 		chomp($line);
 		my $package_name = $line;
-		$package_name =~ s{/.*}{};
+		$package_name =~ s/:.*//;
 		my $changelog_file;
 		if (-f "$doc_dir/$package_name/changelog.Debian.gz") {
 			$changelog_file = "$doc_dir/$package_name/changelog.Debian.gz";
@@ -240,7 +369,7 @@ sub diff_cmd {
 
 sub do_pre {
 	lprint("Building old list of packages... ");
-	get_avail_pkg_list($new_before_file, $errors_file_obj->filename);
+	$backend->get_avail_pkg_list($new_before_file, $errors_file_obj->filename);
 
 	if (-s $errors_file_obj->filename) {
 		lsay("errors present. Is apt/dpkg running?");
@@ -249,26 +378,26 @@ sub do_pre {
 	print_done();
 
 	lprint("Building old list of available updates... ");
-	get_updates($updates_before_file);
+	$backend->get_updates($updates_before_file);
 	print_done();
 
 	lprint("Building old list of watched packages... ");
-	get_watched($watch_before_file);
+	$backend->get_watched($watch_before_file);
 	print_done();
 }
 
 sub do_post {
 	if (not defined $subcommand or $subcommand ne 'last') {
 		lprint("Building new list of packages... ");
-		get_avail_pkg_list($new_after_file, '/dev/null');
+		$backend->get_avail_pkg_list($new_after_file, '/dev/null');
 		print_done();
 
 		lprint("Building new list of available updates... ");
-		get_updates($updates_after_file);
+		$backend->get_updates($updates_after_file);
 		print_done();
 
 		lprint("Building new list of watched packages... ");
-		get_watched($watch_after_file);
+		$backend->get_watched($watch_after_file);
 		print_done();
 	}
 

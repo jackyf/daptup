@@ -1,9 +1,9 @@
-daptup (0.10.0~) UNRELEASED; urgency=low
+daptup (0.10.0) unstable; urgency=low
 
-  * Daptup now able to use Cupt Perl library if present instead of calling
+  * Daptup is now able to use Cupt Perl library if present instead of calling
     APT-related utilities.
 
- -- Eugene V. Lyubimkin <jackyf@debian.org>  Tue, 08 Dec 2009 15:19:36 +0200
+ -- Eugene V. Lyubimkin <jackyf@debian.org>  Sun, 20 Dec 2009 12:53:26 +0200
 
 daptup (0.9.2) unstable; urgency=low
 

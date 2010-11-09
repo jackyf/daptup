@@ -1,6 +1,7 @@
 daptup (0.11.0~) UNRELEASED; urgency=low
 
-  * 
+  * Fixed crash when getting package list in Cupt back-end when some short
+    description is not available.
 
  -- Eugene V. Lyubimkin <jackyf@debian.org>  Tue, 09 Nov 2010 19:30:22 +0200
 

@@ -136,7 +136,8 @@ sub get_avail_pkg_list {
 		my $package = $cache->get_binary_package($package_name);
 		my $policy_version = $cache->get_policy_version($package);
 		defined $policy_version or die("unable to get policy version for the package '$package_name'");
-		print { $output_file_fd } $package_name . ' - ' . $policy_version->short_description . "\n";
+		my $short_description = ($policy_version->short_description // "");
+		print { $output_file_fd } $package_name . ' - ' . $short_description . "\n";
 	}
 	close($output_file_fd);
 }

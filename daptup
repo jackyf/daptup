@@ -20,6 +20,20 @@
 
 # Devoted to Evgeniya V. Katyuk.
 
+package main;
+
+sub include_description_in_pkg_list {
+	return ($ENV{'DAPTUP_NEW_INCLUDE_DESCRIPTION'} // '') eq 'y';
+}
+
+sub get_pkg_list_description_filter {
+	if (main::include_description_in_pkg_list()) {
+		return '';
+	} else {
+		return " | sed -r -e 's/ -.*//'";
+	}
+}
+
 package Daptup::Backend::Apt;
 
 use strict;
@@ -33,7 +47,8 @@ sub new {
 sub get_avail_pkg_list {
 	my ($self, $output_file, $errors_file) = @_;
 
-	system(qq/apt-cache search ".*" | sort > $output_file 2> $errors_file/);
+	my $filter = main::get_pkg_list_description_filter();
+	system(qq/apt-cache search ".*" $filter | sort > $output_file 2> $errors_file/);
 }
 
 sub get_updates {
@@ -88,7 +103,10 @@ sub get_avail_pkg_list {
 	my $command = qq/aptitude search "~n(.*)"/;
 	$command .= qq/ --display-format $ENV{DAPTUP_NEW_DISPLAY_FORMAT}/;
 	$command .= qq/ --width $ENV{DAPTUP_NEW_DISPLAY_WIDTH}/;
-	$command .= qq/ $ENV{DAPTUP_EXTRA_APTITUDE_ARGUMENTS} > $output_file 2> $errors_file/;
+	$command .= qq/ $ENV{DAPTUP_EXTRA_APTITUDE_ARGUMENTS}/;
+	my $filter = main::get_pkg_list_description_filter();
+	$command .= qq/	2> $errors_file $filter > $output_file /;
+
 	system($command);
 }
 
@@ -136,8 +154,12 @@ sub get_avail_pkg_list {
 		my $package = $cache->get_binary_package($package_name);
 		my $policy_version = $cache->get_policy_version($package);
 		defined $policy_version or die("unable to get policy version for the package '$package_name'");
-		my $short_description = ($policy_version->short_description // "");
-		print { $output_file_fd } $package_name . ' - ' . $short_description . "\n";
+		if (main::include_description_in_pkg_list()) {
+			my $short_description = ($policy_version->short_description // "");
+			print { $output_file_fd } $package_name . ' - ' . $short_description . "\n";
+		} else {
+			print { $output_file_fd } $package_name . "\n";
+		}
 	}
 	close($output_file_fd);
 }

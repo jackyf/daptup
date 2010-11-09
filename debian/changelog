@@ -1,5 +1,8 @@
 daptup (0.11.0~) UNRELEASED; urgency=low
 
+  * Introduced new option DAPTUP_NEW_INCLUDE_DESCRIPTION, enabled by default.
+    (Matches previous behavior). Thanks to Klaus Ethgen for the report.
+    (Closes: #595571)
   * Fixed crash when getting package list in Cupt back-end when some short
     description is not available.
   * debian/control:

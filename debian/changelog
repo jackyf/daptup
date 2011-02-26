@@ -1,3 +1,9 @@
+daptup (0.11.1) unstable; urgency=low
+
+  * Upload to unstable.
+
+ -- Eugene V. Lyubimkin <jackyf@debian.org>  Sat, 26 Feb 2011 10:05:22 +0200
+
 daptup (0.11.0) experimental; urgency=low
 
   * Introduced new option DAPTUP_NEW_INCLUDE_DESCRIPTION, enabled by default.

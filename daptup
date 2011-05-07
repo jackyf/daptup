@@ -34,21 +34,29 @@ sub get_pkg_list_description_filter {
 	}
 }
 
-package Daptup::Backend::Apt;
+package Daptup::Backend::AptOrCupt;
 
 use strict;
 use warnings;
 
 sub new {
 	my $class = shift;
-	return bless {} => $class;
+	my $type = shift;
+	return bless { 'type' => $type } => $class;
+}
+
+sub get_cache_binary_name {
+	my ($self) = @_;
+
+	return ($self->{'type'} eq 'cupt') ? 'cupt' : 'apt-cache';
 }
 
 sub get_avail_pkg_list {
 	my ($self, $output_file, $errors_file) = @_;
 
 	my $filter = main::get_pkg_list_description_filter();
-	system(qq/apt-cache search ".*" $filter | sort > $output_file 2> $errors_file/);
+	my $binary_name = $self->get_cache_binary_name();
+	system(qq/$binary_name search ".*" $filter | sort > $output_file 2> $errors_file/);
 }
 
 sub get_updates {
@@ -63,7 +71,8 @@ sub get_updates {
 	}
 
 	my $installed_package_names_string = join(' ', @installed_package_names);
-	my $policy_output = `apt-cache policy $installed_package_names_string`;
+	my $binary_name = $self->get_cache_binary_name();
+	my $policy_output = `$binary_name policy $installed_package_names_string`;
 
 	# 'apt-cache policy' somewhy outputs blocks in random order, not as
 	# specified in the command line (#......), use hash
@@ -89,12 +98,14 @@ sub get_watched {
 
 	my $regex = main::get_watch_regex();
 	if ($regex) {
-		my @watched_packages = split("\n", `apt-cache search --names-only "$regex"`);
+		my $binary_name = $self->get_cache_binary_name();
+
+		my @watched_packages = split("\n", `$binary_name search --names-only "$regex"`);
 		s/ .*// foreach @watched_packages;
 
 		open(my $output_file_fd, '>', $output_file);
 		foreach my $package_name (@watched_packages) {
-			my $version_string = `apt-cache policy $package_name | fgrep "Candidate" | sed 's/.*Candidate: //'`;
+			my $version_string = `$binary_name policy $package_name | fgrep "Candidate" | sed 's/.*Candidate: //'`;
 			chomp($version_string);
 			say $output_file_fd "$package_name $version_string";
 		}
@@ -104,7 +115,7 @@ sub get_watched {
 
 package Daptup::Backend::Aptitude;
 
-use base qw(Daptup::Backend::Apt);
+use base qw(Daptup::Backend::AptOrCupt);
 
 use strict;
 use warnings;
@@ -118,7 +129,7 @@ sub new {
 		$ENV{'DAPTUP_EXTRA_APTITUDE_ARGUMENTS'} .= " --disable-columns"
 	}
 
-	return bless {} => $class;
+	return bless Daptup::BackEnd::AptOrCupt->new('apt') => $class;
 }
 
 sub get_avail_pkg_list {
@@ -295,12 +306,14 @@ my $backend;
 eval {
 	require Cupt::Cache;
 };
-if (not $@) {
+if (-x '/usr/bin/cupt') {
+	$backend = Daptup::Backend::AptOrCupt->new('cupt');
+} elsif (not $@) {
 	$backend = Daptup::Backend::LibCupt1->new();
 } elsif (-x '/usr/bin/aptitude') {
 	$backend = Daptup::Backend::Aptitude->new();
 } else {
-	$backend = Daptup::Backend::Apt->new();
+	$backend = Daptup::Backend::AptOrCupt->new('apt');
 }
 
 sub check_subcommand {

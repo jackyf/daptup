@@ -1,4 +1,4 @@
-daptup (0.12.0) UNRELEASED; urgency=low
+daptup (0.12.0) unstable; urgency=low
 
   * Apt back-end now uses 'apt-cache policy' instead of 'apt-show-versions'.
   * Daptup is now able to use 'cupt' binary as a new back-end.
@@ -6,7 +6,7 @@ daptup (0.12.0) UNRELEASED; urgency=low
     - Removed 'apt-show-versions' from Depends.
     - Added 'cupt' to existing 'apt' and 'libcupt-perl' Depends alternatives.
 
- -- Eugene V. Lyubimkin <jackyf@debian.org>  Sat, 07 May 2011 13:03:07 +0300
+ -- Eugene V. Lyubimkin <jackyf@debian.org>  Sat, 07 May 2011 16:08:15 +0300
 
 daptup (0.11.1) unstable; urgency=low
 

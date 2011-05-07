@@ -1,6 +1,8 @@
 daptup (0.12.0) UNRELEASED; urgency=low
 
-  * 
+  * Apt back-end now uses 'apt-cache policy' instead of 'apt-show-versions'.
+  * debian/control:
+    - Removed 'apt-show-versions' from Depends.
 
  -- Eugene V. Lyubimkin <jackyf@debian.org>  Sat, 07 May 2011 13:03:07 +0300
 

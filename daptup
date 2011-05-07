@@ -54,10 +54,34 @@ sub get_avail_pkg_list {
 sub get_updates {
 	my ($self, $output_file) = @_;
 
-	my @sed_expressions = ('s/upgradeable from/-/g', 's/ to / -> /g',
-			's/ \*manually\*//', 's=/[a-z]+ - =: =g');
-	my $sed_command = 'sed -r ' . join(' ', map { "-e '$_'" } @sed_expressions);
-	system("apt-show-versions -u | $sed_command | sort > $output_file");
+	my @installed_package_names;
+	my $dpkg_query_output = `dpkg-query -l`;
+	foreach my $dpkg_output_line (split("\n", $dpkg_query_output)) {
+		if ($dpkg_output_line =~ m/^ii..(.+?) /) {
+			push @installed_package_names, $1;
+		}
+	}
+
+	my $installed_package_names_string = join(' ', @installed_package_names);
+	my $policy_output = `apt-cache policy $installed_package_names_string`;
+
+	# 'apt-cache policy' somewhy outputs blocks in random order, not as
+	# specified in the command line (#......), use hash
+	my %updateable_entries;
+
+	foreach my $policy_output_block (split(/\n(?=[^ ])/, $policy_output)) {
+		if ($policy_output_block =~ m/^(.+?):\n  Installed: (.+?)\n  Candidate: (.+?)\n/) {
+			if ($2 ne $3) {
+				$updateable_entries{$1} = "$2 -> $3";
+			}
+		}
+	}
+
+	open(my $output_file_fd, '>', $output_file);
+	foreach my $package_name (sort keys %updateable_entries) {
+		say { $output_file_fd } "$package_name: $updateable_entries{$package_name}";
+	}
+	close($output_file_fd);
 }
 
 sub get_watched {

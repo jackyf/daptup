@@ -129,7 +129,7 @@ sub new {
 		$ENV{'DAPTUP_EXTRA_APTITUDE_ARGUMENTS'} .= " --disable-columns"
 	}
 
-	return bless Daptup::BackEnd::AptOrCupt->new('apt') => $class;
+	return bless Daptup::Backend::AptOrCupt->new('apt') => $class;
 }
 
 sub get_avail_pkg_list {

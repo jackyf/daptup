@@ -1,3 +1,9 @@
+daptup (0.12.1) UNRELEASED; urgency=low
+
+  * Fixed a typo in Aptitude back-end. (Closes: #627553)
+
+ -- Eugene V. Lyubimkin <jackyf@debian.org>  Sun, 22 May 2011 11:32:57 +0300
+
 daptup (0.12.0) unstable; urgency=low
 
   * Apt back-end now uses 'apt-cache policy' instead of 'apt-show-versions'.

@@ -58,7 +58,7 @@ sub get_avail_pkg_list {
 
 	my $filter = main::get_pkg_list_description_filter();
 	my $binary_name = $self->get_cache_binary_name();
-	system(qq/$binary_name search ".*" $filter | sort | uniq > $output_file 2> $errors_file/);
+	system(qq/$binary_name search ".*" $filter 2>$errors_file | sort | uniq > $output_file/);
 }
 
 sub get_updates {

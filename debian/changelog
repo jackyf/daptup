@@ -1,6 +1,7 @@
 daptup (0.12.2~) UNRELEASED; urgency=low
 
   * The action '--last' does not require root privileges anymore.
+  * Support the field name 'Preferred' in 'cupt policy' of upcoming Cupt 2.3.
 
  -- Eugene V. Lyubimkin <jackyf@debian.org>  Sat, 12 Nov 2011 12:53:09 +0200
 

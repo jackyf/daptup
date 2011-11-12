@@ -79,7 +79,7 @@ sub get_updates {
 	my %updateable_entries;
 
 	foreach my $policy_output_block (split(/\n(?=[^ ])/, $policy_output)) {
-		if ($policy_output_block =~ m/^(.+?):\n  Installed: (.+?)\n  Candidate: (.+?)\n/) {
+		if ($policy_output_block =~ m/^(.+?):\n  Installed: (.+?)\n  (?:Candidate|Preferred): (.+?)\n/) {
 			if ($2 ne $3) {
 				$updateable_entries{$1} = "$2 -> $3";
 			}

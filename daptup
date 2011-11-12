@@ -102,12 +102,12 @@ sub get_watched {
 	if ($regex) {
 		my $binary_name = $self->get_cache_binary_name();
 
-		my @watched_packages = split("\n", `$binary_name search --names-only "$regex"`);
+		my @watched_packages = split("\n", `$binary_name search --names-only "$regex" 2>/dev/null`);
 		s/ .*// foreach @watched_packages;
 
 		open(my $output_file_fd, '>', $output_file);
 		foreach my $package_name (@watched_packages) {
-			my $policy_output = `$binary_name policy $package_name`;
+			my $policy_output = `$binary_name policy $package_name 2>/dev/null`;
 			my ($version_string) = ($policy_output =~ m/$preferred_version_sub_regex/o);
 			chomp($version_string);
 			say $output_file_fd "$package_name $version_string";

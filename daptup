@@ -365,7 +365,7 @@ sub get_watch_regex {
 }
 
 # Checking for root privileges
-if ($< != 0) {
+if ($< != 0 and (not defined $subcommand or $subcommand ne 'last')) {
 	lsay("You must run daptup with root privileges.");
 	exit 2;
 }

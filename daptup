@@ -50,7 +50,7 @@ sub new {
 sub get_cache_binary_name {
 	my ($self) = @_;
 
-	return ($self->{'type'} eq 'cupt') ? 'cupt' : 'apt-cache';
+	return ($self->{'type'} eq 'cupt') ? 'cupt -o cupt::cache::release-file-expiration::ignore=yes' : 'apt-cache';
 }
 
 sub get_avail_pkg_list {

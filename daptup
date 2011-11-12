@@ -39,6 +39,8 @@ package Daptup::Backend::AptOrCupt;
 use strict;
 use warnings;
 
+my $preferred_version_sub_regex = '(?:Candidate|Preferred): (.+?)\n';
+
 sub new {
 	my $class = shift;
 	my $type = shift;
@@ -79,7 +81,7 @@ sub get_updates {
 	my %updateable_entries;
 
 	foreach my $policy_output_block (split(/\n(?=[^ ])/, $policy_output)) {
-		if ($policy_output_block =~ m/^(.+?):\n  Installed: (.+?)\n  (?:Candidate|Preferred): (.+?)\n/) {
+		if ($policy_output_block =~ m/^(.+?):\n  Installed: (.+?)\n  $preferred_version_sub_regex/o) {
 			if ($2 ne $3) {
 				$updateable_entries{$1} = "$2 -> $3";
 			}
@@ -105,7 +107,8 @@ sub get_watched {
 
 		open(my $output_file_fd, '>', $output_file);
 		foreach my $package_name (@watched_packages) {
-			my $version_string = `$binary_name policy $package_name | fgrep "Candidate" | sed 's/.*Candidate: //'`;
+			my $policy_output = `$binary_name policy $package_name`;
+			my ($version_string) = ($policy_output =~ m/$preferred_version_sub_regex/o);
 			chomp($version_string);
 			say $output_file_fd "$package_name $version_string";
 		}

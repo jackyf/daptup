@@ -4,6 +4,8 @@ daptup (0.12.2~) UNRELEASED; urgency=low
   * Support the field name 'Preferred' in 'cupt policy' of upcoming Cupt 2.3.
   * Wording fixes in daptup.conf.
   * Cupt back-end: ignore release file expiration when possible.
+  * Try to ignore warnings from package managers which are sent to the standard
+    error stream.
   * debian/control:
     - Bumped Standards-Version to 3.9.2, no changes needed.
 

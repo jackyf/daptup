@@ -435,12 +435,15 @@ sub diff_cmd {
 }
 
 sub do_pre {
+	my $errors_file_path = $errors_file_obj->filename;
 	lprint("Building old list of packages... ");
-	$backend->get_avail_pkg_list($new_before_file, $errors_file_obj->filename);
+	$backend->get_avail_pkg_list($new_before_file, $errors_file_path);
 
-	if (-s $errors_file_obj->filename) {
-		lsay("errors present. Is apt/dpkg running?");
-		exit 8;
+	if (-s $errors_file_path) {
+		if (system("grep '^E:' $errors_file_path") == 0) {
+			lsay("errors present. Is apt/dpkg running?");
+			exit 8;
+		}
 	}
 	print_done();
 

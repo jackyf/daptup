@@ -156,7 +156,7 @@ sub get_watched {
 		my $command = qq/aptitude search "~n($regex)"/;
 		$command .= qq/ --display-format $ENV{DAPTUP_WATCH_DISPLAY_FORMAT}/;
 		$command .= qq/ --width "$ENV{DAPTUP_WATCH_DISPLAY_WIDTH}"/;
-		$command .= qq/ $ENV{DAPTUP_EXTRA_APTITUDE_ARGUMENTS} > $output_file/;
+		$command .= qq! $ENV{DAPTUP_EXTRA_APTITUDE_ARGUMENTS} 2>/dev/null > $output_file!;
 		system($command);
 	}
 }

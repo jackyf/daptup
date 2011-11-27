@@ -1,6 +1,8 @@
 daptup (0.12.3~) UNRELEASED; urgency=low
 
-  * 
+  * Don't error out at building old list of packages when a package manager
+    throw errors but a result is not empty. This is a work-around for the
+    aptitude bug #650179.
 
  -- Eugene V. Lyubimkin <jackyf@debian.org>  Sun, 27 Nov 2011 15:20:43 +0200
 

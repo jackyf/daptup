@@ -439,7 +439,7 @@ sub do_pre {
 	lprint("Building old list of packages... ");
 	$backend->get_avail_pkg_list($new_before_file, $errors_file_path);
 
-	if (-s $errors_file_path) {
+	if (-s $errors_file_path and -z $new_before_file) {
 		if (system("grep '^E:' $errors_file_path") == 0) {
 			lsay("errors present. Is apt/dpkg running?");
 			exit 8;

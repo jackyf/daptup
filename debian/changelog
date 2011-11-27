@@ -6,6 +6,8 @@ daptup (0.12.3~) UNRELEASED; urgency=low
   * Aptitude back-end: searching for watched packages: fixed suppressing the
     standard error stream.
   * Always prefix 'apt-cache policy' and 'cupt policy' calls with LC_MESSAGES.
+  * Apt and Cupt back-ends: fixed suppressing the standard error stream at
+    building lists of packages when showing short descriptions is turned off.
 
  -- Eugene V. Lyubimkin <jackyf@debian.org>  Sun, 27 Nov 2011 15:20:43 +0200
 

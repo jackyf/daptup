@@ -1,3 +1,9 @@
+daptup (0.12.3~) UNRELEASED; urgency=low
+
+  * 
+
+ -- Eugene V. Lyubimkin <jackyf@debian.org>  Sun, 27 Nov 2011 15:20:43 +0200
+
 daptup (0.12.2) unstable; urgency=low
 
   * The action '--last' does not require root privileges anymore.

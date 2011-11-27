@@ -1,4 +1,4 @@
-daptup (0.12.3~) UNRELEASED; urgency=low
+daptup (0.12.3) unstable; urgency=low
 
   * Don't error out at building old list of packages when a package manager
     throw errors but a result is not empty. (Closes: #637738, #649244)
@@ -8,7 +8,7 @@ daptup (0.12.3~) UNRELEASED; urgency=low
   * Apt and Cupt back-ends: fixed suppressing the standard error stream at
     building lists of packages when showing short descriptions is turned off.
 
- -- Eugene V. Lyubimkin <jackyf@debian.org>  Sun, 27 Nov 2011 15:20:43 +0200
+ -- Eugene V. Lyubimkin <jackyf@debian.org>  Sun, 27 Nov 2011 16:45:42 +0200
 
 daptup (0.12.2) unstable; urgency=low
 

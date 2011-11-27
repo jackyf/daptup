@@ -5,6 +5,7 @@ daptup (0.12.3~) UNRELEASED; urgency=low
     aptitude bug #650179.
   * Aptitude back-end: searching for watched packages: fixed suppressing the
     standard error stream.
+  * Always prefix 'apt-cache policy' and 'cupt policy' calls with LC_MESSAGES.
 
  -- Eugene V. Lyubimkin <jackyf@debian.org>  Sun, 27 Nov 2011 15:20:43 +0200
 

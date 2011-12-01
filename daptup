@@ -74,7 +74,8 @@ sub get_updates {
 
 	my $installed_package_names_string = join(' ', @installed_package_names);
 	my $binary_name = $self->get_cache_binary_name();
-	my $policy_output = `LC_MESSAGES=C $binary_name policy $installed_package_names_string 2>/dev/null`;
+	# shell may reject too long lists of arguments, xargs automatically handles that
+	my $policy_output = `echo $installed_package_names_string | LC_MESSAGES=C xargs $binary_name policy 2>/dev/null`;
 
 	# 'apt-cache policy' somewhy outputs blocks in random order, not as
 	# specified in the command line (#......), use hash

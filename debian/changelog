@@ -1,6 +1,7 @@
 daptup (0.12.4~) UNRELEASED; urgency=low
 
-  * 
+  * Apt and Cupt back-ends: don't pass too long list of arguments to
+    the shell. (Closes: #650517)
 
  -- Eugene V. Lyubimkin <jackyf@debian.org>  Thu, 01 Dec 2011 20:49:32 +0200
 

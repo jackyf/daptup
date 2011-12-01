@@ -1,3 +1,9 @@
+daptup (0.12.4~) UNRELEASED; urgency=low
+
+  * 
+
+ -- Eugene V. Lyubimkin <jackyf@debian.org>  Thu, 01 Dec 2011 20:49:32 +0200
+
 daptup (0.12.3) unstable; urgency=low
 
   * Don't error out at building old list of packages when a package manager

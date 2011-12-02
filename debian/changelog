@@ -1,3 +1,9 @@
+daptup (0.12.5~) UNRELEASED; urgency=low
+
+  * 
+
+ -- Eugene V. Lyubimkin <jackyf@debian.org>  Fri, 02 Dec 2011 18:30:23 +0200
+
 daptup (0.12.4) unstable; urgency=low
 
   * Apt and Cupt back-ends: don't pass too long list of arguments to

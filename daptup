@@ -64,18 +64,10 @@ sub get_avail_pkg_list {
 sub get_updates {
 	my ($self, $output_file) = @_;
 
-	my @installed_package_names;
-	my $dpkg_query_output = `dpkg-query -l`;
-	foreach my $dpkg_output_line (split("\n", $dpkg_query_output)) {
-		if ($dpkg_output_line =~ m/^ii..(.+?) /) {
-			push @installed_package_names, $1;
-		}
-	}
-
-	my $installed_package_names_string = join(' ', @installed_package_names);
 	my $binary_name = $self->get_cache_binary_name();
+	my $get_installed_package_names_command = q/dpkg -l | grep "^ii" | awk '{ print $2 }'/;
 	# shell may reject too long lists of arguments, xargs automatically handles that
-	my $policy_output = `echo $installed_package_names_string | LC_MESSAGES=C xargs $binary_name policy 2>/dev/null`;
+	my $policy_output = `$get_installed_package_names_command | LC_MESSAGES=C xargs $binary_name policy 2>/dev/null`;
 
 	# 'apt-cache policy' somewhy outputs blocks in random order, not as
 	# specified in the command line (#......), use hash

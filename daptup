@@ -424,7 +424,7 @@ sub print_done {
 
 sub diff_cmd {
 	my ($before_file, $after_file, $output_file) = @_;
-	system(qq/diff --minimal $before_file $after_file | grep -E "^[<>]" | sort > $output_file/);
+	system(qq/diff --minimal $before_file $after_file | grep -E "^[<>]" | sort --key=2 -V > $output_file/);
 }
 
 sub do_pre {

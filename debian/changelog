@@ -1,6 +1,10 @@
 daptup (0.12.6~) UNRELEASED; urgency=low
 
-  * 
+  * Pass '--version-sort' to sort(1) when generating difference lists.
+    This reduces number of cases where "before" line ("<") appears after the 
+    "after" line (">") in the output.
+  * Added a dependency on coreutils (>= 7.0) to make sure that '--version-sort'
+    works.
 
  -- Eugene V. Lyubimkin <jackyf@debian.org>  Sat, 25 Feb 2012 21:15:57 +0200
 

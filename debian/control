@@ -11,7 +11,7 @@ Homepage: http://sourceforge.net/projects/daptup
 Package: daptup
 Architecture: all
 Depends: ${perl:Depends}, ${misc:Depends}, liblocale-gettext-perl,
-  apt (>= 0.7.10) | cupt | libcupt-perl (>= 1.4)
+  apt (>= 0.7.10) | cupt | libcupt-perl (>= 1.4), coreutils (>= 7.0)
 Suggests: aptitude
 Description: reporter of changes in list of available packages from repositories
  Daptup runs "apt-get update' inside and then outputs four

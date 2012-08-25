@@ -8,6 +8,14 @@ daptup (0.12.6~) UNRELEASED; urgency=low
 
  -- Eugene V. Lyubimkin <jackyf@debian.org>  Sat, 25 Feb 2012 21:15:57 +0200
 
+daptup (0.12.5.1) unstable; urgency=medium
+
+  * Strip colons and everything after it in the output of 'dpkg -l'. Newer
+    versions of dpkg started outputting architecture suffixes even on
+    non-multiarch-enabled systems which led to incomplete 'updates' lists.
+
+ -- Eugene V. Lyubimkin <jackyf@debian.org>  Sat, 25 Aug 2012 13:20:14 +0300
+
 daptup (0.12.5) unstable; urgency=low
 
   * Apt and Cupt back-end: don't pass long strings to 'echo' commands as well.

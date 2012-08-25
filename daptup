@@ -65,7 +65,7 @@ sub get_updates {
 	my ($self, $output_file) = @_;
 
 	my $binary_name = $self->get_cache_binary_name();
-	my $get_installed_package_names_command = q/dpkg -l | grep "^ii" | awk '{ print $2 }'/;
+	my $get_installed_package_names_command = q/dpkg -l | grep "^ii" | awk '{ gsub(":.*", "", $2); print $2 }'/;
 	# shell may reject too long lists of arguments, xargs automatically handles that
 	my $policy_output = `$get_installed_package_names_command | LC_MESSAGES=C xargs $binary_name policy 2>/dev/null`;
 

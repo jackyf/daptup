@@ -1,6 +1,8 @@
-daptup (0.12.5.1) UNRELEASED; urgency=low
+daptup (0.12.5.1) UNRELEASED; urgency=medium
 
-  *
+  * Strip colons and everything after it in the output of 'dpkg -l'. Newer
+    versions of dpkg started outputting architecture suffixes even on
+    non-multiarch-enabled systems which led to incomplete 'updates' lists.
 
  -- Eugene V. Lyubimkin <jackyf@debian.org>  Sat, 25 Aug 2012 13:11:55 +0300
 

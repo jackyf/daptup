@@ -12,6 +12,8 @@ daptup (0.12.6~) UNRELEASED; urgency=low
     '$packagemanager update'-commands inside. Specifying a subcommand is now
     mandatory.
   * Got rid of '[done]' message parts.
+  * Fixed a crash when '--last' is run without root privileges and the option
+    DAPTUP_CHECK_FOR_OUTDATED_PACKAGES is enabled.
 
  -- Eugene V. Lyubimkin <jackyf@debian.org>  Sat, 25 Feb 2012 21:15:57 +0200
 

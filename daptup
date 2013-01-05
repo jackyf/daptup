@@ -292,7 +292,7 @@ sub find_old_packages {
 	my $seconds_in_day = 24 * 60 * 60;
 	my $current_timestamp = time();
 
-	open(my $output_file_fd, '>', $output_file);
+	open(my $output_file_fd, '>', $output_file) or return;
 	open(my $updates_file_fd, '<', $updates_after_file);
 	while (my $line = <$updates_file_fd>) {
 		chomp($line);

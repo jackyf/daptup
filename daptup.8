@@ -2,7 +2,7 @@
 .\" First parameter, NAME, should be all caps
 .\" Second parameter, SECTION, should be 1-8, maybe w/ subsection
 .\" other parameters are allowed: see man(7), man(1)
-.TH DAPTUP 8 "Oct 15, 2008"
+.TH DAPTUP 8 "Jan 5, 2013"
 .\" Please adjust this date whenever revising the manpage.
 .\"
 .\" Some roff macros, for reference:
@@ -16,10 +16,10 @@
 .\" .sp <n>    insert n+1 empty lines
 .\" for manpage-specific macros, see man(7)
 .SH NAME
-daptup \- wrapper script on 'apt-get update'
+daptup \- plugin for apt[itude] and cupt to list repository changes
 .SH SYNOPSIS
 .B daptup
-[ \fB--pre\fP | \fB--post\fP | \fB--last\fP ]
+( \fB--pre\fP | \fB--post\fP | \fB--last\fP )
 [ \fB-h\fP | \fB--help\fP ] [ \fB--nocolor\fP ]
 .br
 .SH OPTIONS
@@ -39,9 +39,9 @@ prints the help
 .B --nocolor
 Disables color output, useful for scripts or when output is not terminal. Now works only with \fB--last\fP option, however, you can disable color globally in configuration file.
 .PP
-\fBdaptup\fP is a script that runs "apt-get update" inside and outputs list of packages recently entered to repo, list of packages which got new updates, list of changes in 'watched' packages and, optionally, list of outdated packages.
+\fBdaptup\fP is a script that outputs list of packages recently entered to repo, list of packages which got new updates, list of changes in 'watched' packages and, optionally, list of outdated packages.
 .PP
-Starting with 0.8.0 version, \fBdaptup\fP uses apt hooks and you don't need to explicitly call it if you use 'apt-get update'.
+Starting with 0.8.0 version, \fBdaptup\fP uses apt hooks and you don't need to explicitly call it. It will be called automatically by all the supported package managers.
 .SH TROUBLESHOOTING
 .PP
 If \fBdaptup\fP was interrupted while building the lists, the cached lists can stay in inconsistent state, which is inappropriate if you want to use \fB--last\fP option before the new update. There is nothing to do if interrupt was occured at the moment when old lists were building (besides running the new update). However, if interrupt was occured when the new lists were building, you can easily redo this stage by calling 'daptup \-\-post'.

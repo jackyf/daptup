@@ -244,9 +244,9 @@ GetOptions(
 	'last' => sub { check_subcommand('last') },
 	'nocolor' => sub { $use_color = 0; },
 	'help|h' => sub {
-		lsay("Usage: %s [ --pre | --post | --last ] [ -h | --help | --nocolor ].", basename($0));
+		lsay("Usage: %s ( --pre | --post | --last ) [ -h | --help | --nocolor ].", basename($0));
 		say "";
-		lsay("daptup runs 'apt-get update' command inside and outputs:");
+		lsay("daptup outputs:");
 		lsay(" - list of packages recently entered to repo;");
 		lsay(" - list of packages which got new updates;");
 		lsay(" - list of changes in 'watched' packages;");
@@ -275,16 +275,15 @@ sub get_watch_regex {
 	return $regex;
 }
 
-# Checking for root privileges
-if ($< != 0 and (not defined $subcommand or $subcommand ne 'last')) {
-	lsay("You must run daptup with root privileges.");
-	exit 2;
+if (not defined $subcommand) {
+	lsay("You must specify a subcommand.");
+	exit 16;
 }
 
-unless (defined $subcommand) {
-	# As we now have apt hook, just do 'apt-get update'.
-	# It will call daptup itself.
-	exec("apt-get update");
+# Checking for root privileges
+if ($< != 0 and ($subcommand ne 'last')) {
+	lsay("You must run daptup with root privileges.");
+	exit 2;
 }
 
 sub find_old_packages {
@@ -365,7 +364,7 @@ sub do_pre {
 }
 
 sub do_post {
-	if (not defined $subcommand or $subcommand ne 'last') {
+	if ($subcommand ne 'last') {
 		lprint("Building new list of packages... ");
 		$backend->get_avail_pkg_list($new_after_file, '/dev/null');
 		print_done();
@@ -379,7 +378,7 @@ sub do_post {
 		print_done();
 	}
 
-	if ((defined $subcommand && $subcommand eq 'last') || $ENV{'DAPTUP_SHOW_CHANGES_IN_POST'} eq 'y') {
+	if (($subcommand eq 'last') || $ENV{'DAPTUP_SHOW_CHANGES_IN_POST'} eq 'y') {
 		# show changes
 		my $output_outdated = 0;
 		if ($ENV{'DAPTUP_CHECK_FOR_OUTDATED_PACKAGES'} eq 'y') {

@@ -28,7 +28,7 @@ daptup \- plugin for apt[itude] and cupt to list repository changes
 Do only 'pre' stage: collect info that will be used as 'old'. Usually need to be specified only in apt hooks.
 .TP
 .B --post
-If appropriate option is enabled in config file, do only 'post' stage: collect 'new' info and output changes. Otherwise do nothing. Usually need to be specified only in apt hooks.
+Do only 'post' stage: collect 'new' info and (if appropriate option is enabled in config file) output changes. Usually need to be specified only in apt hooks.
 .TP
 .B --last
 Output changes only. This option is supposed to be specified when you want to see changes made in the last update. Note that list of outdated packages, if daptup is configured to output it, will be rebuilt.

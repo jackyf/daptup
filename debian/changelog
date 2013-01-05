@@ -11,6 +11,7 @@ daptup (0.12.6~) UNRELEASED; urgency=low
   * Daptup is a pure plugin now, i.e. it doesn't attempt to run any
     '$packagemanager update'-commands inside. Specifying a subcommand is now
     mandatory.
+  * Got rid of '[done]' message parts.
 
  -- Eugene V. Lyubimkin <jackyf@debian.org>  Sat, 25 Feb 2012 21:15:57 +0200
 

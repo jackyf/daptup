@@ -332,10 +332,6 @@ sub find_old_packages {
 	close($updates_file_fd);
 }
 
-sub print_done {
-	lsay("[done]");
-}
-
 sub diff_cmd {
 	my ($before_file, $after_file, $output_file) = @_;
 	system(qq/diff --minimal $before_file $after_file | grep -E "^[<>]" | sort --key=2 -V > $output_file/);
@@ -343,7 +339,7 @@ sub diff_cmd {
 
 sub do_pre {
 	my $errors_file_path = $errors_file_obj->filename;
-	lprint("Building old list of packages... ");
+	lsay("Building old list of packages... ");
 	$backend->get_avail_pkg_list($new_before_file, $errors_file_path);
 
 	if (-s $errors_file_path and -z $new_before_file) {
@@ -352,30 +348,24 @@ sub do_pre {
 			exit 8;
 		}
 	}
-	print_done();
 
-	lprint("Building old list of available updates... ");
+	lsay("Building old list of available updates... ");
 	$backend->get_updates($updates_before_file);
-	print_done();
 
-	lprint("Building old list of watched packages... ");
+	lsay("Building old list of watched packages... ");
 	$backend->get_watched($watch_before_file);
-	print_done();
 }
 
 sub do_post {
 	if ($subcommand ne 'last') {
-		lprint("Building new list of packages... ");
+		lsay("Building new list of packages... ");
 		$backend->get_avail_pkg_list($new_after_file, '/dev/null');
-		print_done();
 
-		lprint("Building new list of available updates... ");
+		lsay("Building new list of available updates... ");
 		$backend->get_updates($updates_after_file);
-		print_done();
 
-		lprint("Building new list of watched packages... ");
+		lsay("Building new list of watched packages... ");
 		$backend->get_watched($watch_after_file);
-		print_done();
 	}
 
 	if (($subcommand eq 'last') || $ENV{'DAPTUP_SHOW_CHANGES_IN_POST'} eq 'y') {
@@ -385,10 +375,9 @@ sub do_post {
 			# if DAPTUP_MINIMAL_DAY_COUNT_TREATING_OUTDATED variable contains non-numeric
 			# data, print an error and don't try to check for outdated packages
 			if ($ENV{'DAPTUP_MINIMAL_DAY_COUNT_TREATING_OUTDATED'} !~ m/\D/) {
-				lprint("Building list of outdated packages... ");
+				lsay("Building list of outdated packages... ");
 				find_old_packages($outdated_file);
 				$output_outdated = 1;
-				print_done();
 			} else {
 				lsay("error: DAPTUP_MINIMAL_DAY_COUNT_TREATING_OUTDATED contains non-numeric data");
 			}

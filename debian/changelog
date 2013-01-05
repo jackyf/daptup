@@ -5,6 +5,8 @@ daptup (0.12.6~) UNRELEASED; urgency=low
     "after" line (">") in the output.
   * Added a dependency on coreutils (>= 7.0) to make sure that '--version-sort'
     works.
+  * po/de.po: declared plural forms support, patch by Christian Perrier.
+    (Closes: #695999)
 
  -- Eugene V. Lyubimkin <jackyf@debian.org>  Sat, 25 Feb 2012 21:15:57 +0200
 

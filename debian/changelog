@@ -14,6 +14,8 @@ daptup (0.12.6~) UNRELEASED; urgency=low
   * Got rid of '[done]' message parts.
   * Fixed a crash when '--last' is run without root privileges and the option
     DAPTUP_CHECK_FOR_OUTDATED_PACKAGES is enabled.
+  * daptup.8: fixed grammar of 'occurred' word, patch by A. Costa.
+    (Closes: #698476)
 
  -- Eugene V. Lyubimkin <jackyf@debian.org>  Sat, 25 Feb 2012 21:15:57 +0200
 

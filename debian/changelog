@@ -16,6 +16,8 @@ daptup (0.12.6~) UNRELEASED; urgency=low
     DAPTUP_CHECK_FOR_OUTDATED_PACKAGES is enabled.
   * daptup.8: fixed grammar of 'occurred' word, patch by A. Costa.
     (Closes: #698476)
+  * debian/control:
+    - Bumped Standards-Version to 3.9.5, no changes needed.
 
  -- Eugene V. Lyubimkin <jackyf@debian.org>  Sat, 25 Feb 2012 21:15:57 +0200
 

@@ -18,6 +18,7 @@ daptup (0.12.6~) UNRELEASED; urgency=low
     (Closes: #698476)
   * debian/control:
     - Bumped Standards-Version to 3.9.5, no changes needed.
+    - Updated the long description to reflect the "pure pluginness".
 
  -- Eugene V. Lyubimkin <jackyf@debian.org>  Sat, 25 Feb 2012 21:15:57 +0200
 

@@ -1,3 +1,9 @@
+daptup (0.12.8~) UNRELEASED; urgency=medium
+
+  * 
+
+ -- Eugene V. Lyubimkin <jackyf@debian.org>  Wed, 23 Apr 2014 18:44:03 +0300
+
 daptup (0.12.6) unstable; urgency=low
 
   * Pass '--version-sort' to sort(1) when generating difference lists.

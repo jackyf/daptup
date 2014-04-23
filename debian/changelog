@@ -1,6 +1,6 @@
 daptup (0.12.8~) UNRELEASED; urgency=medium
 
-  * 
+  * debian/README.Debian: removed as obsolete.
 
  -- Eugene V. Lyubimkin <jackyf@debian.org>  Wed, 23 Apr 2014 18:44:03 +0300
 

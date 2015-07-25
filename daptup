@@ -172,11 +172,6 @@ use Term::ANSIColor;
 
 INIT { require Carp; $SIG{__WARN__} = \&Carp::confess; $SIG{__DIE__} = \&Carp::confess; }
 
-$| = 1; # enabling autoflush
-
-# translation support
-Locale::gettext::textdomain("daptup");
-
 sub lprint {
 	my $pattern = shift;
 	print (sprintf gettext($pattern), @_);
@@ -402,6 +397,13 @@ sub do_post {
 	}
 }
 
+sub init() {
+	$| = 1; # enabling autoflush
+
+	# translation support
+	Locale::gettext::textdomain("daptup");
+}
+
 sub parse_command_line_options() {
 	GetOptions(
 		'pre' => sub { check_subcommand('pre') },
@@ -495,6 +497,7 @@ sub run_subcommand {
 }
 
 sub run {
+	init();
 	process_options();
 	check_runability();
 	create_backend();

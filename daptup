@@ -470,11 +470,14 @@ sub create_backend {
 	}
 }
 
-sub run {
+sub check_runability {
 	if ($in_hook && !hook_is_enabled()) {
 		exit 32;
 	}
+}
 
+sub run {
+	check_runability();
 	create_backend();
 
 	# start of program

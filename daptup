@@ -493,7 +493,7 @@ sub check_runability {
 	}
 
 	if ($in_hook && !hook_is_enabled()) {
-		exit 32;
+		exit 0;
 	}
 }
 

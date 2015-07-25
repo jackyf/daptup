@@ -203,6 +203,7 @@ my $temp_file_obj = new File::Temp();
 $SIG{TERM} = sub { exit 1024; };
 $SIG{INT} = sub { exit 1024; };
 
+my $backend;
 my $subcommand;
 my $use_color = 1;
 my $in_hook = 0;
@@ -220,16 +221,6 @@ if (-r $config_file) {
 } else {
 	lsay("Cannot read configuration from '%s'.", $config_file);
 	exit 1
-}
-
-# determining backend to use
-my $backend;
-if (-x '/usr/bin/cupt') {
-	$backend = Daptup::Backend::AptOrCupt->new('cupt');
-} elsif (-x '/usr/bin/aptitude') {
-	$backend = Daptup::Backend::Aptitude->new();
-} else {
-	$backend = Daptup::Backend::AptOrCupt->new('apt');
 }
 
 sub check_subcommand {
@@ -471,6 +462,15 @@ sub do_post {
 
 if ($in_hook && !hook_is_enabled()) {
 	exit 32;
+}
+
+# determining backend to use
+if (-x '/usr/bin/cupt') {
+	$backend = Daptup::Backend::AptOrCupt->new('cupt');
+} elsif (-x '/usr/bin/aptitude') {
+	$backend = Daptup::Backend::Aptitude->new();
+} else {
+	$backend = Daptup::Backend::AptOrCupt->new('apt');
 }
 
 # start of program

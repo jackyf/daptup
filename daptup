@@ -461,7 +461,7 @@ sub parse_configuration_file {
 		while (<$config_fd>) {
 			next if m/^\s*(#|$)/;
 			my ($variable, $value) = m/^(\w+)=(.*)/;
-			$ENV{$variable} = $value;
+			$ENV{$variable} //= $value;
 		}
 		close($config_fd);
 	} else {

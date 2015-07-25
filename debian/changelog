@@ -1,4 +1,4 @@
-daptup (0.12.8~) UNRELEASED; urgency=medium
+daptup (0.12.7~) UNRELEASED; urgency=low
 
   * debian/README.Debian: removed as obsolete.
 

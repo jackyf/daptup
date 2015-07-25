@@ -1,6 +1,7 @@
 daptup (0.12.7~) UNRELEASED; urgency=low
 
   * New option 'DAPTUP_HOOK_ENABLED'. (Closes: #733960)
+  * More friendly error message on unknown command-line options.
   * debian/README.Debian: removed as obsolete. (Closes: #745482)
   * debian/control:
     - bumped Standards-Version to 3.9.6, no changes needed.

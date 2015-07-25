@@ -460,12 +460,7 @@ sub do_post {
 	}
 }
 
-sub run {
-	if ($in_hook && !hook_is_enabled()) {
-		exit 32;
-	}
-
-	# determining backend to use
+sub create_backend {
 	if (-x '/usr/bin/cupt') {
 		$backend = Daptup::Backend::AptOrCupt->new('cupt');
 	} elsif (-x '/usr/bin/aptitude') {
@@ -473,6 +468,14 @@ sub run {
 	} else {
 		$backend = Daptup::Backend::AptOrCupt->new('apt');
 	}
+}
+
+sub run {
+	if ($in_hook && !hook_is_enabled()) {
+		exit 32;
+	}
+
+	create_backend();
 
 	# start of program
 	if ($subcommand eq 'pre') {

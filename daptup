@@ -208,21 +208,6 @@ my $subcommand;
 my $use_color = 1;
 my $in_hook = 0;
 
-my $config_file = '/etc/daptup.conf';
-if (-r $config_file) {
-	# sourcing it to obtain configuration variables
-	open(my $config_fd, '<', $config_file);
-	while (<$config_fd>) {
-		next if m/^\s*(#|$)/;
-		my ($variable, $value) = m/^(\w+)=(.*)/;
-		$ENV{$variable} = $value;
-	}
-	close($config_fd);
-} else {
-	lsay("Cannot read configuration from '%s'.", $config_file);
-	exit 1
-}
-
 sub check_subcommand {
 	my ($subcommand_name) = @_;
 	if (defined $subcommand) {
@@ -457,7 +442,25 @@ sub postprocess_options {
 	}
 }
 
+sub parse_configuration_file {
+	my $config_file = '/etc/daptup.conf';
+	if (-r $config_file) {
+		# sourcing it to obtain configuration variables
+		open(my $config_fd, '<', $config_file);
+		while (<$config_fd>) {
+			next if m/^\s*(#|$)/;
+			my ($variable, $value) = m/^(\w+)=(.*)/;
+			$ENV{$variable} = $value;
+		}
+		close($config_fd);
+	} else {
+		lsay("Cannot read configuration from '%s'.", $config_file);
+		exit 1
+	}
+}
+
 sub process_options() {
+	parse_configuration_file();
 	parse_command_line_options();
 	postprocess_options();
 }

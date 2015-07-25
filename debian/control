@@ -10,8 +10,7 @@ Homepage: http://sourceforge.net/projects/daptup
 
 Package: daptup
 Architecture: all
-Depends: ${perl:Depends}, ${misc:Depends}, liblocale-gettext-perl,
-  apt (>= 0.7.10) | cupt, coreutils (>= 7.0)
+Depends: ${perl:Depends}, ${misc:Depends}, liblocale-gettext-perl, apt | cupt
 Suggests: aptitude
 Description: reporter of changes in list of available packages from repositories
  Daptup is the apt hook which runs automatically within 'apt-get update' or

@@ -277,12 +277,6 @@ if (not defined $subcommand) {
 	exit 16;
 }
 
-# Checking for root privileges
-if ($< != 0 and ($subcommand ne 'last')) {
-	lsay("You must run daptup with root privileges.");
-	exit 2;
-}
-
 sub find_old_packages {
 	my ($output_file) = @_;
 	my $doc_dir = '/usr/share/doc';
@@ -471,6 +465,11 @@ sub create_backend {
 }
 
 sub check_runability {
+	if ($< != 0 and ($subcommand ne 'last')) {
+		lsay("You must run daptup with root privileges.");
+		exit 2;
+	}
+
 	if ($in_hook && !hook_is_enabled()) {
 		exit 32;
 	}

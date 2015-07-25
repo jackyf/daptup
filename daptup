@@ -476,17 +476,18 @@ sub check_runability {
 	}
 }
 
-sub run {
-	check_runability();
-	create_backend();
-
-	# start of program
+sub run_subcommand {
 	if ($subcommand eq 'pre') {
 		do_pre();
 	} else { # post or last
 		do_post();
 	}
+}
 
+sub run {
+	check_runability();
+	create_backend();
+	run_subcommand();
 	exit 0;
 }
 

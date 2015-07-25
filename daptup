@@ -460,25 +460,29 @@ sub do_post {
 	}
 }
 
-if ($in_hook && !hook_is_enabled()) {
-	exit 32;
+sub run {
+	if ($in_hook && !hook_is_enabled()) {
+		exit 32;
+	}
+
+	# determining backend to use
+	if (-x '/usr/bin/cupt') {
+		$backend = Daptup::Backend::AptOrCupt->new('cupt');
+	} elsif (-x '/usr/bin/aptitude') {
+		$backend = Daptup::Backend::Aptitude->new();
+	} else {
+		$backend = Daptup::Backend::AptOrCupt->new('apt');
+	}
+
+	# start of program
+	if ($subcommand eq 'pre') {
+		do_pre();
+	} else { # post or last
+		do_post();
+	}
+
+	exit 0;
 }
 
-# determining backend to use
-if (-x '/usr/bin/cupt') {
-	$backend = Daptup::Backend::AptOrCupt->new('cupt');
-} elsif (-x '/usr/bin/aptitude') {
-	$backend = Daptup::Backend::Aptitude->new();
-} else {
-	$backend = Daptup::Backend::AptOrCupt->new('apt');
-}
-
-# start of program
-if ($subcommand eq 'pre') {
-	do_pre();
-} else { # post or last
-	do_post();
-}
-
-exit 0;
+run();
 

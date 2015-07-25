@@ -26,6 +26,10 @@ sub include_description_in_pkg_list {
 	return ($ENV{'DAPTUP_NEW_INCLUDE_DESCRIPTION'} // '') eq 'y';
 }
 
+sub hook_is_enabled {
+	return ($ENV{'DAPTUP_HOOK_ENABLED'} // '') eq 'y';
+}
+
 sub get_pkg_list_description_filter {
 	if (main::include_description_in_pkg_list()) {
 		return '';
@@ -201,6 +205,7 @@ $SIG{INT} = sub { exit 1024; };
 
 my $subcommand;
 my $use_color = 1;
+my $in_hook = 0;
 
 my $config_file = '/etc/daptup.conf';
 if (-r $config_file) {
@@ -242,6 +247,7 @@ GetOptions(
 	'pre' => sub { check_subcommand('pre') },
 	'post' => sub { check_subcommand('post') },
 	'last' => sub { check_subcommand('last') },
+	'hook' => sub { $in_hook = 1 },
 	'nocolor' => sub { $use_color = 0; },
 	'help|h' => sub {
 		lsay("Usage: %s ( --pre | --post | --last ) [ -h | --help | --nocolor ].", basename($0));
@@ -461,6 +467,10 @@ sub do_post {
 
 		print color 'reset';
 	}
+}
+
+if ($in_hook && !hook_is_enabled()) {
+	exit 32;
 }
 
 # start of program

@@ -4,8 +4,8 @@ Priority: extra
 Maintainer: Eugene V. Lyubimkin <jackyf@debian.org>
 Build-Depends-Indep: debhelper (>= 9), gettext
 Standards-Version: 3.9.6
-Vcs-Git: git://github.com/jackyf/daptup.git
-Vcs-Browser: http://github.com/jackyf/daptup
+Vcs-Git: https://github.com/jackyf/daptup.git
+Vcs-Browser: https://github.com/jackyf/daptup
 Homepage: http://sourceforge.net/projects/daptup
 
 Package: daptup

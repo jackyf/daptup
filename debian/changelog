@@ -5,6 +5,7 @@ daptup (0.12.8) UNRELEASED; urgency=medium
 
   [ Debian Janitor ]
   * Trim trailing whitespace.
+  * Upgrade to newer source format 3.0 (native).
 
  -- Jelmer Vernooĳ <jelmer@debian.org>  Thu, 13 Sep 2018 16:19:00 +0100
 

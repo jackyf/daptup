@@ -1,6 +1,10 @@
 daptup (0.12.8) UNRELEASED; urgency=medium
 
+  [ Jelmer Vernooĳ ]
   * Use secure URI in Vcs control header.
+
+  [ Debian Janitor ]
+  * Trim trailing whitespace.
 
  -- Jelmer Vernooĳ <jelmer@debian.org>  Thu, 13 Sep 2018 16:19:00 +0100
 
@@ -21,7 +25,7 @@ daptup (0.12.7) unstable; urgency=low
 daptup (0.12.6) unstable; urgency=low
 
   * Pass '--version-sort' to sort(1) when generating difference lists.
-    This reduces number of cases where "before" line ("<") appears after the 
+    This reduces number of cases where "before" line ("<") appears after the
     "after" line (">") in the output.
   * Added a dependency on coreutils (>= 7.0) to make sure that '--version-sort'
     works.

@@ -2,12 +2,12 @@ Source: daptup
 Section: admin
 Priority: extra
 Maintainer: Eugene V. Lyubimkin <jackyf@debian.org>
-Build-Depends-Indep: debhelper (>= 9), gettext
+Build-Depends-Indep: gettext
 Standards-Version: 3.9.6
 Vcs-Git: https://github.com/jackyf/daptup.git
 Vcs-Browser: https://github.com/jackyf/daptup
 Homepage: http://sourceforge.net/projects/daptup
-Build-Depends: debhelper (>= 13~)
+Build-Depends: debhelper-compat (= 13)
 
 Package: daptup
 Architecture: all

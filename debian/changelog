@@ -7,6 +7,7 @@ daptup (0.12.8) UNRELEASED; urgency=medium
   * Trim trailing whitespace.
   * Upgrade to newer source format 3.0 (native).
   * Bump debhelper from deprecated 9 to 13.
+  * Set debhelper-compat version in Build-Depends.
 
  -- Jelmer Vernooĳ <jelmer@debian.org>  Thu, 13 Sep 2018 16:19:00 +0100
 
